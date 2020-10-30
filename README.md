@@ -12,7 +12,7 @@ The result should be a dashboard with two pages (the application can be single-p
 
 Because this position requires familiarity with web components, we would like you to refer to our Astro UX Design site (https://astrouxds.com/) for this project. You may work with the web components directly, or build your own. We also encourage you to utilize our CSS-only library to better match Astro styling.
 
-Refer to the section *Astro Storybook and Sample Apps* on this page to get more details about Astro components, and to see several sample apps that may provide you with inspiration (https://astrouxds.com/getting-started/developers/).
+Refer to the section *Astro Storybook and Sample Apps* at this link to get more details about Astro components, and to see several sample apps that may provide you with inspiration (https://astrouxds.com/getting-started/developers/).
 
 ## Requirements
 
