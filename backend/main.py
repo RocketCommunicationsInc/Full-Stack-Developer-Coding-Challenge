@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
+from werkzeug.security import generate_password_hash, check_password_hash
 # from models import login
 
 # from models import ContactsModel, AlertsModel, UserModel
@@ -13,6 +14,7 @@ api = Api(app)
 jwt = JWTManager(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/assets.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["JWT_SECRET_KEY"] = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
 
 
 db = SQLAlchemy(app)
@@ -69,7 +71,7 @@ class UserModel(db.Model):
     password_hash = db.Column(db.String(), nullable=False)
 
     def check_password(self, password):
-        return check_password_hash(password, self.password_hash)
+        return check_password_hash(self.password_hash, password)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -104,25 +106,45 @@ class Alerts(Resource):
         return {"data": "Hello World"}
 
 class Signup(Resource):
-    def post(self, credentials):
+    def post(self):
         email = request.form["email"]
-        print(credentials)
-        print(email)
+        password = request.form["password"]
         # Check if user exists
         user_test = UserModel.query.filter_by(email=email).first()
         if user_test:
-            return jsonify(message="User Already Exists"), 409
+            return {"message":"User Already Exists"}, 409
         else :
-            user = UserModel(email=email, password=UserModel.set_password(request.form["password"]))
+            user = UserModel(email=email)
+            user.set_password(password)
             db.session.add(user)
             db.session.commit()
+            return {"message":"Account Successfully Created"}, 201
+        # return {email: email, password: password}
 
 class Login(Resource):
-    def post(self, credentials):
-        return {}
+    def post(self):
+        if request.is_json:
+            print("Request is JSON")
+            email = request.json["email"]
+            password = request.json["password"]
+        else:
+            print("Request is NOT JSON")
+            email = request.form["email"]
+            password = request.form["password"]
+        # Find User Record
+        user = UserModel.query.filter_by(email=email).first()
+        if user:
+            if user.check_password(password):
+                access_token = create_access_token(identity=email)
+                return {"message":"Login Success", "access_token":access_token}, 201
+            else:
+                return {"message":"Email or Password Incorrect"}, 401
+        else:
+            return {"message": "No user found with requested email"}
 
 
-
+api.add_resource(Signup, "/signup")
+api.add_resource(Login, "/login")
 api.add_resource(Contacts, "/contacts/<int:contact_id>")
 api.add_resource(Alerts, "/alerts/<int:alert_id>")
 
