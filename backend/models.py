@@ -1,15 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, LoginManager
 
 db = SQLAlchemy()
-login = LoginManager()
 
 # # SQL Table Migration Classes
 class ContactsModel(db.Model):
     __tablename__ = "contacts"
 
-    # Primary Keys?!?!
+    id = db.Column(db.Integer, primary_key=True)
     _id = db.Column(db.String(48))
     contactId = db.Column(db.String(48))
     contactStatus = db.Column(db.String(48))
@@ -32,8 +30,10 @@ class ContactsModel(db.Model):
     # def __repr__(self):
     #     return f"Contact (name = {contactName}, contactId = {contactId})"
 
-class Alerts(db.Model):
-    # Primary Keys?!?!?
+class AlertsModel(db.Model):
+    __tablename__ = "alerts"
+
+    id = db.Column(db.Integer, primary_key=True)
     errorId = db.Column(db.String(48))
     errorSeverity = db.Column(db.String(48))
     errorCategory = db.Column(db.String(48))
@@ -46,3 +46,16 @@ class Alerts(db.Model):
     #
     # def __repr__(self):
     #     return f"Error (errorId = {errorId}, errorSeverity = {errorSeverity})"
+
+class UserModel(db.Model):
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(), nullable=False)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
