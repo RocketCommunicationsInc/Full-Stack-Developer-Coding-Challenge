@@ -18,17 +18,17 @@ class ContactsModel(db.Model):
     contactState = db.Column(db.String(24))
     contactStep = db.Column(db.String(48))
     contactDetail = db.Column(db.String(512))
-    contactBeginTimestamp = db.Column(db.DateTime())
-    contactEndTimestamp = db.Column(db.DateTime())
+    contactBeginTimestamp = db.Column(db.Integer)
+    contactEndTimestamp = db.Column(db.Integer)
     contactLatitude = db.Column(db.Float(12))
-    contactLongitute = db.Column(db.Float(12))
+    contactLongitude = db.Column(db.Float(12))
     contactAzimuth = db.Column(db.Float(12))
     contactElevation = db.Column(db.Float(12))
     contactResolution = db.Column(db.String(48))
     contactResolutionStatus = db.Column(db.String(48))
 
-    # def __repr__(self):
-    #     return f"Contact (name = {contactName}, contactId = {contactId})"
+    def __repr__(self):
+        return self.__dict__
 
 class AlertsModel(db.Model):
     __tablename__ = "alerts"
@@ -39,13 +39,13 @@ class AlertsModel(db.Model):
     errorCategory = db.Column(db.String(48))
     errorMessage = db.Column(db.String(128))
     longMessage = db.Column(db.String(256))
-    errorTime = db.Column(db.DateTime())
+    errorTime = db.Column(db.Integer)
     selected = db.Column(db.Boolean())
     new = db.Column(db.Boolean())
     expanded = db.Column(db.Boolean())
     #
-    # def __repr__(self):
-    #     return f"Error (errorId = {errorId}, errorSeverity = {errorSeverity})"
+    def __repr__(self):
+        return self.__dict__
 
 class UserModel(db.Model):
     __tablename__ = "users"
