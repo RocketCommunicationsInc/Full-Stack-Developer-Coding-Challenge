@@ -14,8 +14,6 @@ from endpoints import Signup, Login
 app = Flask(__name__, instance_relative_config=True)
 api = Api(app)
 jwt = JWTManager(app)
-# app.config.from_object("config")
-# app.config.from_pyfile(config.py)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/assets.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
