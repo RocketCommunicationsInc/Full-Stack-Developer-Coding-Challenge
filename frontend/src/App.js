@@ -1,25 +1,29 @@
-import React, {useState} from "react"
-import './App.css';
-// import "./static/css/astro.css"
-import { Route } from "react-router-dom";
+import React from "react";
+import "./App.css";
+import { Route, withRouter } from "react-router-dom";
 
-import Login from "./Components/Login"
-import Signup from "./Components/Signup"
+import Login from "./Components/Login";
+import Signup from "./Components/Signup";
+import NavBar from "./Components/NavBar"
 
-function App() {
-  // const [isLoggingIn, setIsLoggingin] = useState(False)
-  // const [loginError, setLoginError] = useState(null)
-  // const [email, setEmail] = useState("")
+function App(props) {
+  const {
+    history
+  } = props
 
   return (
-    <div className="App">
-      <div className="dark-theme">
-        <Route exact path="/" component={Login} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-      </div>
+    <div className="App dark-theme">
+      <NavBar history={history} />
+      <Route exact path="/" component={Login} />
+      <Route
+        path="/login"
+        render={(props) => {
+          <Login {...props} history={history} />
+        }}
+      />
+      <Route path="/signup" component={Signup} />
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
