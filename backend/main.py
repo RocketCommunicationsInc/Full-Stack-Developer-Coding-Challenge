@@ -1,17 +1,16 @@
 from flask import Flask, jsonify, request
-from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
-from flask_sqlalchemy import SQLAlchemy
+from flask_restful import Api, Resource
 from sqlalchemy import inspect
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-from werkzeug.security import generate_password_hash, check_password_hash
 import json
+from flask_cors import CORS
 
 from models import db, ContactsModel, AlertsModel
 from endpoints import Signup, Login
 
- # ContactsModel, AlertsModel, UserModel
 
-app = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__)
+CORS(app)
 api = Api(app)
 jwt = JWTManager(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/assets.db"
