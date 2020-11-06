@@ -1,5 +1,12 @@
 # Full-Stack-Developer-Coding-Challenge
+
 As the next step in the interview process, we’d like you to complete a coding challenge.
+
+
+## Starting the project locally
+  1. In bash, run  `./backend/main.py`
+  2. In another bash window, run `cd frontend` then `yarn start`
+
 
 ## The Project
 
