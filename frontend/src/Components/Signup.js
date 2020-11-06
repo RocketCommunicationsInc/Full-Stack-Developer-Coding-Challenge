@@ -5,11 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 
 class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.loginButton = React.createRef();
-  }
-
   state = {
     isLoggingIn: false,
     error: null,
@@ -20,34 +15,41 @@ class SignUp extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({
-        ...this.state,
-        isLoggingIn: true
-    })
-    // this.loginButton.addEventListener("click", this.signup);
-    document.getElementById("loginButton").addEventListener("click", this.signup)
-    
-    
-    this.setState({
-        ...this.state,
-        isLoggingIn: false
-    })    
+    document
+      .getElementById("loginButton")
+      .addEventListener("click", this.signup);
   }
 
-//   componentWillUnmount() {
-//     this.loginButton.removeEventListener("click", this.signup);
-//   }
+  componentWillUnmount() {
+    document
+      .getElementById("loginButton")
+      .removeEventListener("click", this.signup);
+  }
 
   signup = (e) => {
-    try {
-      const response = axios.post(
-        "http://127.0.0.1:5000/signup",
-        this.state.creds
-      );
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+    this.setState({
+      ...this.state,
+      isLoggingIn: true,
+      error: null,
+    });
+    axios
+      .post("http://127.0.0.1:5000/signup", this.state.creds)
+      .then((res) => {
+        localStorage.setItem('token', res.data.token);
+        this.setState({
+          ...this.state,
+          isLoggingIn: false,
+          error: null,
+        });
+      })
+      .catch((error) => {
+        console.error(error.response);
+        this.setState({
+          ...this.state,
+          isLoggingIn: false,
+          error: error.response,
+        });
+      });
   };
 
   handleChanges = (e) => {
@@ -105,14 +107,14 @@ class SignUp extends React.Component {
                 value={this.state.email}
               />
             </Grid>
-            {this.props.error && (
+            {this.state.error && (
               <Grid item>
-                <p>Email or password are not recognized.</p>
+                <p style={{ color: "rgb(255, 48, 48)" }}>User Already Exists</p>
               </Grid>
             )}
             <Grid item>
               {!this.state.isLoggingIn ? (
-                <rux-button id="loginButton" size="large" ref={this.loginButton}>
+                <rux-button id="loginButton" size="large">
                   Sign Up
                 </rux-button>
               ) : (
