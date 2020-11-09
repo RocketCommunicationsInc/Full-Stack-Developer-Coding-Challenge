@@ -37,7 +37,7 @@ const NavBar = (props) => {
             </>
           ) : (
             <Grid item>
-              <NavLink onClick={logOut}>Log Out</NavLink>
+              <NavLink to="/login" onClick={logOut}>Log Out</NavLink>
             </Grid>
           )}
         </Grid>
@@ -48,6 +48,6 @@ const NavBar = (props) => {
 
 export default NavBar
 
-// NavBar.Proptypes = {
-//     history: Proptypes.object.isRequired
-// }
+NavBar.propTypes = {
+    history: Proptypes.object.isRequired
+}
