@@ -4,8 +4,9 @@ As the next step in the interview process, we’d like you to complete a coding 
 
 
 ## Starting the project locally
-  1. In bash, run  `./backend/main.py`
-  2. In another bash window, run `cd frontend` then `yarn start`
+  1. Initialize python venv using `pip install -r requirements.txt`. NOTE: Python 3.9 was used in this project
+  2. In bash, run  `./backend/main.py`
+  3. In another bash window, run `cd frontend` then `yarn start`
 
 
 ## The Project
