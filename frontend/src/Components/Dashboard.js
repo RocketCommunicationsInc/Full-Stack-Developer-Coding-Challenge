@@ -6,9 +6,9 @@ import ContactTable from "./ContactTable"
 
 const contactColumns = [
     { id: 'contactName', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'contactStatus', numeric: false, disablePadding: false, label: 'Status' },
-    { id: 'contactBeginTimestamp', numeric: false, disablePadding: false, label: 'Begin Timestamp' },
-    { id: 'contactEndTimestamp', numeric: false, disablePadding: false, label: 'End Timestamp' },
+    { id: 'contactStatus', numeric: true, disablePadding: true, label: 'Status' },
+    { id: 'contactBeginTimestamp', numeric: true, disablePadding: true, label: 'Begin Timestamp' },
+    { id: 'contactEndTimestamp', numeric: true, disablePadding: true, label: 'End Timestamp' },
   ];
   
 

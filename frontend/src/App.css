@@ -9,3 +9,27 @@
   transform: translate(-50%, -50%);
   width: 400px
 }
+
+.rux-table-th {
+  overflow: hidden
+}
+
+#table-container {
+  max-height: 600px;
+}
+
+.rux-table td {
+  color: rgb(255, 255, 255)
+}
+
+.contact-table-container .rux-pagination {
+  color: rgb(255, 255, 255)
+}
+
+.contact-table-container .rux-pagination .MuiSelect-icon {
+  color: rgb(255, 255, 255)
+}
+
+#contacts-failed {
+  color: var(--colorSerious)
+}
