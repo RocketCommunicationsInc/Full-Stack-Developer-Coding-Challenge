@@ -76,7 +76,6 @@ export default class Auth extends React.Component {
     axios
       .post("http://127.0.0.1:5000/login", this.state.creds)
       .then((res) => {
-        // console.log(res.data)
         localStorage.setItem("token", res.data.access_token);
         this.setState({
           ...this.state,
@@ -175,7 +174,6 @@ export default class Auth extends React.Component {
               ) : (
                 <rux-button
                   size="large"
-                  // ref="disabledLoginButton"
                   disabled="true"
                 >
                   {this.props.auth === "signup" ? "Sign Up" : "Login"}
