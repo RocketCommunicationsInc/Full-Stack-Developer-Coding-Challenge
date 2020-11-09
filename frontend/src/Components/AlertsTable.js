@@ -11,7 +11,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
-import Grid from "@material-ui/core/Grid";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -85,37 +84,13 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const EnhancedTableToolbar = (props) => {
-  const { totals } = props;
+const EnhancedTableToolbar = () => {
 
   return (
     <Toolbar className="rux-table rux-table-th">
-      <Grid container spacing={1} direction="row" wrap="nowrap">
-        <Grid container item spacing={0} direction="column">
-          <h2>{totals.contacts}</h2>
-          <p>Contacts</p>
-        </Grid>
-        <Grid
-          container
-          item
-          spacing={0}
-          direction="column"
-          id="contacts-failed"
-        >
-          <h2>{totals.failed}</h2>
-          <p>Failed</p>
-        </Grid>
-        <Grid container item spacing={0} direction="column">
-          <h2>{totals.executing}</h2>
-          <p>Executing</p>
-        </Grid>
-      </Grid>
+      <h2>Alerts</h2>
     </Toolbar>
   );
-};
-
-EnhancedTableToolbar.propTypes = {
-  totals: PropTypes.object.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -142,12 +117,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContactTable(props) {
+export default function AlertsTable(props) {
   const { rows, columns } = props;
   const classes = useStyles();
 
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("contactName");
+  const [orderBy, setOrderBy] = React.useState("errorTime");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -166,21 +141,9 @@ export default function ContactTable(props) {
     setPage(0);
   };
 
-  const findTotals = (data) => {
-    const totals = {
-      executing: 0,
-      failed: 0,
-      contacts: data.length,
-    };
-    data.forEach((contact) => {
-      totals[contact.contactState] += 1;
-    });
-    return totals;
-  };
-
   return (
     <div className="contact-table-container">
-      <EnhancedTableToolbar totals={findTotals(rows)} />
+      <EnhancedTableToolbar />
       <TableContainer id="table-container">
         <Table
           className="rux-table"
@@ -215,16 +178,13 @@ export default function ContactTable(props) {
                       scope="row"
                       padding="none"
                     >
-                      {row.contactName}
+                      {row.errorMessage}
                     </TableCell>
                     <TableCell align="right" className="rux-table td">
-                      {row.contactStatus}
+                      {row.errorCategory}
                     </TableCell>
                     <TableCell align="right" className="rux-table td">
-                      {moment(row.contactBeginTimestamp).format("hh:mm:ss")}
-                    </TableCell>
-                    <TableCell align="right" className="rux-table td">
-                      {moment(row.contactEndTimestamp).format("hh:mm:ss")}
+                      {moment(row.errorTime).format("hh:mm:ss")}
                     </TableCell>
                   </TableRow>
                 );

@@ -10,12 +10,24 @@
   width: 400px
 }
 
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-container h1 {
+  margin: 20px auto 100px auto;
+}
+
 .rux-table-th {
-  overflow: hidden
+  overflow: hidden;
+  height: 90px;
 }
 
 #table-container {
-  max-height: 600px;
+  max-height: 500px;
 }
 
 .rux-table td {
