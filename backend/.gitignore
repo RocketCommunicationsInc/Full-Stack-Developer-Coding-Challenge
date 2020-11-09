@@ -1,5 +1,2 @@
 # Ignore cache directories
 __pycache__/
-
-# Ignore database
-*.db
