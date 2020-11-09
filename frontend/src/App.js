@@ -2,9 +2,9 @@ import React from "react";
 import "./App.css";
 import { Route, withRouter } from "react-router-dom";
 
-import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+import Auth from "./Components/Auth";
 import NavBar from "./Components/NavBar"
+import Dashboard from "./Components/Dashboard"
 
 function App(props) {
   const {
@@ -14,14 +14,10 @@ function App(props) {
   return (
     <div className="App dark-theme">
       <NavBar history={history} />
-      <Route exact path="/" component={Login} />
-      <Route
-        path="/login"
-        render={(props) => {
-          <Login {...props} history={history} />
-        }}
-      />
-      <Route path="/signup" component={Signup} />
+      <Route exact path="/" render={props => <Auth {...props} auth="login" />} />
+      <Route path="/login" render={props => <Auth {...props} auth="login" />} />
+      <Route path='/signup' render={props => <Auth {...props} auth="signup" />} />
+      <Route path='/dashboard' render={props => <Dashboard {...props} />} />
     </div>
   );
 }
