@@ -1,12 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
-from sqlalchemy import inspect
+from sqlalchemy import inspect, select
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 import json
 from flask_cors import CORS
 
 from models import db, ContactsModel, AlertsModel
-from endpoints import Signup, Login
+from endpoints import Signup, Login, Alerts, Contacts
 
 
 app = Flask(__name__)
@@ -68,34 +68,11 @@ db.init_app(app)
 #         db.session.add(alert)
 #     db.session.commit()
 
-# helper to return objects as dictionaries
-def object_as_dict(obj):
-    return {c.key: getattr(obj, c.key)
-            for c in inspect(obj).mapper.column_attrs}
-
-# Protected Endpoints
-@app.route("/contacts", methods=["GET"])
-@jwt_required
-def Contacts():
-    contacts = []
-    contacts_query = ContactsModel.query.all()
-    for i in contacts_query:
-        contact = object_as_dict(i)
-        contacts.append(contact)
-    return jsonify(contacts), 200
-
-@app.route("/alerts", methods=["GET"])
-@jwt_required
-def Alerts():
-    alerts = []
-    alerts_query = AlertsModel.query.all()
-    for i in alerts_query:
-        alert = object_as_dict(i)
-        alerts.append(alert)
-    return jsonify(alerts), 200
-
+# Endpoints
 api.add_resource(Signup, "/signup")
 api.add_resource(Login, "/login")
+api.add_resource(Alerts, "/alerts")
+api.add_resource(Contacts, "/contacts")
 
 if __name__ == "__main__":
     app.run(debug=True, host="localhost", port=5000)

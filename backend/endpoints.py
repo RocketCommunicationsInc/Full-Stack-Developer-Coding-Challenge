@@ -2,8 +2,15 @@ from flask_jwt_extended import create_access_token
 from sqlalchemy import inspect
 from flask_restful import Resource
 from flask import request
+from flask_jwt_extended import jwt_required
 
-from models import db, UserModel
+from models import db, UserModel, ContactsModel, AlertsModel
+
+# helper to return objects as dictionaries
+def object_as_dict(obj):
+    return {c.key: getattr(obj, c.key)
+            for c in inspect(obj).mapper.column_attrs}
+
 
 class Signup(Resource):
     def post(self):
@@ -66,3 +73,23 @@ class Login(Resource):
                 return {"message": "No user found with requested email"}, 401
         else:
             return {"message": "Incorrect request"}, 401
+
+class Alerts(Resource):
+    @jwt_required
+    def get(self):
+        alerts = []
+        alerts_query = AlertsModel.query.all()
+        for i in alerts_query:
+            alert = object_as_dict(i)
+            alerts.append(alert)
+        return alerts, 200
+
+class Contacts(Resource):
+    @jwt_required
+    def get(self):
+        contacts = []
+        contacts_query = ContactsModel.query.all()
+        for i in contacts_query:
+            contact = object_as_dict(i)
+            contacts.append(contact)
+        return contacts, 200
