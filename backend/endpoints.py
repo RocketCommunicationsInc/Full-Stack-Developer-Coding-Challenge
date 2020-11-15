@@ -21,13 +21,13 @@ class Signup(Resource):
             else:
                 email = None
         else:
-            if "email" in request.json and "password" in request.json:
+            if "email" in request.form and "password" in request.form:
                 email = request.form["email"]
                 password = request.form["password"]
             else:
                 email = None
         # Check if user exists
-        if email and password:
+        if email:
             user_test = UserModel.query.filter_by(email=email).first()
             if user_test:
                 return {"message":"User Already Exists"}, 409
@@ -55,7 +55,7 @@ class Login(Resource):
             else:
                 email = None
         else:
-            if "email" in request.json and "password" in request.json:
+            if "email" in request.form and "password" in request.form:
                 email = request.form["email"]
                 password = request.form["password"]
             else:
