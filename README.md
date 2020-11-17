@@ -54,4 +54,4 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 
 ## Timeframe
 
-We would like the take home challenge to be completed within two weeks. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
+We would like the take home challenge to be completed within 3 days. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
