@@ -49,7 +49,7 @@ export default class Auth extends React.Component {
     axios
       .post("http://127.0.0.1:5000/signup", this.state.creds)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("token", res.data.access_token);
         this.setState({
           ...this.state,
           isLoggingIn: false,
