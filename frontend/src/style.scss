@@ -1,0 +1,97 @@
+/** @format */
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+$mainLayoutColor: #ffffff;
+$dark: #2c3e50;
+
+$primary: #1c4d85;
+$danger: #e74c3c;
+$success: #27ae60;
+$warning: #f39c12;
+$secondary: #616a6b;
+
+body {
+  background-color: #f2f3f4;
+}
+
+.bg,
+.btn,
+.badge {
+  &-primary {
+    background-color: $primary !important;
+  }
+
+  &-secondary {
+    background-color: $secondary !important;
+  }
+
+  &-danger {
+    background-color: $danger !important;
+  }
+
+  &-success {
+    background-color: $success !important;
+  }
+
+  &-warning {
+    background-color: $warning !important;
+  }
+}
+
+.text {
+  &-primary {
+    color: $primary !important;
+  }
+
+  &-secondary {
+    color: $secondary !important;
+  }
+
+  &-danger {
+    color: $danger !important;
+  }
+
+  &-success {
+    color: $success !important;
+  }
+
+  &-warning {
+    color: $warning !important;
+  }
+}
+
+.btn-outline {
+  background-color: $mainLayoutColor;
+  border: 2px solid;
+}
+
+.btn {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #ed3330;
+  padding: 8px;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+.btn:hover {
+  background: #434343;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+.form-control {
+  border-radius: 0px !important;
+
+  &:focus {
+    outline: none !important;
+    border: 0.5px solid $primary;
+    box-shadow: 0 0 5px $primary;
+  }
+}
