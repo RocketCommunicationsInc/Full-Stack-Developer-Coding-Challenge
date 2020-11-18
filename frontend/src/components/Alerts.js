@@ -35,7 +35,7 @@ class Alerts extends Component {
         const { alerts, isLoading } = this.state;
         const alertSize = alerts.length
         if (isLoading) {
-          return <div className="auth"><rux-progress></rux-progress></div>;
+          return <div className="spinner"><rux-progress></rux-progress></div>;
         }
         return (
             <div>            

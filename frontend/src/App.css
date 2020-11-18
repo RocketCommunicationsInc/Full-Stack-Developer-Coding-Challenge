@@ -29,6 +29,17 @@
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  background-color: rgb(24, 38, 53);
+
+}
+.spinner {
+  margin: 0;
+  position: absolute;
+  padding: 15em;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 

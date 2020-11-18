@@ -56,7 +56,7 @@ class Contacts extends Component {
         })
         
         if (isLoading) {
-          return <div className="auth"><rux-progress></rux-progress></div>;
+          return <div className="spinner"><rux-progress></rux-progress></div>;
         }
 
         return (
