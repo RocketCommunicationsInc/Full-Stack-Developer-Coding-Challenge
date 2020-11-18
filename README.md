@@ -1,3 +1,29 @@
+# To run application:
+
+cd to frontend folder and run "npm install" and then "npm start"
+
+In a separate terminal, cd to challenge-api and run "bundle"
+
+run "rails db:migrate", "rails db:seed", and "rails s"
+
+The challenge-api is configured to run out of http://localhost:3001 while the frontend will run out of http://localhost:3000
+
+This challenge utilizes the following Astro UXDS components:
+
+* Astro RUX Progress
+* Astro UXDS Input Fields
+* Astro UXDS HTML Table
+* Astro UXDS Status Symbols
+* Astro UXDS Button
+* Astro UXDS Global Status Bar
+* Astro UXDS Clock
+* Astro UXDS CSS Library
+
+test
+
+
+
+
 # Full-Stack-Developer-Coding-Challenge
 As the next step in the interview process, we’d like you to complete a coding challenge.
 
@@ -54,4 +80,4 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 
 ## Timeframe
 
-We would like the take home challenge to be completed within 3 days. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
+We would like the take home challenge to be completed within two weeks. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
