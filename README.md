@@ -4,7 +4,7 @@ cd to frontend folder and run "npm install" and then "npm start"
 
 In a separate terminal, cd to challenge-api and run "bundle"
 
-run "rails db:migrate", "rails db:seed", and "rails s"
+run "rails db:create && rails db:migrate", "rails db:seed", and "rails s"
 
 The challenge-api is configured to run out of http://localhost:3001 while the frontend will run out of http://localhost:3000
 
