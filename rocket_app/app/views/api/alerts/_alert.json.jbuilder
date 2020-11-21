@@ -1,0 +1,1 @@
+json.extract! alert, :id, :errorId, :errorSeverity, :errorCategory, :errorMessage, :longMessage, :errorTime, :selected, :new, :expanded

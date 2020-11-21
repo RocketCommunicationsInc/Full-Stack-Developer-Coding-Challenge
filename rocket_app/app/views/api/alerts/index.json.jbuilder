@@ -1,0 +1,1 @@
+json.array! @alerts, partial: 'api/alerts/alert', as: :alert
