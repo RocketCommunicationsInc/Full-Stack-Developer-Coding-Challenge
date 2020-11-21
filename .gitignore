@@ -52,3 +52,5 @@ app/assets/javascripts/bundle.js.map
 master.key
 rocket_app/log/development.log
 rocket_app/log/development.log
+rocket_app/tmp/cache/bootsnap-compile-cache/9f/4d35ea941e95b8
+rocket_app/log/development.log
