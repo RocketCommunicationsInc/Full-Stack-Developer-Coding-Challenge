@@ -2,8 +2,11 @@
   "name": "rocket_app",
   "private": true,
   "dependencies": {
+    "@astrouxds/rux-global-status-bar": "^4.0.3",
+    "@astrouxds/rux-progress": "^4.0.3",
     "@babel/preset-react": "^7.12.7",
     "@rails/webpacker": "5.2.1",
+    "axios": "^0.21.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",

@@ -1,17 +1,18 @@
-// Run this example by adding <%= javascript_pack_tag 'index' %> to the head of your layout file,
-// like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
-// of the page.
-
+// Library Imports
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { HashRouter as Router } from 'react-router-dom';
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
+// Local Imports
+import App from './App'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Hello />,
+    <React.StrictMode>
+      <Router>
+        <App />
+      </Router>
+    </React.StrictMode>,
     document.getElementById('root')
-  )
-})
+  );
+});
