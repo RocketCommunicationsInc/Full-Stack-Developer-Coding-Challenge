@@ -50,3 +50,5 @@ app/assets/javascripts/bundle.js.map
 
 # Ignore master key for decrypting credentials and more.
 master.key
+rocket_app/log/development.log
+rocket_app/log/development.log
