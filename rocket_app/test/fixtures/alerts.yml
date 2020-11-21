@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: alerts
+#
+#  id            :bigint           not null, primary key
+#  errorId       :string           not null
+#  errorSeverity :string           not null
+#  errorCategory :string           not null
+#  errorMessage  :string           not null
+#  longMessage   :string           not null
+#  errorTime     :bigint           not null
+#  selected      :boolean          not null
+#  new           :boolean          not null
+#  expanded      :boolean          not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value
