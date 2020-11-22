@@ -13,7 +13,7 @@ class Api::SessionsController < ApplicationController
     if logged_in? && current_user
       render :show
     else
-      render json: { user: { id: nil, username: "" } }
+      render json: { id: nil, username: "" }
     end
   end
 
