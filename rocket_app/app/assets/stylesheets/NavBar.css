@@ -1,0 +1,4 @@
+.nav-bar-header {
+  position: sticky;
+  z-index: 100;
+}
