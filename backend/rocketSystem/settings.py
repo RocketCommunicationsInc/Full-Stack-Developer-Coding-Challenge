@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8ggj()!)v%+m1v6@rfc2s^hoen710iw3xxbeyhnhw7ob9c0le0'
+SECRET_KEY = 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,11 +89,11 @@ WSGI_APPLICATION = 'rocketSystem.wsgi.application'
 
 DATABASES={
    'default':{
-      'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'postgres',
-      'USER':'postgres',
-      'PASSWORD':'Test34Test',
-      'HOST':'localhost',
+      'ENGINE':,
+      'NAME':,
+      'USER':,
+      'PASSWORD':,
+      'HOST':,
       
       
    }
@@ -106,8 +106,8 @@ DATABASES={
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'rocketcommunicationux@gmail.com'
-EMAIL_HOST_PASSWORD = 'atslhhydybllpgzg'
+EMAIL_HOST_USER = 
+EMAIL_HOST_PASSWORD = 
 EMAIL_USE_TLS = True
 
 
