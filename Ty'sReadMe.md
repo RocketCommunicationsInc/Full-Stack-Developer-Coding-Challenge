@@ -15,3 +15,5 @@ That will get the backend up and running.
 For the frontend:
 node modules
 list of dependencies in json file.
+
+Live version: https://grmdashboard.herokuapp.com/ (I will have to dump data or set up aws for data to render)
