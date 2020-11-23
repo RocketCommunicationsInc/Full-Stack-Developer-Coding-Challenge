@@ -27,4 +27,8 @@
 class Contact < ApplicationRecord
   validates :_id, :contactId, :contactName, uniqueness: true
   validates :_id, :contactId, :contactStatus, :contactName, :contactGround, :contactSatellite, :contactEquipment, :contactState, :contactStep, :contactDetail, :contactBeginTimestamp, :contactEndTimestamp, :contactLatitude, :contactLongitude, :contactAzimuth, :contactElevation, :contactResolution, :contactResolutionStatus, presence: true
+
+  # def self.statusCounts
+  #   Contact.group(:contactStatus).count
+  # end
 end
