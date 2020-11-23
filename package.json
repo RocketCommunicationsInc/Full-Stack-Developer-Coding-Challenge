@@ -25,6 +25,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "./bin/webpack-dev-server"
+    "start": "./rocket_app/bin/webpack-dev-server",
+    "heroku-prebuild": "cd rocket_app && npm install && npm run build"
   }
 }

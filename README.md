@@ -1,6 +1,23 @@
 # Full-Stack-Developer-Coding-Challenge
 As the next step in the interview process, we’d like you to complete a coding challenge.
 
+## Setup
+
+>Run "npm install" and then "npm start"
+
+cd into rocket_app::
+
+>Run "bundle install" and then run: 
+"rails db:create", 
+"rails db:migrate", 
+and then "rails db:seed"
+
+>Then run "rails server"
+
+Open open your browser at http://localhost:3000/.
+
+The Rails server will run at http://localhost:3000/ and webpacker will use http://localhost:3035/.
+
 ## The Project
 
 You will be building a basic version of a Ground Resources Management (GRM) Dashboard. There are two JSON files in this repository, *contacts.json* and *alerts.json*. Contacts (satellites) is a list of satellites in orbit and includes pertinent information about each device. Alerts is a list of unrelated status alerts with varying levels of severity. You will need to take this JSON data and persist it in a backend database. You will then develop a backend API, to be called upon by your frontend, which will display the data. This dashboard should allow registration and login of a user, requiring a password, and the user's credentials should also be persisted in your database.
