@@ -1,82 +1,69 @@
 // Library Imports
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 // local imports
 import SignUpForm from '../components/SignUpForm'
 import MainPage from '../components/MainPage';
 import NavBar from '../components/NavBar';
+import Loading from '../components/Loading';
 
-const App = () => {
-  const [currentUser, setCurrentUser] = useState({ id: null, username: "" });
+const App = (props) => {
+  const [currentUser, setCurrentUser] = useState({ id: null });
   const [loadingStatus, setLoadingStatus] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
     let isMounted = true;
     setLoadingStatus(true);
-    axios.get("./api/current_user").then((res) => {
-      if (isMounted) {
-        debugger
-        const user = res.data;
-        if (user.id) {
+    const findUser = async () => {
+      try {
+        const res = await axios.get("/api/current_user");
+        if (isMounted) {
+          const user = res.data;
           setCurrentUser(user);
         }
+      } finally {
         setLoadingStatus(false);
       }
-    });
+    }
+    findUser();
     return () => { isMounted = false };
   }, []);
 
+  const logout = () => {
+    axios.delete("/api/session")
+    setCurrentUser({ id: null, username: "" });
+    props.history.push('/')
+  };
+
   if (loadingStatus) {
-    return (
-      <div>Loading...</div>
+    return ( 
+      <main>
+        <NavBar currentUser={currentUser} logout={logout} />
+        <section className="content-main">
+          <Loading />
+        </section>
+      </main>
     )
   }
-
-  const SignUpComponent = (
-    <SignUpForm
-      username={username}
-      setUsername={setUsername}
-      password={password}
-      setPassword={setPassword}
-      currentUser={currentUser}
-      setCurrentUser={setCurrentUser}
-      loadingStatus={loadingStatus}
-      setLoadingStatus={setLoadingStatus}
-    />
-  );
-
-  const MainComponent = (
-    <MainPage 
-    />
-  );
-
+  
   return (
     <main>
-      <NavBar />
-      <Switch>
-        <Route exact path="/" render={() => currentUser.id !== null ? MainComponent : SignUpComponent}/>
-        <Route path="/signup" render={() => <div>Signup Page <Link to="/">Login Page</Link></div>}/>
-        <Redirect to="/"/>
-      </Switch>
+      <NavBar currentUser={currentUser} logout={logout} />
+      <section className="content-main">
+        <Switch>
+          <Route exact path="/" render={() => (currentUser && currentUser.id !== null) ? (<Redirect to="/dashboard"/>) :
+            (<SignUpForm currentUser={currentUser} setCurrentUser={setCurrentUser} formType="login"/>)}/>
+          <Route path="/register" render={() => (currentUser && currentUser.id !== null) ? (<Redirect to="/dashboard"/>) :
+            (<SignUpForm currentUser={currentUser} setCurrentUser={setCurrentUser} formType="register"/>)}/>
+          <Route path="/dashboard" render={() => (currentUser && currentUser.id !== null) ? (<MainPage />): (<Redirect to="/"/>)}/>
+          <Redirect to="/"/>
+        </Switch>
+      </section>
     </main>
   )
 
 }
 
-const Test = (props) => {
-  const logout = () => {
-    axios.delete("/api/session")
-    props.setCurrentUser({ id: null, username: "" });
-    props.setUsername("");
-    props.setPassword("");
-  };
-
-  return <button onClick={logout}>Logout</button>
-}
-
-
-export default App;
+export default withRouter(App);
