@@ -11,7 +11,7 @@ const NavBar = (props) => {
 
   const { currentUser, logout } = props;
 
-  const logoutBtn = (!!currentUser || currentUser.id === null) ? (<div></div>) : (
+  const logoutBtn = (!currentUser || currentUser.id === null) ? (<div></div>) : (
     <rux-button onClick={logout}>Logout</rux-button>
   )
 
