@@ -1,0 +1,25 @@
+.table-stats-container {
+  border: solid #68686E 1px;
+  border-bottom: none;
+  background-color: #181D1F;
+  color: #EFF0F1;
+  text-align: center;
+  height: 75px;
+  margin-top: 10px;
+  width: 600px;
+  color: var(--ag-header-foreground-color, var(--ag-secondary-foreground-color, var(--ag-foreground-color, #fff)));
+}
+
+.table-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.table-stat {
+  display: flex;
+}
+
+.table-stat-text {
+  margin-top: 2%;
+}
