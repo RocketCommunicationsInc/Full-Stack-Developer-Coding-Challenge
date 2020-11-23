@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+cd into rocket_app:
 
-* Ruby version
+>Run "npm install" and then "npm start"
 
-* System dependencies
+Open another terminal at the same directory:
+>Run "bundle install" and then run: 
+"rails db:create", 
+"rails db:migrate", 
+and then "rails db:seed"
 
-* Configuration
+>Then run "rails server"
 
-* Database creation
+Open open your browser at http://localhost:3000/.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The Rails server will run at http://localhost:3000/ and webpacker will use http://localhost:3035/.

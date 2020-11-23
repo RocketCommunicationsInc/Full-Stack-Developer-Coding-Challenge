@@ -55,3 +55,6 @@ master.key
 
 rocket_app/log/development.log
 rocket_app/tmp/cache/bootsnap-compile-cache/*
+development.log
+4d35ea941e95b8
+development_secret.txt
