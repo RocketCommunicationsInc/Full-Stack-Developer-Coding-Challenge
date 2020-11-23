@@ -1,65 +1,77 @@
 // Library Imports
 import axios from 'axios';
-import React from 'react';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, withRouter, Redirect } from 'react-router-dom';
+import { RuxButton } from '@astrouxds/rux-button/rux-button.js';
 
 // Local Imports
+import Loading from './Loading';
 
 const SignUpForm = (props) => {
-  const handleSubmit = (e) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]);
+
+  const authRequest = (props.formType === 'login') ? ('/api/session') : ('/api/users');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = { username: props.username, password: props.password };
-    axios.post("/api/session", { user })
-      .then((res) => {
-        props.setCurrentUser(res.data.user);
-        props.setUsername("");
-        props.setPassword("");
+    const user = { username, password };
+    axios.post(authRequest, { user })
+      .then(res => {
+        props.setCurrentUser(res.data);
+        setUsername("");
+        setPassword("");
+        props.history.push('/dashboard');
       })
-      .then(() => {
-        // <Redirect to={{pathname: '/main'}}/>
-        props.history.push('/main')
-      })
+      .catch(err => {
+        let newErrors = err.response.data;
+        setErrors(newErrors);
+      });
   } 
 
-  if (props.loadingStatus) {
-    return <div>Loading...</div>
-  }
-
-  // const logout = () => {
-  //   Axios.delete("/api/session")
-  //   props.setCurrentUser({ id: null, username: "" });
-  //   props.setUsername("");
-  //   props.setPassword("");
-  // };
-
-  // if (loggedIn) {
-  //   return (
-  //     <>
-  //       <p>{`${props.currentUser.username} is logged in!`}</p>
-  //       <button onClick={logout}>Logout</button>
-  //     </>
-  //   )
-  // }
+  const errorsList = errors.length < 1 ? null : (
+    <ul className="auth-form-errors-list">
+      {errors.map((error, i) => (
+        <li key={i} className="auth-form-error">{error}</li>
+      ))}
+    </ul>
+  )
 
   return (
-    <div className="rux-form-field">
-      <form onSubmit={handleSubmit}>
+    <div className="rux-form-field auth-form">
+      <form>
+        <div className="auth-form-title">
+          <h3>Welcome to Rocket App!</h3> 
+        </div>
+        {errorsList}
+        <label htmlFor="username">Username</label>
         <input
+          id="username"
           type="text"
-          value={props.username}
-          onChange={e => props.setUsername(e.target.value)}
+          className="rux-input"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          required
           placeholder="Username"
         />
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
-          value={props.password}
-          onChange={e => props.setPassword(e.target.value)}
+          className="rux-input"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
           placeholder="Password"
         />
-        
-        <button>Register!</button>
+        <div className="auth-form-btns">
+          <rux-button onClick={handleSubmit}size="large">{(props.formType === 'login') ? ('Login') : ('Register')}</rux-button>
+          {(props.formType === 'login') ? 
+            (<p>Don't have an account? <Link to="/register">Register here!</Link></p>) : 
+            (<p>Already have an account? <Link to="/">Login here!</Link></p>)}
+        </div>
       </form>
-      <p><Link to="/signup">Register!</Link></p>
     </div>
   )
 }

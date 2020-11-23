@@ -1,0 +1,30 @@
+.auth-form {
+  font-family: inherit;
+  margin: auto;
+  border: #001724 solid 3px;
+  padding: 10px;
+  box-shadow: 5px 5px black;
+  width: 575px;
+}
+
+.auth-form-btns {
+  text-align: center;
+}
+
+.auth-form-btns * {
+  padding-top: 10px;
+}
+
+.auth-form-title {
+  text-align: center;
+}
+
+.auth-form-errors-list {
+  text-align: center;
+}
+
+.auth-form-error {
+  list-style: none;
+  font-family: inherit;
+  color: red;
+}
