@@ -14,6 +14,7 @@ const App = (props) => {
   const [loadingStatus, setLoadingStatus] = useState(false);
 
   useEffect(() => {
+    // displays loading compnent and checks server for logged in User
     let isMounted = true;
     setLoadingStatus(true);
     const findUser = async () => {

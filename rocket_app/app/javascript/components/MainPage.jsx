@@ -8,10 +8,12 @@ import ContactTable from './ContactTable';
 import AlertTable from './AlertTable';
 
 const MainPage = () => {
+  // local state
   const [contacts, setContacts] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [loadingStatus, setLoadingStatus] = useState(true);
 
+  // retrieves table data from server
   const fetchTableData = async () => {
     const contactRes = await axios.get("/api/contacts");
     const alertRes = await axios.get("/api/alerts");
@@ -20,6 +22,7 @@ const MainPage = () => {
     setLoadingStatus(false);
   }
 
+  // Only fires when component is initially mounted
   useEffect(() => {
     setLoadingStatus(true);
     fetchTableData();

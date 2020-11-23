@@ -6,6 +6,7 @@ import { RuxStatus } from '@astrouxds/rux-status/rux-status.js';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
 
+// counts statuses within dataset
 const buildStatusCounts = (contacts) => {
   const counts = { normal: 0, caution: 0, serious: 0, critical: 0 };
 
@@ -24,6 +25,7 @@ const Table = (props) => {
   const [statusCounts, setStatusCounts] = useState({});
   const { data } = props;
   
+  // updates status counts when mounted
   useEffect(() => {
     setStatusCounts(buildStatusCounts(data));
   }, [])

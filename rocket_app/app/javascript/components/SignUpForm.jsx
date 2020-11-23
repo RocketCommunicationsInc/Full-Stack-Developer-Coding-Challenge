@@ -4,16 +4,15 @@ import React, { useState } from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import { RuxButton } from '@astrouxds/rux-button/rux-button.js';
 
-// Local Imports
-import Loading from './Loading';
-
 const SignUpForm = (props) => {
+   // local state
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
   const authRequest = (props.formType === 'login') ? ('/api/session') : ('/api/users');
 
+  // Submits credentials to server
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = { username, password };
@@ -30,6 +29,7 @@ const SignUpForm = (props) => {
       });
   } 
 
+  // Builds Array of Errors
   const errorsList = errors.length < 1 ? null : (
     <ul className="auth-form-errors-list">
       {errors.map((error, i) => (
