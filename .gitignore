@@ -34,10 +34,12 @@ yarn-error.log*
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/rocket_app/log/*
-/rocket_app/tmp/*
+rocket_app/log/*
+rocket_app/tmp/*
 !/log/.keep
 !/tmp/.keep
+log/*
+tmp/*
 
 # Ignore uploaded files in development
 /storage/*
@@ -50,7 +52,6 @@ app/assets/javascripts/bundle.js.map
 
 # Ignore master key for decrypting credentials and more.
 master.key
+
 rocket_app/log/development.log
-rocket_app/log/development.log
-rocket_app/tmp/cache/bootsnap-compile-cache/9f/4d35ea941e95b8
-rocket_app/log/development.log
+rocket_app/tmp/cache/bootsnap-compile-cache/*

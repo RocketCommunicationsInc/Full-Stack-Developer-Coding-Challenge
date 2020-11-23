@@ -1,56 +1,41 @@
 // Library Imports
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
+import Loading from './Loading';
 
 // Local Imports
-import Table from './Table';
+import ContactTable from './ContactTable';
+import AlertTable from './AlertTable';
 
-const MainPage = (props) => {
+const MainPage = () => {
   const [contacts, setContacts] = useState([]);
   const [alerts, setAlerts] = useState([]);
-  const [loadingStatus, setLoadingStatus] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(true);
+
+  const fetchTableData = async () => {
+    const contactRes = await axios.get("/api/contacts");
+    const alertRes = await axios.get("/api/alerts");
+    setContacts(contactRes.data);
+    setAlerts(alertRes.data);
+    setLoadingStatus(false);
+  }
 
   useEffect(() => {
     setLoadingStatus(true);
-    axios.get("/api/contacts")
-      .then(res => {
-        // debugger;
-        const newContacts = res.data;
-        setContacts(newContacts);
-        setLoadingStatus(false);
-      });
-
-    setLoadingStatus(true);
-    axios.get("/api/alerts")
-      .then(res => {
-        // debugger;
-        const newAlerts = res.data;
-        setAlerts(newAlerts);
-        setLoadingStatus(false);
-    });
+    fetchTableData();
   }, [])
 
-  // const tableData = contacts.map(contact => {
-  //   return null;
-  //   // Make Row <TableRow contact={contact} key={}/>
-  //   // return contact.map(column => {
-  //   //   return <td>{column}</td>
-  //   // })
-  // })
   if (loadingStatus) {
-    return (
-      <div className="rux-progress">
-        <progress></progress>
-      </div>
-    )
+    return <Loading />
   }
 
-  const contactTable = <Table data={contacts}/>
-  // console.log(alerts)
+  const contactTable = <ContactTable data={contacts}/>
+  const alertTable = <AlertTable data={alerts}/>
+
   return (
-    <div>
+    <div className="main-tables-container">
       {contactTable}
+      {alertTable}
     </div>
   )
 }

@@ -1,0 +1,4 @@
+.main-tables-container {
+  display: flex;
+  justify-content: space-evenly;
+}
