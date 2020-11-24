@@ -1,6 +1,8 @@
 # Full-Stack-Developer-Coding-Challenge
 As the next step in the interview process, we’d like you to complete a coding challenge.
 
+[Live Site](https://rocket-app-calvincu.herokuapp.com/ "Live Site")
+
 ## Setup
 
 cd into rocket_app:
@@ -9,12 +11,11 @@ cd into rocket_app:
 
 Open another terminal:
 
->Run "bundle install" and then run: 
+>Run "bundle install" and then run the following commands: 
 "rails db:create", 
 "rails db:migrate", 
-and then "rails db:seed"
-
->Then run "rails server"
+"rails db:seed"
+"rails server"
 
 Open open your browser at http://localhost:3000/.
 
