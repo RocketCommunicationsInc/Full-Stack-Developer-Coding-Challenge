@@ -25,6 +25,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "./bin/webpack-dev-server"
+    "start": "./bin/webpack-dev-server",
+    "heroku-prebuild": "npm install && npm run build"
   }
 }
