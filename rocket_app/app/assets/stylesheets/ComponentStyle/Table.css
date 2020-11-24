@@ -1,19 +1,25 @@
 .table-stats-container {
-  border: solid #68686E 1px;
+  border: solid #536579 1px;
   border-bottom: none;
-  background-color: #181D1F;
-  color: #EFF0F1;
+  background-color: #192635;
   text-align: center;
   height: 75px;
   margin-top: 10px;
   width: 600px;
-  color: var(--ag-header-foreground-color, var(--ag-secondary-foreground-color, var(--ag-foreground-color, #fff)));
+  font-weight: normal;
+}
+
+.table-title {
+  font-weight: normal;
 }
 
 .table-stats {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
+  font-size: 14px;
+  color: #A9B2BC;
+  
 }
 
 .table-stat {

@@ -5,6 +5,7 @@
     "@astrouxds/rux-button": "^4.1.2",
     "@astrouxds/rux-clock": "^4.1.1",
     "@astrouxds/rux-global-status-bar": "^4.0.3",
+    "@astrouxds/rux-icon": "^4.0.3",
     "@astrouxds/rux-log": "^4.0.8",
     "@astrouxds/rux-progress": "^4.0.3",
     "@astrouxds/rux-status": "^4.0.3",

@@ -8,9 +8,9 @@ const Table = (props) => {
   const { data } = props;
 
   return (
-    <div className="ag-theme-alpine-dark" style={ { height: 500, width: 600 } }>
+    <div className="ag-theme-astro" style={ { height: 500, width: 600 } }>
       <div className="table-stats-container">
-        <h2>Alerts</h2>
+        <h2 className="table-title">Alerts</h2>
       </div>
       <AgGridReact
         pagination={true}

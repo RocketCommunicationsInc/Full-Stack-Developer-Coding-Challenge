@@ -1,7 +1,5 @@
 // Library Imports
 import * as React from "react";
-
-// Local Imports
 import { RuxGlobalStatusBar } from '@astrouxds/rux-global-status-bar/rux-global-status-bar.js';
 import { RuxButton } from '@astrouxds/rux-button/rux-button.js';
 import { RuxClock } from '@astrouxds/rux-clock/rux-clock.js';

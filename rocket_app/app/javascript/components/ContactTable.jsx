@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import { RuxButton } from '@astrouxds/rux-button/rux-button.js';
 import { RuxStatus } from '@astrouxds/rux-status/rux-status.js';
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
 
 // counts statuses within dataset
 const buildStatusCounts = (contacts) => {
@@ -43,9 +41,9 @@ const Table = (props) => {
   });
 
   return (
-    <div className="ag-theme-alpine-dark" style={ { height: 500, width: 600 } }>
+    <div className="ag-theme-astro" style={ { height: 500, width: 600 } }>
       <div className="table-stats-container">
-        <h2>Contacts</h2>
+        <h2 className="table-title">Contacts</h2>
         <section className="table-stats">
           <div className="table-stat">
              <p className="table-stat-text">Total Contacts: {data.length}</p>
