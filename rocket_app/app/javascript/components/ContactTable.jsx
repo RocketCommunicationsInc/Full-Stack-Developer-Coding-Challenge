@@ -34,7 +34,9 @@ const Table = (props) => {
     let count = statusCounts[status];
     return (
       <div key={i} className="table-stat">
-        <rux-status status={status} className=""></rux-status>
+        <div className="status-symbol">
+          <rux-status status={status}></rux-status>
+        </div>
         <p className="table-stat-text">{`${newString}: ${count}`}</p>
       </div>
     )

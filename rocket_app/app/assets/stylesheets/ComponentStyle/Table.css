@@ -19,7 +19,10 @@
   margin-bottom: 20px;
   font-size: 14px;
   color: #A9B2BC;
-  
+}
+
+.status-symbol {
+  margin-top: 2%;
 }
 
 .table-stat {
