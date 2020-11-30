@@ -18,15 +18,15 @@ class UsersController < ApplicationController
           render json: {
             user: @user
           }
-        else
+       else
           render json: {
             status: 500,
             errors: ['user not found']
           }
-        end
-      end
+       end
+    end
       
-      def create
+    def create
         @user = User.new(user_params)
         if @user.save
           login!
