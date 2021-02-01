@@ -50,7 +50,8 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 ## How to submit this challenge:
 1. Fork this repository
 2. Work on your solution
-3. Create a pull request with @github/cskerbo as the reviewer.
+3. Deploy the frontend and backend of your application using free services (Netlify, Heroku, etc).
+4. Create a pull request with @github/cskerbo as the reviewer.
 
 ## Timeframe
 
