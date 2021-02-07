@@ -1,0 +1,39 @@
+<div class="centered-window" style="width: 325px;">
+  <h2>Register user:</h2>
+  <div>
+    <form class="rux-form" [formGroup]="userRegistrationForm">
+      <div class="rux-form-field">
+        <label class="rux-form-field__label" for="firstName">First Name:</label>
+        <input id="firstName" class="rux-input" type="text" formControlName="firstName" required/>
+        <div *ngIf="formSubmitted && form.firstName.errors" class="invalid-feedback">
+          <div *ngIf="form.firstName.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="rux-form-field">
+        <label class="rux-form-field__label" for="lastName">Last Name:</label>
+        <input id="lastName" class="rux-input" type="text" formControlName="lastName" required/>
+        <div *ngIf="formSubmitted && form.lastName.errors" class="invalid-feedback">
+          <div *ngIf="form.lastName.errors.required">Last Name is required</div>
+        </div>
+      </div>
+      <div class="rux-form-field">
+        <label class="rux-form-field__label" for="userName">Username:</label>
+        <input id="userName" class="rux-input" type="text" formControlName="userName" required/>
+        <div *ngIf="formSubmitted && form.username.errors" class="invalid-feedback">
+          <div *ngIf="form.username.errors.required">Username is required</div>
+        </div>
+      </div>
+      <div class="rux-form-field">
+        <label class="rux-form-field__label" for="password">Password:</label>
+        <input id="password" class="rux-input" type="password" formControlName="password" required/>
+        <div *ngIf="formSubmitted && form.password.errors" class="invalid-feedback">
+          <div *ngIf="form.password.errors.required">Password is required</div>
+        </div>
+      </div>
+      <div class="rux-button-group">
+        <rux-button style="margin-left:auto; margin-right: 5px" [disabled]="loading" (click)="cancelRegistration()" outline>cancel</rux-button>
+        <rux-button [disabled]="loading" (click)="submitRegistration()">register</rux-button>
+      </div>
+    </form>
+  </div>
+</div>
