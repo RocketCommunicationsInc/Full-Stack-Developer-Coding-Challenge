@@ -1,0 +1,17 @@
+<div class="summary-grid">
+  <div>
+    <span class="summary-counts">{{totalSatContacts}}</span>
+    Contacts
+  </div>
+  <div>
+    <span class="summary-counts">{{totalDiffStates}}</span>
+    States
+  </div>
+</div>
+<ag-grid-angular
+  style="width: 100%; height: calc(100vh - 60px)"
+  class='ag-theme-astro'
+  [columnDefs]="columnDefs"
+  [rowData]="rowData"
+></ag-grid-angular>
+
