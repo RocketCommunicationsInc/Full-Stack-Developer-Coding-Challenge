@@ -2,15 +2,42 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {User} from '../models/user';
+import {tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
+
+interface UserInfo {
+  firstName: string;
+  lastName: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
+  private _authenticated: Subject<boolean> = new BehaviorSubject(false);
+  get authenticated (): Observable<boolean> { return this._authenticated.asObservable(); }
+
+  private _user: UserInfo;
+  get user (): UserInfo {
+    return this._user;
+  }
   constructor (
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
+
+  canActivate (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> {
+    return this.authenticated.pipe(tap( activate => {
+      if (!activate) {
+        this.router.navigate(['login']);
+      }
+    }));
+  }
 
   authenticate (uname: string, pass: string): any {
     const filterObj = {
@@ -24,7 +51,13 @@ export class AuthenticationService {
       }
     };
     const filter = encodeURIComponent(JSON.stringify(filterObj));
-    return this.http.get(`${environment.apiUrl}/users?filter=${filter}`);
+    return this.http.get(`${environment.apiUrl}/users?filter=${filter}`)
+      .pipe(tap((resp: UserInfo) => {
+        if (Object.entries(resp).length > 0) {
+          this._authenticated.next(true);
+          this._user = resp;
+        }
+      }));
   }
 
   registerUser (user: User): any {

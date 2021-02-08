@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './authentication/components/login/login.component';
 import {UserRegistrationComponent} from './authentication/components/user-registration/user-registration.component';
+import {GrmDashboardComponent} from './grm-dashboard/grm-dashboard/grm-dashboard.component';
+import {AuthenticationService} from './authentication/authentication.service';
 
 const routes: Routes = [
   {
@@ -16,6 +18,11 @@ const routes: Routes = [
   {
     path: 'registration',
     component: UserRegistrationComponent
+  },
+  {
+    path: 'dashboard',
+    component: GrmDashboardComponent,
+    canActivate: [AuthenticationService]
   },
   {
     path: '**/*',

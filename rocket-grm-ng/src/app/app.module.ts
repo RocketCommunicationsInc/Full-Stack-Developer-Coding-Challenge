@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthenticationModule} from './authentication/authentication.module';
+import {GrmDashboardModule} from './grm-dashboard/grm-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {AuthenticationModule} from './authentication/authentication.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AuthenticationModule
+    AuthenticationModule,
+    GrmDashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

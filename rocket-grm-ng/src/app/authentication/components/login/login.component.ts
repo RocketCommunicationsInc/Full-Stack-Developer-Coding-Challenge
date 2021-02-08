@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {AuthenticationService} from '../../authentication.service';
+import {take} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -26,7 +28,8 @@ export class LoginComponent implements OnInit {
 
   constructor (
     private http: HttpClient,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) { }
 
   ngOnInit (): void {
@@ -35,9 +38,8 @@ export class LoginComponent implements OnInit {
   submitLogin (): void {
     console.log('form: ', this.form);
     this.authService.authenticate(this.form.userName.value, this.form.password.value)
-      .subscribe(result => {
-        console.log('Authentication result: ', result);
-      });
+      .pipe(take(1))
+      .subscribe(() => this.router.navigate(['/dashboard']));
   }
 
 }
