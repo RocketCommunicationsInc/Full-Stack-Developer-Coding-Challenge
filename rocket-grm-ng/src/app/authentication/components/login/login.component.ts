@@ -1,8 +1,8 @@
 import '@astrouxds/rux-button/rux-button';
+import '@astrouxds/rux-notification/rux-notification.js';
 
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
 import {AuthenticationService} from '../../authentication.service';
 import {take} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -15,6 +15,9 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  @ViewChild('usernameInput') usernameInput: ElementRef;
+  @ViewChild('passwordInput') passwordInput: ElementRef;
+
   get form (): { [c: string]: AbstractControl } {
     return this.userLoginForm.controls;
   }
@@ -23,11 +26,12 @@ export class LoginComponent implements OnInit {
     password: new FormControl('')
   });
 
-  formSubmitted: boolean = false;
+  loginError: boolean = false;
+  formSubmitted: boolean = false
+  errorMessage: string;
   loading: boolean = false;
 
   constructor (
-    private http: HttpClient,
     private authService: AuthenticationService,
     private router: Router
   ) { }
@@ -35,11 +39,27 @@ export class LoginComponent implements OnInit {
   ngOnInit (): void {
   }
 
+  // This is a bit of hackey solution. Usually my best strategy is utilizing an OAuth or OIDC provider
+  // such as Keycloak. Use solid authentication/authorization instead of always recreating the wheel.
   submitLogin (): void {
-    console.log('form: ', this.form);
+    this.formSubmitted = true;
+    this.usernameInput.nativeElement.disabled = true;
+    this.passwordInput.nativeElement.disabled = true;
     this.authService.authenticate(this.form.userName.value, this.form.password.value)
       .pipe(take(1))
-      .subscribe(() => this.router.navigate(['/dashboard']));
+      .subscribe(
+        resp => {
+          if (resp.length > 0) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.formSubmitted = false;
+            this.usernameInput.nativeElement.disabled = false;
+            this.passwordInput.nativeElement.disabled = false;
+            this.loginError = true;
+            this.errorMessage = 'Invalid credentials. Please try again.';
+          }
+        }
+      );
   }
 
 }

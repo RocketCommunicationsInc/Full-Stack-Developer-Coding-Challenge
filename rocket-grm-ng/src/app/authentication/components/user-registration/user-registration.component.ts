@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
 import {AuthenticationService} from '../../authentication.service';
 import {User} from '../../../models/user';
 import {Router} from '@angular/router';
@@ -25,7 +24,6 @@ export class UserRegistrationComponent implements OnInit {
   loading: boolean = false;
 
   constructor (
-    private http: HttpClient,
     private authService: AuthenticationService,
     private router: Router
   ) { }

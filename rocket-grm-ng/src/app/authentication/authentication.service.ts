@@ -28,6 +28,8 @@ export class AuthenticationService {
     private router: Router
   ) { }
 
+  // function to work with the routing module. Will allow/disallow navigation to specified routes
+  // in the app-routing.module.ts file based on logging in successfully or not.
   canActivate (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -50,6 +52,7 @@ export class AuthenticationService {
         lastName: true
       }
     };
+    // creation of the mongodb query filter as an encoded query string
     const filter = encodeURIComponent(JSON.stringify(filterObj));
     return this.http.get(`${environment.apiUrl}/users?filter=${filter}`)
       .pipe(tap((resp: UserInfo) => {

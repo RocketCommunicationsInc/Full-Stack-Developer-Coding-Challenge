@@ -1,26 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
+import { GrmDashboardComponent } from './grm-dashboard.component';
+import {DataService} from '../../services/data.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {RouterTestingModule} from '@angular/router/testing';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('GrmDashboardComponent', () => {
+  let component: GrmDashboardComponent;
+  let fixture: ComponentFixture<GrmDashboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
+        HttpClientTestingModule
       ],
-      declarations: [ LoginComponent ]
+      declarations: [ GrmDashboardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(GrmDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

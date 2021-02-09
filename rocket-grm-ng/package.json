@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~11.0.3",
     "@angular/router": "~11.0.3",
     "@astrouxds/rux-button": "^5.0.0",
+    "@astrouxds/rux-notification": "^5.0.0",
     "@astrouxds/rux-push-button": "^5.0.0",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "ag-grid-angular": "^25.0.1",
