@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     loginPassword: new FormControl(''),
   });
   isValid: boolean = true;
+  invalidLogin: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef,
     private loginService: LoginService,
@@ -33,6 +34,13 @@ export class LoginComponent implements OnInit {
       this.loginService.login({
         email: this.loginInfo.controls['loginEmail'].value,
         password: this.loginInfo.controls['loginPassword'].value,
+      }).subscribe(result => {
+        if (result == 'Ok') {
+          this.invalidLogin = false;
+          this.router.navigate(['./dashboard']);
+        } else {
+          this.invalidLogin = true;
+        }
       })
     }
     this.cdr.detectChanges();

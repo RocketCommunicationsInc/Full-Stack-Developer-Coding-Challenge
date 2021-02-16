@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { User } from '../models';
 
@@ -10,7 +9,6 @@ import { User } from '../models';
 })
 export class LoginService {
   private _isAuthenticated: boolean = false;
-  private _isAuthenticated$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   get isAuthenticated() {
     return this._isAuthenticated;
@@ -18,25 +16,24 @@ export class LoginService {
 
   set isAuthenticated(value: boolean) {
     this._isAuthenticated = value;
-    this._isAuthenticated$.next(this._isAuthenticated);
   }
 
-  get isAuthenticated$() {
-    return this._isAuthenticated$.asObservable();
-  }
-
-  constructor(private httpClient: HttpClient,
-    private router: Router) { }
+  constructor(private httpClient: HttpClient) { }
 
   login(user: User) {
-    this.httpClient.post(`${environment.baseUrl}/login`, user)
-      .subscribe(response => {
-        this.isAuthenticated = true;
-        this.router.navigate(['./dashboard']);
-      });
+    return this.httpClient.post(`${environment.baseUrl}/login`, user)
+      .pipe(map(response => response['result']),
+            tap(result => {
+              if (result == 'Ok') {
+                this.isAuthenticated = true;
+              } else {
+                this.isAuthenticated = false;
+              }
+            }));
   }
 
   createUser(user: User)  {
-     return this.httpClient.post(`${environment.baseUrl}/create`, user);
+     return this.httpClient.post(`${environment.baseUrl}/create`, user)
+        .pipe(map(response => response['result']));
   }
 }

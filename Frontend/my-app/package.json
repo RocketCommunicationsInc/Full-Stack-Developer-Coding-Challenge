@@ -25,6 +25,7 @@
     "@angular/router": "~9.1.4",
     "@fortawesome/fontawesome-free": "^5.15.2",
     "bootstrap": "^4.6.0",
+    "express": "*",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "rxjs": "~6.5.4",

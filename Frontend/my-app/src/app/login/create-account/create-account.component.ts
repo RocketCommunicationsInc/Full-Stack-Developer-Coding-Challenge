@@ -16,6 +16,7 @@ export class CreateAccountComponent implements OnInit {
     loginPassword: new FormControl(''),
   });
   isValid: boolean = true;
+  createAccountError: string = null;
 
   constructor(private cdr: ChangeDetectorRef,
     private loginService: LoginService,
@@ -31,7 +32,13 @@ export class CreateAccountComponent implements OnInit {
         email: this.loginInfo.controls['loginEmail'].value,
         password: this.loginInfo.controls['loginPassword'].value,
       }).subscribe(response => {
-        this.bAccountCreationSuccess = true;
+        if (response == 'Ok') {
+          this.bAccountCreationSuccess = true;
+          this.createAccountError = null;
+        } else {
+          this.bAccountCreationSuccess = false;
+          this.createAccountError = response;
+        }
         this.cdr.detectChanges();
       });
     } else {

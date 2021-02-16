@@ -1,5 +1,6 @@
 <div class="login-region">
     <div>Please Login</div>
+    <div class="login-invalid" *ngIf="invalidLogin">Login is invalid</div>
     <form [formGroup]="loginInfo">
         <div class="rux-form-field">
             <label for="user_name">Email</label>

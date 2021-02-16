@@ -1,5 +1,6 @@
 <div class="login-region">
     <div>Create Account</div>
+    <div class="create-account-invalid" *ngIf="createAccountError">{{ createAccountError }}</div>
     <form [formGroup]="loginInfo">
         <div class="rux-form-field">
             <label for="user_name">Email</label>
