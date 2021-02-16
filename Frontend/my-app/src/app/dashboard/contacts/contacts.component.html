@@ -1,0 +1,5 @@
+<span>Total Contacts: {{ contactDashboard?.contacts.length }} </span>
+<span class="contact-states">Total States: {{ contactDashboard?.totalStates }}</span>
+
+<my-data-grid [items]="contactDashboard?.contacts" [columns]="contactColumns">
+</my-data-grid>

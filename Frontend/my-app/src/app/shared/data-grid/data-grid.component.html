@@ -1,0 +1,14 @@
+<table class="rux-table">
+    <tr class="rux-table__column-head">
+        <th *ngFor="let column of columnsCopy" (click)="onSortByCategory(column)">
+            {{ column.caption }}
+            <i *ngIf="!!column.canSort && sortCategoryByAsc != null" class="fas" [ngClass]="{'fa-arrow-up': !!sortCategoryByAsc, 'fa-arrow-down': !sortCategoryByAsc}"></i>
+        </th>
+    </tr>
+    <tr *ngFor="let item of itemsCopy">
+        <td *ngFor="let column of getItemColumnData(item)">
+            <span *ngIf="!column.datatype">{{ getDisplayValue(item, column) }}</span>
+            <span *ngIf="column.datatype === 'datetime'">{{ item[column.key] | date: 'short' }}</span>
+        </td>
+    </tr>
+</table>

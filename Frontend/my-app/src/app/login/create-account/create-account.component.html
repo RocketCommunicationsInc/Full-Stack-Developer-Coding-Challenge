@@ -1,0 +1,26 @@
+<div class="login-region">
+    <div>Create Account</div>
+    <form [formGroup]="loginInfo">
+        <div class="rux-form-field">
+            <label for="user_name">Email</label>
+            <input id="user_name" class="rux-input" type="text" [required]="!isValid" formControlName="loginEmail">
+        </div>
+        <div class="rux-form-field">
+            <label for="password">Password</label>
+            <input id="password" class="rux-input" type="password" [required]="!isValid" formControlName="loginPassword">
+        </div>
+        <div class="row login-row-divider">
+            <div class="col" *ngIf="!bAccountCreationSuccess">
+                <button class="rux-button" (click)="onSubmitLoginInfo()">Create Account</button>
+            </div>
+            <div class="col login-create-account" *ngIf="!bAccountCreationSuccess">
+                Already have an account? 
+                <button class="rux-button create-account-login-button" (click)="onLoginClicked()">Log In</button>
+            </div>
+            <div class="col" *ngIf="bAccountCreationSuccess">
+                Account Created. Please return to login screen to sign in
+                <button class="rux-button create-account-login-button" (click)="onLoginClicked()">Log In</button>
+            </div>
+        </div>
+    </form>
+</div>

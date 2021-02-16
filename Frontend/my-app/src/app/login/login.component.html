@@ -1,0 +1,23 @@
+<div class="login-region">
+    <div>Please Login</div>
+    <form [formGroup]="loginInfo">
+        <div class="rux-form-field">
+            <label for="user_name">Email</label>
+            <input id="user_name" class="rux-input" type="text" [required]="!isValid" formControlName="loginEmail">
+        </div>
+        <div class="rux-form-field">
+            <label for="password">Password</label>
+            <input id="password" class="rux-input" type="password" [required]="!isValid" formControlName="loginPassword">
+        </div>
+        <div class="row login-row-divider">
+            <div class="col">
+                <button class="rux-button" (click)="onSubmitLoginInfo()">Sign In</button>
+            </div>
+            <div class="col login-create-account">
+                <a href="javascript:void(0)" (click)="onCreateAccountClicked()">Create Account</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
