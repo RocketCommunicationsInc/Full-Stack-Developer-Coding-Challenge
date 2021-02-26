@@ -1,0 +1,28 @@
+body{
+   text-align: center;
+}
+img.logo{
+   margin-bottom: 50px;
+}
+rux-button{
+   display: inline-block;
+   border: 5px solid #2B659B;
+   background-color: #172635;
+   margin: 5px;
+}
+form.login{
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   font-size: large;
+   color: #7B8089;
+}
+input{
+   width: 40%;
+   padding: 5px;
+   margin-bottom: 20px;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   border: 5px solid #2B659B;
+   border-radius: 30px;
+   background-color: #172635;
+}
