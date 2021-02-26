@@ -18,7 +18,12 @@
                 :key="column.name"
                 class="truncate"
             >
-                {{ item[column.name] }}
+                <template v-if="column.format === 'date'">
+                    {{formatDate(item[column.name])}}
+                </template>
+                <div class="capitalize" v-else>
+                    {{ item[column.name] }}
+                </div>
             </td>
         </tr>
     </table>
@@ -26,6 +31,8 @@
 
 
 <script>
+
+import {formatDate} from "../../utils/helpers";
 
 export default {
     name: "RuxTable",
@@ -37,6 +44,12 @@ export default {
         data: {
             type: Array,
             default: (() => [])
+        },
+    },
+
+    methods: {
+        formatDate(date) {
+            return formatDate(date)
         }
     },
 }
