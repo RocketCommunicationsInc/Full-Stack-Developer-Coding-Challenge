@@ -3,10 +3,11 @@ import App from './App.vue'
 
 import './index.css';
 
+import '@astrouxds/rux-global-status-bar';
+
 Vue.config.productionTip = false
 
 import './assets/astro.css'
-import './assets/astro.core.css'
 
 new Vue({
   render: h => h(App),
