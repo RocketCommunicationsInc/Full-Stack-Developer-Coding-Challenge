@@ -9,7 +9,6 @@ class Alert extends Model
 {
     use HasFactory;
 
-//    protected $dateFormat = 'U';
     protected $dateFormat = 'Y-m-d H:i:s.u';
 
     protected $casts = [
