@@ -1,14 +1,8 @@
-const jwt = require('jsonwebtoken');
+const router = require('express').Router();
+const verify = require('./verifyToken');
 
-function auth (req, res, next){
-   const token = req.header('auth-token');
-   if(!token) return res.status(401).send('Access denied');
+router.get('/loggedIn', verify,  (req, res) => {
+   return res.redirect('/main')
+})
 
-   try{
-      const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-      req.user = verified;
-   }catch{
-      res.status(400).send('Invalid token');
-   }
-   
-}
+module.exports = router;
