@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import logo from '../logo.png';
-import { RuxButton } from '@astrouxds/rux-button/rux-button.js';
+import '@astrouxds/rux-button/rux-button.js';
 import "../css/login.css";
 
 class login extends Component{
