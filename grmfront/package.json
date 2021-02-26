@@ -1,0 +1,26 @@
+{
+  "name": "grmfront",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "HOST=0.0.0.0 nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@astrouxds/rux-button": "^5.0.0",
+    "@astrouxds/rux-clock": "^5.0.1",
+    "@astrouxds/rux-global-status-bar": "^5.0.0",
+    "@astrouxds/rux-icon": "^5.0.0",
+    "@astrouxds/rux-notification": "^5.0.0",
+    "@astrouxds/rux-progress": "^5.0.0",
+    "@webcomponents/webcomponentsjs": "^2.5.0",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
+    "core-js": "^3.8.3",
+    "moment": "^2.29.1",
+    "nuxt": "^2.14.12"
+  },
+  "devDependencies": {}
+}
