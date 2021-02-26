@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/alerts', [\App\Http\Controllers\Api\AlertController::class, 'index']);
+Route::get('/contacts', [\App\Http\Controllers\Api\ContactController::class, 'index']);
