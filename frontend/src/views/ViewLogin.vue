@@ -51,6 +51,7 @@
 import BasePanel from "@/components/BasePanel";
 import RuxInput from "@/components/RuxInput";
 import RuxButton from "@/components/RuxButton";
+import client from "../../utils/client";
 export default {
     name: "ViewLogin",
     components: {RuxButton, RuxInput, BasePanel},
@@ -68,9 +69,18 @@ export default {
             this.$router.push('/register')
         },
         submitForm() {
+            this.logIn(this.form)
             console.log('heard submit')
-
-        }
+        },
+        async logIn(credentials) {
+            await client.get('/csrf-cookie')
+            await client.post('/login', credentials)
+            const me = await client.get('/me');
+            if (me) {
+               this.$router.push('/dashboard')
+            }
+            console.log(me)
+        },
     },
 }
 </script>

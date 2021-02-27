@@ -62,12 +62,14 @@
 import BasePanel from "@/components/BasePanel";
 import RuxInput from "@/components/RuxInput";
 import RuxButton from "@/components/RuxButton";
+import client from "../../utils/client";
 
 export default {
     name: "ViewRegister",
     components: {RuxButton, RuxInput, BasePanel},
     data() {
         return {
+            loading: false,
             form: {
                 name: '',
                 email: '',
@@ -81,6 +83,19 @@ export default {
             this.$router.push('/login')
         },
         submitForm() {
+            this.loading = true
+            client.post('/register', this.form)
+            .then(r => {
+                console.log(r)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+            .finally(() => {
+                this.loading = false;
+            })
+
+
             console.log('heard submit')
         },
     },
