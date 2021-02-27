@@ -1,1 +1,1 @@
-web: gunicorn run:grm-api
+web: gunicorn run:app

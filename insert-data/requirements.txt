@@ -1,2 +1,2 @@
 certifi==2020.12.5
-psycopg2 @ file:///opt/concourse/worker/volumes/live/7541fe58-2a45-4073-5d69-313e733fc729/volume/psycopg2_1612298592535/work
+psycopg2
