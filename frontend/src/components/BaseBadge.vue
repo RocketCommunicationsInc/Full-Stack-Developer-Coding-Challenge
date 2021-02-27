@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center flex-col leading-tight">
         <div class="text-6xl font-bold">{{value}}</div>
-        <div>{{label}}</div>
+        <div class="capitalize">{{label}}</div>
     </div>
 </template>
 
@@ -14,8 +14,8 @@ export default {
             default: ''
         },
         value: {
-            type: String,
-            default: ''
+            type: Number,
+            default: 0
         }
     },
 }

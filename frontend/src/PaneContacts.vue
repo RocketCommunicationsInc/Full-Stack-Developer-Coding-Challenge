@@ -1,30 +1,23 @@
 <template>
-    <div class="">
-        <div class="bg-gray-600 ">
+    <div class="flex flex-col overflow-hidden">
+        <div class="bg-gray-600 pb-8">
             <ul class="flex items-center justify-between w-1/3 m-auto">
                 <li class="mr-4">
                     <base-badge
                         label="Contacts"
-                        value="23"
+                        :value="totalContacts"
                     />
                 </li>
 
-                <li class="mr-4">
+                <li class="mr-4" v-for="(contacts, state) in contactsGroupedByState" :key="state">
                     <base-badge
-                        label="Failed"
-                        value="9"
-                    />
-                </li>
-
-                <li>
-                    <base-badge
-                        label="Executing"
-                        value="3"
+                        :label="state"
+                        :value="contacts.length"
                     />
                 </li>
             </ul>
         </div>
-        <div class="">
+        <div class="overflow-auto">
             <rux-table
                 class=""
                 :columns="columns"
@@ -38,6 +31,7 @@
 import client from "../utils/client";
 import RuxTable from "@/components/RuxTable";
 import BaseBadge from "@/components/BaseBadge";
+import { groupBy } from 'lodash'
 
 export default {
 name: "PaneContacts",
@@ -71,6 +65,16 @@ name: "PaneContacts",
     },
     created() {
         this.fetchContacts()
+    },
+    computed: {
+        totalContacts() {
+            return this.contacts.length
+        },
+        contactsGroupedByState() {
+            return groupBy(this.contacts, contact => contact.contactState);
+        },
+
+
     },
     methods: {
         async fetchContacts() {

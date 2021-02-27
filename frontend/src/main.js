@@ -4,6 +4,7 @@ import App from './App.vue'
 import './index.css';
 
 import '@astrouxds/rux-global-status-bar';
+import '@astrouxds/rux-clock';
 
 Vue.config.productionTip = false
 
