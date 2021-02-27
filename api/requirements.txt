@@ -1,9 +1,9 @@
 certifi==2020.12.5
-click @ file:///home/linux1/recipes/ci/click_1610990599742/work
-Flask @ file:///home/ktietz/src/ci/flask_1611932660458/work
+click
+Flask
 gunicorn==20.0.4
-itsdangerous @ file:///home/ktietz/src/ci/itsdangerous_1611932585308/work
-Jinja2 @ file:///tmp/build/80754af9/jinja2_1612213139570/work
-MarkupSafe @ file:///opt/concourse/worker/volumes/live/fac44ebc-60de-4182-7f89-29bb8796c554/volume/markupsafe_1607027351541/work
-psycopg2 @ file:///opt/concourse/worker/volumes/live/7541fe58-2a45-4073-5d69-313e733fc729/volume/psycopg2_1612298592535/work
-Werkzeug @ file:///home/ktietz/src/ci/werkzeug_1611932622770/work
+itsdangerous
+Jinja2
+MarkupSafe
+psycopg2
+Werkzeug
