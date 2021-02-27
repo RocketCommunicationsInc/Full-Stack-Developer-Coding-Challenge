@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import logo from '../logo.png';
 import '@astrouxds/rux-button/rux-button.js';
 import "../css/login.css";
+import { BrowserRouter, Link } from 'react-router-dom';
 
 class register extends Component{
    state = {
@@ -18,7 +19,7 @@ class register extends Component{
                <input name="username" value={this.state.username} placeholder="Enter username" onChange={this.handleInputChange}/>
                <input name="password" value={this.state.password} placeholder="Enter password" onChange={this.handleInputChange}/>
                <rux-button onClick={this.register}>Register</rux-button>
-               <rux-button onClick={this.login}>Returning User?</rux-button>
+               <rux-button><Link to="/">Returning User?</Link></rux-button>
             </form>
          </div>
       )
