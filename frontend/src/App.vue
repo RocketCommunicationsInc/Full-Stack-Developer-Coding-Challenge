@@ -1,23 +1,28 @@
 <template>
     <div
         id="app"
-        class="bg-gray-500 dark-theme overflow-hidden h-screen"
+        class="bg-tertiary-800 dark-theme h-screen"
     >
         <rux-global-status-bar
             appname="Hello"
             class="w-full   "
         />
-        <div class="h-screen flex overflow-hidden bg-white">
-            <div class="flex flex-shrink-0">
-                <div class="flex flex-col w-96 pt-5 pb-4 bg-gray-600">
-                    <pane-alerts class="bg-blue-400" />
+        <main class="bg-tertiary-800">
+            <div class="grid grid-cols-8 gap-4 p-4 h-full overflow-hidden">
+                <div class="col-span-3 panel">
+                    <!--panel-->
+                    <base-panel title="Sat 1">
+                        <pane-alerts class="" />
+                    </base-panel>
+                </div>
+
+                <div class="col-span-5 panel">
+                    <base-panel title="Sat 2">
+                        <pane-contacts />
+                    </base-panel>
                 </div>
             </div>
-            <!-- Main column -->
-            <div class="flex flex-col w-0 flex-1 overflow-hidden">
-                <pane-contacts class="bg-blue-200" />
-            </div>
-        </div>
+        </main>
     </div>
 </template>
 
@@ -25,12 +30,16 @@
 
 import PaneAlerts from "@/PaneAlerts";
 import PaneContacts from "@/PaneContacts";
+import BasePanel from "@/components/BasePanel";
 export default {
   name: 'App',
-    components: {PaneContacts, PaneAlerts},
+    components: {BasePanel, PaneContacts, PaneAlerts},
 }
 </script>
 
-<style>
-
+<style scoped>
+.panel {
+    height: calc(100vh - 150px);
+    overflow: auto;
+}
 </style>

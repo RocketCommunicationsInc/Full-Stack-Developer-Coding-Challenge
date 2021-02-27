@@ -110,9 +110,14 @@ module.exports = {
             'xs': '.60rem',
             'sm': '.75rem',
             'md': '0.875rem',
-            'lg': '1',
-            'base': '1',
+            'lg': '1rem',
+            'base': '1rem',
             'xl': '1.125rem',
+            '2xl': '1.25rem',
+            '3xl': '1.5rem',
+            '4xl': '1.875rem',
+            '5xl': '2.25rem',
+            '6xl': '3rem'
         },
         fontFamily: {
             sans: ["Roboto"],

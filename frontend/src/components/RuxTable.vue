@@ -1,9 +1,10 @@
 <template>
     <table class="rux-table">
-        <tr class="rux-table__column-head">
+        <tr class="relative rux-table__column-head">
             <th
                 v-for="(column, index) in columns"
                 :key="index"
+                class="sticky top-0"
                 :class="column.sort ? 'rux-table__column--sortable' : ''"
             >
                 {{ column.label }}
@@ -18,7 +19,12 @@
                 :key="column.name"
                 class="truncate"
             >
-                {{ item[column.name] }}
+                <template v-if="column.format === 'date'">
+                    {{formatDate(item[column.name])}}
+                </template>
+                <div class="capitalize" v-else>
+                    {{ item[column.name] }}
+                </div>
             </td>
         </tr>
     </table>
@@ -26,6 +32,8 @@
 
 
 <script>
+
+import {formatDate} from "../../utils/helpers";
 
 export default {
     name: "RuxTable",
@@ -37,6 +45,12 @@ export default {
         data: {
             type: Array,
             default: (() => [])
+        },
+    },
+
+    methods: {
+        formatDate(date) {
+            return formatDate(date)
         }
     },
 }
