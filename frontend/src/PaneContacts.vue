@@ -10,13 +10,13 @@
                 </li>
 
                 <li
-                    v-for="(contacts, state) in contactsGroupedByState"
+                    v-for="(groupedContacts, state) in contactsGroupedByState"
                     :key="state"
                     class="mr-4"
                 >
                     <base-badge
                         :label="state"
-                        :value="contacts.length"
+                        :value="groupedContacts.length"
                     />
                 </li>
             </ul>

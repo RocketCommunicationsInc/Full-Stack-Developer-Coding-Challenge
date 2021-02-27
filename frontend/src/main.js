@@ -10,8 +10,13 @@ import '@astrouxds/rux-clock';
 Vue.config.productionTip = false
 
 import router from './router'
+import store from './store'
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+
+store.dispatch('auth/fetchUser').then(() => {
+    new Vue({
+        router,
+        store,
+        render: h => h(App)
+    }).$mount('#app')
+})

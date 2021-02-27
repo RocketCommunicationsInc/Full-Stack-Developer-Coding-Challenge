@@ -14,9 +14,13 @@
                 @input="$emit('input', $event.target.value)"
             >
         </div>
-        <div v-if="validationError" class="mt-2 ml-4 text-white text-left">{{validationError}}</div>
+        <div
+            v-if="validationError"
+            class="mt-2 ml-4 text-white text-left"
+        >
+            {{ validationError }}
+        </div>
     </div>
-
 </template>
 
 <script>
