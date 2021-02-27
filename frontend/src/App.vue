@@ -10,6 +10,7 @@
         >
             <rux-clock></rux-clock>
         </rux-global-status-bar>
+
         <main class="bg-tertiary-800">
             <div class="flex p-4">
                 <div class="w-1/3 mr-4 panel">
@@ -45,4 +46,6 @@ export default {
     height: calc(100vh - 150px);
     overflow: hidden;
 }
+
 </style>
+
