@@ -1,3 +1,4 @@
+// const colors = require('tailwindcss/colors')
 const colors = {
     blue: {
         100: "var(--colorPrimaryLighten4)",
@@ -93,6 +94,8 @@ module.exports = {
     darkMode: false, // or 'media' or 'class'
     theme: {
         colors: {
+            black: '#000',
+            white: '#fff',
             primary: colors.blue,
             secondary: colors.lightBlue,
             tertiary: colors.gray,

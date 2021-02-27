@@ -2,13 +2,12 @@
     <div class="flex flex-col">
         <div class="bg-tertiary-600 p-4">
             <div class="text-2xl">
-                {{title}}
+                {{ title }}
             </div>
         </div>
         <div class="bg-tertiary-500 p4 flex flex-col overflow-hidden">
-            <slot></slot>
+            <slot />
         </div>
-
     </div>
 </template>
 

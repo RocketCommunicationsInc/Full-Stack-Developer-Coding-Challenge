@@ -1,7 +1,11 @@
 <template>
     <div class="flex items-center flex-col leading-tight">
-        <div class="text-6xl font-bold">{{value}}</div>
-        <div class="capitalize">{{label}}</div>
+        <div class="text-6xl font-bold">
+            {{ value }}
+        </div>
+        <div class="capitalize">
+            {{ label }}
+        </div>
     </div>
 </template>
 
