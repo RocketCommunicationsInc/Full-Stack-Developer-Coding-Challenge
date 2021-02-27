@@ -12,7 +12,7 @@
 
                     {{ column.label }}
                     <svg
-                        v-if="column.sort && sort === 'asc'"
+                        v-if="column.sort && sort === 'desc'"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         class="ml-2 w-4 h-4"
@@ -26,7 +26,7 @@
                     </svg>
 
                     <svg
-                        v-if="column.sort && sort === 'desc'"
+                        v-if="column.sort && sort === 'asc'"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         class="ml-2 w-4 h-4"
@@ -42,7 +42,7 @@
             </th>
         </tr>
         <tr
-            v-for="(item,index) in data"
+            v-for="(item,index) in sortedData"
             :key="index"
         >
             <td
@@ -64,11 +64,9 @@
     </table>
 </template>
 
-
 <script>
-
 import {formatDate} from "../../utils/helpers";
-
+import { orderBy } from 'lodash'
 export default {
     name: "RuxTable",
     props: {
@@ -83,20 +81,29 @@ export default {
     },
     data() {
         return {
-            sort: null
+            sort: null,
+            sortBy: null
+        }
+    },
+    computed: {
+        sortedData() {
+            return this.sort ? orderBy(this.data, [this.sortBy], [this.sort]) : this.data;
         }
     },
 
     methods: {
-        sortColumn() {
+        sortColumn(column) {
             if (!this.sort) {
                 this.sort = 'asc'
+                this.sortBy = column.name
             }
             else if(this.sort === 'asc') {
                 this.sort = 'desc'
+                this.sortBy = column.name
             }
             else if (this.sort === 'desc') {
                 this.sort = null
+                this.sortBy = null
             }
 
         },
@@ -111,5 +118,4 @@ export default {
 .rux-table__column--sortable {
     cursor: pointer;
 }
-
 </style>
