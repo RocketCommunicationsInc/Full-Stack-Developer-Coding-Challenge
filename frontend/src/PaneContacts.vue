@@ -9,10 +9,14 @@
                     />
                 </li>
 
-                <li class="mr-4" v-for="(contacts, state) in contactsGroupedByState" :key="state">
+                <li
+                    v-for="(groupedContacts, state) in contactsGroupedByState"
+                    :key="state"
+                    class="mr-4"
+                >
                     <base-badge
                         :label="state"
-                        :value="contacts.length"
+                        :value="groupedContacts.length"
                     />
                 </li>
             </ul>
@@ -63,9 +67,6 @@ name: "PaneContacts",
             ],
         }
     },
-    created() {
-        this.fetchContacts()
-    },
     computed: {
         totalContacts() {
             return this.contacts.length
@@ -75,6 +76,9 @@ name: "PaneContacts",
         },
 
 
+    },
+    created() {
+        this.fetchContacts()
     },
     methods: {
         async fetchContacts() {

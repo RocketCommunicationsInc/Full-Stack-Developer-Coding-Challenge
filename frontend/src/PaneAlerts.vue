@@ -1,8 +1,11 @@
 <template>
     <div class="overflow-auto">
-        <rux-table class="" :columns="columns" :data="alerts"></rux-table>
+        <rux-table
+            class=""
+            :columns="columns"
+            :data="alerts"
+        />
     </div>
-
 </template>
 
 <script>
