@@ -1,0 +1,4 @@
+name: insert-data
+dependencies:
+- python=3
+- psycopg2

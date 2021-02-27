@@ -1,0 +1,5 @@
+name: grm-api
+dependencies:
+- python=3
+- Flask
+- psycopg2
