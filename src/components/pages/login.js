@@ -14,6 +14,7 @@ class login extends Component{
          <div>
             <img className="logo" src={logo} alt="Logo"/>
             <form className="login">
+               <h1>LOGIN</h1>
                <input name="username" value={this.state.username} placeholder="Enter username" onChange={this.handleInputChange}/>
                <input name="password" value={this.state.password} placeholder="Enter password" onChange={this.handleInputChange}/>
                <rux-button onClick={this.login}>Login</rux-button>
