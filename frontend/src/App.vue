@@ -9,14 +9,14 @@
         />
         <main class="bg-tertiary-800">
             <div class="grid grid-cols-8 gap-4 p-4 h-full overflow-hidden">
-                <div class="panel col-span-3">
+                <div class="col-span-3 panel">
                     <!--panel-->
                     <base-panel title="Sat 1">
                         <pane-alerts class="" />
                     </base-panel>
                 </div>
 
-                <div class="panel col-span-5">
+                <div class="col-span-5 panel">
                     <base-panel title="Sat 2">
                         <pane-contacts />
                     </base-panel>

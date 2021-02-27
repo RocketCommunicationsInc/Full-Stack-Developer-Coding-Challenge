@@ -5,7 +5,7 @@
                 {{title}}
             </div>
         </div>
-        <div class="bg-tertiary-500 p-4">
+        <div class="bg-tertiary-500 p4">
             <slot></slot>
         </div>
 

@@ -1,7 +1,30 @@
 <template>
     <div class="">
-        Contacts
-        <div class="h-1/2">
+        <div class="bg-gray-600 ">
+            <ul class="flex items-center justify-between w-1/3 m-auto">
+                <li class="mr-4">
+                    <base-badge
+                        label="Contacts"
+                        value="23"
+                    />
+                </li>
+
+                <li class="mr-4">
+                    <base-badge
+                        label="Failed"
+                        value="9"
+                    />
+                </li>
+
+                <li>
+                    <base-badge
+                        label="Executing"
+                        value="3"
+                    />
+                </li>
+            </ul>
+        </div>
+        <div class="">
             <rux-table
                 class=""
                 :columns="columns"
@@ -14,10 +37,11 @@
 <script>
 import client from "../utils/client";
 import RuxTable from "@/components/RuxTable";
+import BaseBadge from "@/components/BaseBadge";
 
 export default {
 name: "PaneContacts",
-    components: {RuxTable},
+    components: {BaseBadge, RuxTable},
     data() {
         return {
             loading: false,
