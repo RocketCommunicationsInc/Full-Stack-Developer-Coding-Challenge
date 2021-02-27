@@ -1,9 +1,10 @@
 <template>
     <table class="rux-table">
-        <tr class="rux-table__column-head">
+        <tr class="relative rux-table__column-head">
             <th
                 v-for="(column, index) in columns"
                 :key="index"
+                class="sticky top-0"
                 :class="column.sort ? 'rux-table__column--sortable' : ''"
             >
                 {{ column.label }}

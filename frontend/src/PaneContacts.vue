@@ -1,10 +1,13 @@
 <template>
-    <div>
+    <div class="">
         Contacts
-        <rux-table
-            :columns="columns"
-            :data="contacts"
-        />
+        <div class="h-1/2">
+            <rux-table
+                class=""
+                :columns="columns"
+                :data="contacts"
+            />
+        </div>
     </div>
 </template>
 

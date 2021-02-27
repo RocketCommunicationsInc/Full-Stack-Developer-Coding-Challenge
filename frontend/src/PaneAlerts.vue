@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <rux-table :columns="columns" :data="alerts"></rux-table>
+    <div class="">
+        <rux-table class="" :columns="columns" :data="alerts"></rux-table>
     </div>
 
 </template>

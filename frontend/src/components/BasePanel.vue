@@ -1,0 +1,29 @@
+<template>
+    <div class="">
+        <div class="bg-tertiary-600 p-4">
+            <div class="text-2xl">
+                {{title}}
+            </div>
+        </div>
+        <div class="bg-tertiary-500 p-4">
+            <slot></slot>
+        </div>
+
+    </div>
+</template>
+
+<script>
+export default {
+    name: "BasePanel",
+    props: {
+        title: {
+            type: String,
+            default: 'Sat 1'
+        },
+    },
+}
+</script>
+
+<style scoped>
+
+</style>
