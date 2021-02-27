@@ -6,13 +6,13 @@ import { BrowserRouter, Link } from 'react-router-dom';
 
 class login extends Component{
    state = {
-      username: "",
+      email: "",
       password: "",
    }
 
-   handleNameChange = (event) => {
+   handleEmailChange = (event) => {
       const {value} = event.target;
-      this.setState({username: value});
+      this.setState({email: value});
    }
 
    handlePassChange = (event) => {
@@ -26,7 +26,7 @@ class login extends Component{
             <img className="logo" src={logo} alt="Logo"/>
             <form className="login">
                <h1>LOGIN</h1>
-               <input name="username" value={this.state.username} placeholder="Enter username" onChange={this.handleNameChange}/>
+               <input name="email" value={this.state.email} placeholder="Enter email" onChange={this.handleEmailChange}/>
                <input name="password" type="password" value={this.state.password} placeholder="Enter password" onChange={this.handlePassChange}/>
                <rux-button onClick={this.login}>Login</rux-button>
                <rux-button><Link to="/register">New User?</Link></rux-button>
