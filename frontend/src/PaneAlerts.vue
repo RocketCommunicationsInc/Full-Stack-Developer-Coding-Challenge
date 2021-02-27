@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="overflow-auto">
         <rux-table class="" :columns="columns" :data="alerts"></rux-table>
     </div>
 
