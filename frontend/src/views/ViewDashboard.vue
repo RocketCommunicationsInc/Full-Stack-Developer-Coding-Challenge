@@ -8,6 +8,7 @@
             class="w-full   "
         >
             <rux-clock />
+            <rux-button @click.native="logOut">Logout</rux-button>
         </rux-global-status-bar>
 
         <main class="bg-tertiary-800">
@@ -40,9 +41,17 @@
 import PaneAlerts from "@/PaneAlerts";
 import PaneContacts from "@/PaneContacts";
 import BasePanel from "@/components/BasePanel";
+import RuxButton from "@/components/RuxButton";
 export default {
     name: 'ViewDashboard',
-    components: {BasePanel, PaneContacts, PaneAlerts},
+    components: {RuxButton, BasePanel, PaneContacts, PaneAlerts},
+    methods: {
+        async logOut() {
+            await this.$store.dispatch('auth/logOut');
+            this.$router.replace({name: 'Login'})
+
+        }
+    },
 }
 </script>
 
