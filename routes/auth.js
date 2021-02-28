@@ -14,6 +14,11 @@ router.post('/register', async (req, res) => {
    const emailExist = await User.findOne({email: req.body.email})
    if(emailExist) return res.status(400).send('Email already in use');
 
+   // Checking if the two passwords match
+   const pass = req.body.password;
+   const pass2 = req.body.password2;
+   if(pass != pass2) return res.status(400).send('Passwords do not match')
+
    // Hash passwords
    const salt = await bcrypt.gentSalt(10);
    const hashedPassword = await bcrypt.hash(req.body.password, salt);
