@@ -35,16 +35,6 @@ class register extends Component{
       this.setState({password2: value});
    }
 
-   register = (event) => {
-      event.preventDefault(); 
-      router.post('/api/user/register', {
-         name: this.state.username,
-         email: this.state.email,
-         password: this.state.password,
-         password2: this.state.password2
-      })
-   }
-
    render(){
       return(
          <div>
