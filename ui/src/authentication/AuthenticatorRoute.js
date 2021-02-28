@@ -9,7 +9,7 @@ const AuthenticatorRoute = ({ children, ...props }) => {
     <Route
       {...props}
       render={({ location }) =>
-        auth.user ? (
+        auth.session ? (
           children
         ) : (
           <Redirect

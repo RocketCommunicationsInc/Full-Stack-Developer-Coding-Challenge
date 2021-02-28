@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import { getUsers } from '../services/userService.js';
 
 const authenticator = {
   isAuthenticated: false,
-  signIn(postAuthSuccess) {
+  signIn(username, password, postAuthSuccess) {
     //TODO database reqquest
     // then
+    console.log("in signIn");
+    getUsers();
     this.isAuthenticated = true;
+
     postAuthSuccess();
   },
   logout(postLogout) {
@@ -20,8 +24,9 @@ const authenticator = {
 const useProvideAuth = () => {
   const [user, setUser] = useState(null);
 
-  const authenticate = (redirectToRequestedPage) => {
-    return authenticator.siginIn(() => {
+  const authenticate = ({ username, password }, redirectToRequestedPage) => {
+    console.log("in authenticate");
+    return authenticator.signIn(username, password, () => {
       // TODO: figure this out --> setUser()
       redirectToRequestedPage();
     });
@@ -33,6 +38,12 @@ const useProvideAuth = () => {
       leaveSecuredPage();
     });
   };
+
+  return {
+    session: localStorage.getItem("session_token"),
+    authenticate,
+    logout
+  }
 };
 
 export default useProvideAuth;
