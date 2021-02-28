@@ -46,16 +46,10 @@ import RuxButton from "@/components/RuxButton";
 export default {
     name: 'ViewDashboard',
     components: {RuxButton, BasePanel, PanelContacts, PanelAlerts},
-    data() {
-        return {
-            open: false
-        }
-    },
     methods: {
         async logOut() {
             await this.$store.dispatch('auth/logOut');
             this.$router.replace({name: 'Login'})
-
         }
     },
 }

@@ -54,10 +54,6 @@ name: "RuxInput",
             type: String,
             default: ''
         },
-        // required: {
-        //     type: Boolean,
-        //     default: false
-        // }
 
     },
     computed: {

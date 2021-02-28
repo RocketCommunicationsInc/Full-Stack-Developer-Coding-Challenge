@@ -1,7 +1,6 @@
 <template>
     <button
         :type="type"
-        outline
         class="rux-button"
         :class="outline ? 'rux-button--outline' : ''"
     >

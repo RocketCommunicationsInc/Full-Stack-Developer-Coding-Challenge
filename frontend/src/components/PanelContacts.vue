@@ -31,9 +31,17 @@
                     />
                 </div>
             </template>
-            <div class="p-12 flex justify-center items-center" v-else>
-                {{error}}
-                <rux-button class="ml-4" @click.native="fetchContacts">Retry</rux-button>
+            <div
+                v-else
+                class="p-12 flex justify-center items-center"
+            >
+                {{ error }}
+                <rux-button
+                    class="ml-4"
+                    @click.native="fetchContacts"
+                >
+                    Retry
+                </rux-button>
             </div>
         </template>
         <div
