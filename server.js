@@ -16,6 +16,7 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => consol
 
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use('/api/user', authRoute);
 app.use('/api/loggedIn', mainRoute);
 
