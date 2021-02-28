@@ -1,9 +1,4 @@
 module.exports = {
-    pages: {
-        index: {
-            title: "GRM Dashboard"
-        }
-    },
     // proxy API requests to Valet during development
     devServer: {
         proxy: 'http://rocket.test',
