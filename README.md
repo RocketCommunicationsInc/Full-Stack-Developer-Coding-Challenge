@@ -1,3 +1,14 @@
+## Architecture
+* The app is split into two codebases, (1) A PHP API written in Laravel (2) A Vue SPA
+* The root of the app is the API. The Vue SPA is in the /frontend directory. The Vue app is an entirely standalone app, this folder structure is just to make development easier (taken from [Evan You](https://github.com/yyx990803/laravel-vue-cli-3)) 
+* Authentication is done via [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum#spa-authentication) using cookie based session authentication, rather than JWT. This gives us added CSRF + XSS protection and solves the problem of having to store tokens insecurely like in LocalStorage. However, tokens can easily be added if there were ever to be a mobile app component to this. 
+
+## Running Locally
+* `composer install`
+* `cp .env.example .env`
+* `php artisan migrate --seed`
+* `cd frontend && npm run build`
+
 ## TODOS
 * I don't like how the column width changes when you click sort on a column. The caret icon changes the width and it feels janky.
 
@@ -8,6 +19,7 @@
   
 ### Form Input
 * If the field is required, the default state shows the red warning icon and highlighted border. 
+* I was able to hack around it by manually setting the required attribute in the component. 
 
 ### Rux Button
 * Might want to add 'type' as a prop to the rux-button component. 

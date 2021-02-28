@@ -1,44 +1,50 @@
 <template>
-    <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <base-panel title="Register">
-                <div class="py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <div class="py-8 px-4 sm:px-10">
                     <form
                         class="space-y-6"
-                        action="#"
-                        method="POST"
                         @submit.prevent="submitForm"
                     >
                         <rux-input
                             id="name"
                             v-model="form.name"
                             label="Name"
+                            :validation-error="getError('name')"
+                            @blur="clearErrors"
                         />
                         <rux-input
                             id="email"
                             v-model="form.email"
                             label="Email"
                             type="email"
+                            :validation-error="getError('email')"
+                            @blur="clearErrors"
                         />
                         <rux-input
                             id="password"
                             v-model="form.password"
                             label="Password"
                             type="password"
+                            :validation-error="getError('password')"
+                            @blur="clearErrors"
                         />
                         <rux-input
                             id="password_confirmation"
                             v-model="form.password_confirmation"
                             label="Confirm Password"
                             type="password"
+                            :validation-error="getError('password_confirmation')"
+                            @blur="clearErrors"
                         />
 
                         <div class="flex items-center">
                             <rux-button
                                 size="large"
-                                class="ml-auto mr-4 "
+                                class="ml-auto mr-4"
                                 :outline="true"
-                                type="default"
+                                type="button"
                                 @click.native="goToLogin"
                             >
                                 Cancel
@@ -47,6 +53,7 @@
                             <rux-button
                                 size="large"
                                 type="submit"
+                                :disabled="loading"
                             >
                                 Submit
                             </rux-button>
@@ -69,6 +76,7 @@ export default {
     components: {RuxButton, RuxInput, BasePanel},
     data() {
         return {
+            errors: null,
             loading: false,
             form: {
                 name: '',
@@ -79,24 +87,38 @@ export default {
         }
     },
     methods: {
-        goToLogin() {
-            this.$router.push('/login')
+        clearErrors() {
+            this.errors = null
         },
-        submitForm() {
+        getError(field) {
+            return this.errors && this.errors[field] ? this.errors[field][0] : null;
+        },
+        goToLogin() {
+            this.$router.replace({name: 'Login'})
+        },
+        async submitForm() {
             this.loading = true
             client.post('/register', this.form)
-            .then(r => {
-                console.log(r)
+                .then(() => {
+                   this.$store.dispatch('auth/fetchUser').then(() => {
+                       this.$router.replace({name: 'Dashboard'})
+                   })
+                    .catch(() => {
+                        this.$router.replace({name: 'Login'})
+                    })
             })
             .catch(e => {
-                console.log(e)
+                if (e.response && e.response.data && e.response.data.errors) {
+                    this.errors = e.response.data.errors
+                } else {
+                    this.errors = ['Error']
+                }
             })
             .finally(() => {
                 this.loading = false;
             })
 
 
-            console.log('heard submit')
         },
     },
 }

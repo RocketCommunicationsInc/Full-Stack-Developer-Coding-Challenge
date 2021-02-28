@@ -1,22 +1,47 @@
 <template>
     <div class="overflow-auto">
-        <rux-table
-            class=""
-            :columns="columns"
-            :data="alerts"
-        />
+        <template v-if="!loading">
+            <template v-if="!error">
+                <rux-table
+                    class=""
+                    :columns="columns"
+                    :data="alerts"
+                />
+            </template>
+            <div
+                v-else
+                class="p-12 flex justify-center items-center"
+            >
+                {{ error }}
+                <rux-button
+                    class="ml-4"
+                    @click.native="fetchAlerts"
+                >
+                    Retry
+                </rux-button>
+            </div>
+        </template>
+        <div
+            v-else
+            class="p-12"
+        >
+            <base-spinner class="m-auto w-16 h-16" />
+        </div>
     </div>
 </template>
 
 <script>
-import client from "../utils/client";
+import client from "../../utils/client";
 import RuxTable from "@/components/RuxTable";
+import BaseSpinner from "@/components/BaseSpinner";
+import RuxButton from "@/components/RuxButton";
 
 export default {
-    name: "PaneAlerts",
-    components: {RuxTable},
+    name: "PanelAlerts",
+    components: {RuxButton, BaseSpinner, RuxTable},
     data() {
         return {
+            error: null,
             loading: false,
             columns: [
                 {
@@ -44,13 +69,14 @@ export default {
     },
     methods: {
         async fetchAlerts() {
+            this.error = null
             this.loading = true;
             client.get('/alerts')
             .then(r => {
                 this.alerts = r.data.data
             })
-            .catch(e => {
-                console.log(e)
+            .catch(() => {
+                this.error = 'Unable to fetch Alerts'
             })
             .finally(() => {
                 this.loading = false

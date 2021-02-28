@@ -28,8 +28,13 @@ const mutations = {
 const actions = {
     async logIn({dispatch}, credentials) {
         await client.get('/csrf-cookie')
-        await client.post('/login', credentials)
-        return dispatch('fetchUser')
+        const log = await client.post('/login', credentials)
+        if (log) {
+
+            return dispatch('fetchUser')
+        } else {
+            console.log(log)
+        }
     },
     async logOut({ commit }) {
         try {
