@@ -4,6 +4,9 @@ import '@astrouxds/rux-button/rux-button.js';
 import '../css/login.css';
 import { BrowserRouter, Link } from 'react-router-dom';
 
+// Importing Express
+const router = require('express').router();
+
 class register extends Component{
    state = {
       username: "",
@@ -30,6 +33,16 @@ class register extends Component{
    handlePassChange2 = (event) => {
       const {value} = event.target;
       this.setState({password2: value});
+   }
+
+   register = (event) => {
+      event.preventDefault(); 
+      router.post('/api/user/register', {
+         name: this.state.username,
+         email: this.state.email,
+         password: this.state.password,
+         password2: this.state.password2
+      })
    }
 
    render(){

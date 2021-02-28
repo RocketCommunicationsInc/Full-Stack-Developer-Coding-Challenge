@@ -4,8 +4,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 // Import Routes
-const authRoute = require('./routes/auth');
-const mainRoute = require('./routes/privateRoutes');
+const router = require('./routes/auth');
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,5 +16,6 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => consol
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use('/api/user' + router);
 
 app.listen(PORT, () => console.log('Server connected to port' + PORT ));
