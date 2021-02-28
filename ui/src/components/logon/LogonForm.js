@@ -35,15 +35,18 @@ const LogonForm = (props) => {
         .required('Password is Required')
     }),
     onSubmit: values => {
-      // TODO: stuff into the auth stuff
-      props.authenticate(values, props.redirectPath);
+      if (props.location.state) {
+        props.authenticate(values, props.location.state.from.pathname);
+      } else {
+        props.authenticate(values);
+      }
     }
   });
 
   return (
     <div className="logon-form d-flex flex-row justify-content-center align-items-center">
       <Container>
-        <Row className="justify-content-center">
+        <Row className="justify-content-center" >
           <Col md="8">
             <CardGroup className="mb-0">
               <Card className="p-4 mb-0 rounded" style={{ backgroundColor:"#001724" }}>
@@ -113,7 +116,7 @@ const Logon = (formik, loading) => {
             data-style={CONTRACT}
             // style={{}}
           >Submit</LaddaButton>
-          <Button className="">
+          <Button className="" onClick={() => {window.location.pathname = "/register"}}>
             Register
           </Button>
         </FormGroup>

@@ -1,16 +1,25 @@
 import { useState } from 'react';
-import { getUsers } from '../services/userService.js';
+import { requestAccess } from '../services/userService.js';
 
 const authenticator = {
   isAuthenticated: false,
-  signIn(username, password, postAuthSuccess) {
-    //TODO database reqquest
-    // then
-    console.log("in signIn");
-    getUsers();
-    this.isAuthenticated = true;
+  async signIn(username, password, postAuth) {
+    let authenticationMessage;
+    try {
+      await requestAccess(username, password).then((response) => {
+        authenticationMessage = response.data[0].message;
+      });
+    } catch(error) {
 
-    postAuthSuccess();
+    }
+
+    let tokenValue = null;
+    if (authenticationMessage === "authenticated") {
+      this.isAuthenticated = true;
+      tokenValue = "fake_token_value";
+    } 
+
+    postAuth(this.isAuthenticated, tokenValue);
   },
   logout(postLogout) {
     // TODO: in the real world there would be a session cookie set and 
@@ -24,11 +33,12 @@ const authenticator = {
 const useProvideAuth = () => {
   const [user, setUser] = useState(null);
 
-  const authenticate = ({ username, password }, redirectToRequestedPage) => {
-    console.log("in authenticate");
-    return authenticator.signIn(username, password, () => {
-      // TODO: figure this out --> setUser()
-      redirectToRequestedPage();
+  const authenticate = ({ username, password }, requestedPath = '/') => {
+    authenticator.signIn(username, password, (isAuthenticated, token) => {
+      if (isAuthenticated) {
+        localStorage.setItem("session_token", token);
+        window.location.pathname = requestedPath;
+      }
     });
   };
 
