@@ -9,6 +9,7 @@ import RegisterForm from '../components/logon/RegisterForm';
 
 const App = () => {
   return (
+    <div style={{backgroundColor:"#1A2838"}}>
     <ProvideAuth>
       <Router>
         <Switch>
@@ -22,7 +23,7 @@ const App = () => {
               {(value) => 
               <LogonForm 
                 authenticate={value.authenticate}
-                redirectPath={props.location.state.from} 
+                {...props} 
               />}
             </authContext.Consumer>
             }
@@ -33,6 +34,7 @@ const App = () => {
         </Switch>
       </Router>
     </ProvideAuth>
+    </div>
   );
 };
 

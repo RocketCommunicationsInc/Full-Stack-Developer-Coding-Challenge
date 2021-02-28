@@ -1,15 +1,11 @@
 import axios from 'axios';
 
-const getUsers = async () => {
-  console.log("here");
-  try {
-    const response = await axios.get(process.env.REACT_APP_API_URL + '/alerts');
-    console.log(response);
-  } catch(error) {
-    console.log(error);
-  }
+const requestAccess = async (username, password) => {
+  const response = await axios.post(process.env.REACT_APP_API_URL + 'users/login', {"username": username, "password": password});
+  console.log(response);
+  return response;
 }
 
 export {
-  getUsers
+  requestAccess
 }

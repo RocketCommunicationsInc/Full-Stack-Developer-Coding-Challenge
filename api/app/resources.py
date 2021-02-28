@@ -38,4 +38,19 @@ def authenticate_user():
 
 @app.route('/users/register', methods=['PUT'])
 def register_user():
-  return
+  response = []
+  check_existance = db_accessor.do_query(queries.select_user, (request.json.get('username'), request.json.get('password')))
+
+  if (models.user_model(check_existance) == None):
+    db_accessor.do_query(queries.insert_user, (request.json.get('username'), request.json.get('password')))
+
+    user = db_accessor.do_query(queries.select_user, (request.json.get('username'), request.json.get('password')))
+
+    if (models.user_model(user) != None):
+      response.append({"response": 201, "message": "account created"})
+    else:
+      response.append({"response": 400, "message": "account could not be created"})
+  else: 
+    response.append({"response": 400, "message": "account not created because it already exists"})
+
+  return jsonify(response)
