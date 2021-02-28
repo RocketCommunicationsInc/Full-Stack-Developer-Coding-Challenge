@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import client from "../utils/client";
+import client from "../../utils/client";
 import RuxTable from "@/components/RuxTable";
 
 export default {
-    name: "PaneAlerts",
+    name: "PanelAlerts",
     components: {RuxTable},
     data() {
         return {

@@ -13,13 +13,16 @@
                             id="email"
                             v-model="form.email"
                             label="Email"
+                            :validation-error="getError('email')"
                             type="email"
+                            @blur="clearErrors"
                         />
                         <rux-input
                             id="password"
                             v-model="form.password"
                             label="Password"
                             type="password"
+                            :validation-error="getError('password')"
                         />
 
 
@@ -28,7 +31,7 @@
                                 size="large"
                                 class="ml-auto mr-4 "
                                 :outline="true"
-                                type="default"
+                                type="button"
                                 @click.native="goToRegister"
                             >
                                 Register
@@ -51,11 +54,14 @@
 import BasePanel from "@/components/BasePanel";
 import RuxInput from "@/components/RuxInput";
 import RuxButton from "@/components/RuxButton";
+
 export default {
     name: "ViewLogin",
     components: {RuxButton, RuxInput, BasePanel},
     data() {
         return {
+            errors: null,
+            required: null,
             form: {
                 email: '',
                 password: ''
@@ -64,16 +70,31 @@ export default {
     },
 
     methods: {
+        clearErrors() {
+            this.errors = null
+        },
+        getError(field) {
+            if (this.errors && this.errors[field]) {
+                return this.errors[field][0]
+            } else {
+                return null
+            }
+        },
         goToRegister() {
             this.$router.push('/register')
         },
         submitForm() {
             this.logIn(this.form)
-            console.log('heard submit')
         },
         async logIn() {
-            await this.$store.dispatch('auth/logIn', this.form)
-            this.$router.replace({name: 'Dashboard'})
+            try {
+                await this.$store.dispatch('auth/logIn', this.form)
+                await this.$router.replace({name: 'Dashboard'})
+            } catch (e) {
+                if (e.response && e.response.data && e.response.data.errors) {
+                    this.errors = e.response.data.errors
+                }
+            }
         },
     },
 }

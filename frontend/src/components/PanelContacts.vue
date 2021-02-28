@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import client from "../utils/client";
+import client from "../../utils/client";
 import RuxTable from "@/components/RuxTable";
 import BaseBadge from "@/components/BaseBadge";
 import { groupBy } from 'lodash'
 
 export default {
-name: "PaneContacts",
+name: "PanelContacts",
     components: {BaseBadge, RuxTable},
     data() {
         return {
