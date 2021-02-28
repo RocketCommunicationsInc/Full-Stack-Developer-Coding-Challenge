@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AuthenticatorRoute from '../authentication/AuthenticatorRoute';
 import { authContext } from '../hooks/useAuth';
@@ -11,19 +11,26 @@ const App = () => {
   return (
     <ProvideAuth>
       <Router>
-
         <Switch>
-          <Route exact path="/">
+          <AuthenticatorRoute exact path="/">
             <Dashboard />
-          </Route>
+          </AuthenticatorRoute>
+
           <Route path="/login">
-            <LogonForm />
+            {props => 
+            <authContext.Consumer>
+              {(value) => 
+              <LogonForm 
+                authenticate={value.authenticate}
+                redirectPath={props.location.state.from} 
+              />}
+            </authContext.Consumer>
+            }
           </Route>
           <Route path="/register">
             <RegisterForm />
           </Route>
         </Switch>
-
       </Router>
     </ProvideAuth>
   );
@@ -31,6 +38,7 @@ const App = () => {
 
 const ProvideAuth = ({ children }) => {
   const auth = useProvideAuth();
+
   return (
     <authContext.Provider value={auth}>
       {children}
