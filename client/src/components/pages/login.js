@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from '../logo.png';
 import '@astrouxds/rux-button/rux-button.js';
 import '../css/login.css';
-import { BrowserRouter, Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class Login extends Component{
    state = {
