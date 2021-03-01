@@ -1,17 +1,20 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import Login from './components/pages/login';
+import Register from './components/pages/register';
+import Main from './components/pages/main';
 
 function Router() {
    return <BrowserRouter>
       <Switch>
          <Route exact path="/">
-            <div>Login</div>
+            <Login/>
          </Route>
          <Route exact path="/register">
-            <div>Register</div>
+            <Register/>
          </Route>
          <Route exact path="/main">
-            <div>Main</div>
+            <Main/>
          </Route>
       </Switch>
    </BrowserRouter>
