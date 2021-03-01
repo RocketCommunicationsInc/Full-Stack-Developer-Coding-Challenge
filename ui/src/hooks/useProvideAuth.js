@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { requestAccess } from '../services/userService.js';
 
 const authenticator = {
@@ -31,7 +30,6 @@ const authenticator = {
 }
 
 const useProvideAuth = () => {
-  const [user, setUser] = useState(null);
 
   const authenticate = ({ username, password }, requestedPath = '/') => {
     authenticator.signIn(username, password, (isAuthenticated, token) => {

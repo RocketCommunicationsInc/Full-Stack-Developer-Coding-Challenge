@@ -26,13 +26,12 @@ def get_all_contacts():
 
 @app.route('/users/login', methods=['POST'])
 def authenticate_user():
-  # print(request.json.get('username'))
   user = db_accessor.do_query(queries.select_user, (request.json.get('username'), request.json.get('password')))
   
   response = [] 
   
-  if (models.user_model(user) != None):
-    response.append({"response": 200, "message": "authenticated"})
+  if models.user_model(user):
+    response.append({"message": "authenticated"}), 200
 
   return jsonify(response) 
 
@@ -40,17 +39,19 @@ def authenticate_user():
 def register_user():
   response = []
   check_existance = db_accessor.do_query(queries.select_user, (request.json.get('username'), request.json.get('password')))
-
-  if (models.user_model(check_existance) == None):
-    db_accessor.do_query(queries.insert_user, (request.json.get('username'), request.json.get('password')))
+  
+  if not models.user_model(check_existance):
+    db_accessor.do_insert(queries.insert_user, (request.json.get('username'), request.json.get('password')))
 
     user = db_accessor.do_query(queries.select_user, (request.json.get('username'), request.json.get('password')))
-
-    if (models.user_model(user) != None):
-      response.append({"response": 201, "message": "account created"})
+    
+    if models.user_model(user):
+      response.append({"message": "account created"})
     else:
-      response.append({"response": 400, "message": "account could not be created"})
+      response.append({"message": "account could not be created"})
+      return jsonify(response), 400
   else: 
-    response.append({"response": 400, "message": "account not created because it already exists"})
+    response.append({"message": "account not created because it already exists"})
+    return jsonify(response), 400
 
-  return jsonify(response)
+  return jsonify(response), 201

@@ -6,6 +6,13 @@ const requestAccess = async (username, password) => {
   return response;
 }
 
+const register = async (username, password) => {
+  const response = await axios.put(process.env.REACT_APP_API_URL + 'users/register', {"username": username, "password": password});
+  console.log(response);
+  return response;
+}
+
 export {
-  requestAccess
+  requestAccess,
+  register
 }
