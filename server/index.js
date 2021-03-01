@@ -29,3 +29,4 @@ mongoose.connect(process.env.DB_CONNECT, {
 
 // Set up routes
 app.use("/auth", require("./routers/userRouter"));
+app.use("/api", require("./routers/apiRouter"));
