@@ -21,7 +21,11 @@ function Register() {
             passwordVerify,
          };
 
-         await axios.post("http://localhost:3001/auth/", registerData)
+         await axios.post(
+            "http://localhost:3001/auth/", 
+            registerData,
+            {withCredentials: true},
+         )
       }catch(err){
          console.error(err);
       }

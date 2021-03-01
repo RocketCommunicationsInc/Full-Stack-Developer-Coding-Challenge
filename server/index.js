@@ -13,7 +13,8 @@ app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
 app.use(express.json());
 app.use(
    cors({
-      origin: ["http://localhost:3002"]
+      origin: ["http://localhost:3002"],
+      credentials: true,
    })
 );
 
