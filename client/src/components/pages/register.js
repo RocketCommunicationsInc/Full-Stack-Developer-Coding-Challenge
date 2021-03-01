@@ -30,7 +30,7 @@ function Register() {
    return(
       <div>
          <img className="logo" src={logo} alt="Logo"/>
-         <form onSubmit={register}>
+         <form className="login">
             <h1>REGISTER</h1>
             <input 
                type="email" 
@@ -50,7 +50,7 @@ function Register() {
                onChange={(e) => setPasswordVerify(e.target.value)} 
                value={passwordVerify}
             />
-            <rux-button type="submit">Register</rux-button>
+            <rux-button onClick={register}>Register</rux-button>
             <rux-button><Link to="/">Returning User?</Link></rux-button>
          </form>
       </div>
