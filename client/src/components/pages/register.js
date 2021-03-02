@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import axios from 'axios';
 import logo from '../logo.png';
 import '@astrouxds/rux-button/rux-button.js';
 import '../css/login.css';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import AuthContext from '../authContext';
 
 function Register() {
 
@@ -26,6 +27,22 @@ function Register() {
             registerData,
             {withCredentials: true},
          )
+
+         const {getLoggedIn} = useContext(AuthContext);
+         getLoggedIn();
+         checkLoggedIn();
+
+      }catch(err){
+         console.error(err);
+      }
+   }
+
+   function checkLoggedIn(){
+      try{
+         const {loggedIn} = useContext(AuthContext)
+         if(loggedIn === true){
+            return <Redirect to="/main"/>
+         }
       }catch(err){
          console.error(err);
       }
