@@ -32,8 +32,7 @@ def connect():
             print('Database connection closed.')
 
 class App(Resource):
-    def get(self, path):
-        print(path)
+    def get(self):
         return jsonify({'message': 'hello world'})
 
     def post(self):
