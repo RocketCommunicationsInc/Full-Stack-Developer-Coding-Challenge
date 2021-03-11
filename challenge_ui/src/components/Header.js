@@ -1,24 +1,8 @@
-import api from '../api/api';
 import Button from '@material-ui/core/Button';
-import ENDPOINTS from '../config/endpoints';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
-import { React, useState } from 'react';
+import { React } from 'react';
 
 function Header(props) {
-
-    const [alert, setAlert] = useState('');
-
-    const callback = (data) => {
-        console.log('got data');
-        console.log(data);
-        setAlert(data.data.status);
-    };
-
-    const errorCb = (e) => {
-        console.error(e);
-    };
 
     const CustomButton = withStyles((theme) => ({
         root: {

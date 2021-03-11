@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request
-from flask_httpauth import HTTPBasicAuth
-import psycopg2
 import json
 import os
+import psycopg2
+from flask import Flask, jsonify, request, render_template, Response
+from flask_cors import cross_origin
+from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -18,26 +19,8 @@ def verify_password(username, password):
         valid = check_password_hash(user, password)
         if valid:
             return username
-    
-def connect():
-    conn = None
-    try:
-        print('Connecting to database')
-        conn = psycopg2.connect(
-            host=os.environ["PG_HOST"],
-            user=os.environ["PG_USER"],
-            password=os.environ["PG_PASS"],
-            database=os.environ["PG_DB"]
-        )
-
-        cur = conn.cursor()
-        cur.execute('SELECT version()')
-
-        db_version = cur.fetchone()
-        print(db_version)
-
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
+        else:
+            return False
 
 def select(query, params):
     try:
@@ -70,26 +53,41 @@ def insert(query, values):
         cur = conn.cursor()
         cur.execute(query, (values[0], values[1]))
         conn.commit()
-    
+        return { 'status': 200 }
+   
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        return error
+        return { 'status': 500, 'error': error }
 
 @app.route('/', methods=['GET'])
-@auth.login_required
 def home():
-    return '<h1>YOU ARE HOME ' + auth.current_user() + '/h1>'
+    return render_template('index.html', flask_token='hello there')
+    #return '<h1>YOU ARE HOME ' + auth.current_user() + '/h1>'
 
 @app.route('/register', methods=['POST'])
+@cross_origin(origin='localhost' ,headers=['Content- Type','Authorization'])
 def register():
     data = json.loads(request.data.decode('utf-8'))
-    print(data)
-    user = data['user']['username']
-    password = generate_password_hash(data['user']['password'])
+    user = data['user']
+    password = generate_password_hash(data['password'])
     new_user = insert('INSERT INTO users (username, credential) values(%s, %s)', [user, password])
-    return jsonify({ 'message': str(new_user) })
+
+    return Response(json.dumps({ 'username': user, 'password': data['password'] }), status=new_user['status'], mimetype='application/json')
+
+@app.route('/login', methods=['POST'])
+@cross_origin(origin='localhost' ,headers=['Content- Type','Authorization'])
+def login():
+    data = json.loads(request.data.decode('utf-8'))
+    user = data['user']
+    password = data['password']
+    result = verify_password(user, password)
+    if result:
+        return Response(json.dumps({ 'username': user, 'password': password }), status=200, mimetype='application/json')
+    else:
+        return Response({ 'Unauthorized' }, status=401)
 
 @app.route('/data/alerts', methods=['GET'])
+@auth.login_required
 def alerts():
     result = {}
     with open('./alerts.json') as data:
@@ -97,6 +95,7 @@ def alerts():
         return jsonify(result)
 
 @app.route('/data/contacts', methods=['GET'])
+@auth.login_required
 def contacts():
     result = {}
     with open('./contacts.json') as data:
@@ -104,5 +103,4 @@ def contacts():
         return jsonify(result)
 
 if __name__ == '__main__':
-    connect()
     app.run()

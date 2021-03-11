@@ -1,3 +1,5 @@
 CODEOWNERS
 Procfile
 *.json
+challenge_api/dev_ui/*
+challenge_ui/*

@@ -3,14 +3,12 @@ import '../App.css';
 import endpoints from '../config/endpoints';
 import Header from '../components/Header';
 import Modal from '../components/Modal';
-import Overview from '../components/Overview';
 import { useState } from 'react';
 
 export default function Main() {
     const [open, setOpen] = useState(false);
     const [modalInfo, setModalInfo] = useState();
     const [responseText, setResponseText] = useState();
-    const [token, setToken] = useState();
     const [user, setUser] = useState(null);
 
     const handleClose = () => {
@@ -19,39 +17,41 @@ export default function Main() {
     };
 
     const login = async (inputs) => {
-        setToken(inputs.token);
 
         const cb = (res) => {
-            console.log(res);
-            setUser(res.user);
+            setUser(res);
             setResponseText('Login successful');
             setTimeout(() => handleClose(), 1000);
         }
 
         const error = (e) => {
-            console.error(e.response);
+            console.error(e);
+            setResponseText('Invalid username or password')
         }
         
-        let config = {
-            headers: { Authorization: `Bearer ${inputs.token}`}
+        let data = {
+            user: inputs.username,
+            password: inputs.password
         }
 
-        await api.GET({ url: endpoints.USER(inputs.username) }, config, cb, error);
+        await api.POST({ url: endpoints.LOGIN() }, data, cb, error);
     };
 
     const register = async (inputs) => {
         const cb = (res) => {
-            console.log(res.token);
-            setToken(res.token);
-            setResponseText(`Store this token for safekeeping: ${res.token}`);
+            setResponseText(`Registration successful`);
+            setUser(res);
+            setTimeout(() => handleClose(), 1000);
         };
 
         const error = (e) => {
-            console.error(e.data);
-            setResponseText(e.data);
+            if (e.status === 500)
+                setResponseText('User already exists');
+            else
+                setResponseText(e.status)
         };
 
-        await api.POST({ url: endpoints.REGISTER(inputs.username) }, {}, cb, error);
+        await api.POST({ url: endpoints.REGISTER() }, { user: inputs.username, password: inputs.password }, cb, error);
     };
 
     const headerClick = (e) => {
@@ -59,10 +59,11 @@ export default function Main() {
         switch (e.currentTarget.id) {
             case 'register':
                 setModalInfo({
-                    header: 'Enter desired username',
+                    header: 'Register',
                     submitText: 'Submit',
                     inputs: [
-                        { id: 'username', label: 'Username' }
+                        { id: 'username', label: 'Username' },
+                        { id: 'password', label: 'Password' }
                     ],
                     submitAction: register
                 });
@@ -75,7 +76,7 @@ export default function Main() {
                     submitText: 'Login',
                     inputs: [
                         { id: 'username', label: 'Username' },
-                        { id: 'token', label: 'Token' }
+                        { id: 'password', label: 'Password' }
                     ],
                     submitAction: login
                 });
@@ -93,7 +94,6 @@ export default function Main() {
                 action={headerClick}
                 username={user?.username}
             >
-                {user ? <Overview user={user} /> : null}
             </Header>
             <Modal 
                 open={open}
