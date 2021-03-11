@@ -1,1 +1,1 @@
-web: gunicorn challenge_api/server:app
+web: gunicorn challenge_api.server:app
