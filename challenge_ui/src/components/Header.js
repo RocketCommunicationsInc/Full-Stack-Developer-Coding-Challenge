@@ -14,7 +14,7 @@ function Header(props) {
 
     return (
         <div className='row' style={styles.banner}>
-            <rux-global-status-bar class='dark-theme' appname='Astro UI' version='0.1' />
+            <rux-global-status-bar class='dark-theme' appname='Astro UI' version='0.1'></rux-global-status-bar>
             {props.children}
             {!props.username && <div className='row' style={{ backgroundColor: '#282c34', display: 'inline-flex' }}>
                <CustomButton
@@ -39,6 +39,7 @@ function Header(props) {
 const styles = {
     banner: {
         backgroundColor: '#172635',
+        color: 'white',
         display: 'flex',
         justifyContent: 'space-between',
         paddingLeft: '20px',
