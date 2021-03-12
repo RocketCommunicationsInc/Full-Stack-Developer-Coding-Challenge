@@ -1,4 +1,4 @@
-const base = '/'
+const base = ''
 
 module.exports = Object.freeze({
     LOGIN: () => { return base + 'login' },
