@@ -1,4 +1,4 @@
-const base = 'https:rocket-coding-challenge.herokuapp.com/'
+const base = '/'
 
 module.exports = Object.freeze({
     LOGIN: () => { return base + 'login' },
