@@ -1,15 +1,19 @@
 import api from '../api/api';
 import '../App.css';
 import endpoints from '../config/endpoints';
+import AstroTable from '../components/AstroTable';
 import Header from '../components/Header';
 import Modal from '../components/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Main() {
     const [open, setOpen] = useState(false);
     const [modalInfo, setModalInfo] = useState();
     const [responseText, setResponseText] = useState();
     const [user, setUser] = useState(null);
+    const [contacts, setContacts] = useState(null);
+    const [contactStateGroups, setContactStateGroups] = useState(null);
+    const [alerts, setAlerts] = useState(null);
 
     const handleClose = () => {
         setOpen(false);
@@ -86,7 +90,57 @@ export default function Main() {
                 setOpen(true);
                 break;
         }
-    }
+    };
+
+    useEffect(() => {
+        const contactCols = ['contactName', 'contactStatus', 'contactBeginTimestamp', 'contactEndTimestamp'];
+        const alertCols = ['errorMessage', 'errorCategory', 'errorTime'];
+
+        const fetchData = async (params) => {
+            let auth = {
+                headers: {
+                    'Authorization': 'Basic ' + btoa(unescape(encodeURIComponent(user.username + ':' + user.password)))
+                }
+            }
+
+            const cb = (res) => {
+                let headers = [];
+
+                for (let col of Object.keys(res[0])) {
+                    if ((params.name === 'alerts' && alertCols.includes(col)) || (params.name === 'contacts' && contactCols.includes(col))) {
+                        headers.push({
+                            Header: col,
+                            accessor: col
+                        });
+                    }
+                }
+
+                if (params.name === 'alerts')
+                    setAlerts({ columns: headers, data: res });
+                else {
+                    let groups = {}
+                    for (let row of res) {
+                        if (!groups[row.contactState])
+                            groups[row.contactState] = 0;
+                        groups[row.contactState] ++;
+                    }
+                    setContactStateGroups(groups);
+                    setContacts({ columns: headers, data: res });
+                }
+            };
+
+            const error = (res) => {
+                console.error(res);
+            };
+
+            await api.GET({ url: endpoints.DATA(params.name) }, auth, cb, error);
+        };
+
+        if (user) {
+            fetchData({ name: 'alerts' });
+            fetchData({ name: 'contacts' });
+        }
+    }, [user]);
 
     return (
         <div>
@@ -101,6 +155,21 @@ export default function Main() {
                 modalInfo={modalInfo}
                 responseText={responseText}
             />
+            { user && alerts ?
+                <AstroTable 
+                    data={alerts.data}
+                    columns={alerts.columns}
+                /> : null
+            }
+            <div style={{ backgroundColor: '#172635', height: '20px' }}/>
+            { user && contacts ?
+                <AstroTable 
+                    data={contacts.data}
+                    columns={contacts.columns}
+                    groups={contactStateGroups}
+                    showCount={true}
+                /> : null
+            }
         </div>
     );
 };

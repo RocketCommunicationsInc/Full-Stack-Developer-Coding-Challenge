@@ -23,6 +23,7 @@ export default function Modal(props) {
             inputs.push(
                 <TextField 
                     id={input.id} 
+                    key={input.id}
                     label={input.label} 
                     variant='outlined'
                     style={styles.input}
