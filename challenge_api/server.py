@@ -98,7 +98,7 @@ def home():
     #return '<h1>YOU ARE HOME ' + auth.current_user() + '/h1>'
 
 @app.route('/register', methods=['POST'])
-@cross_origin(origin='localhost', headers=['Content- Type','Authorization'])
+@cross_origin(origin=['localhost', 'rocket-coding-challenge.herokuapp.com'], headers=['Content- Type','Authorization'])
 def register():
     data = json.loads(request.data.decode('utf-8'))
     user = data['user']
@@ -108,7 +108,7 @@ def register():
     return Response(json.dumps({ 'username': user, 'password': data['password'] }), status=new_user['status'], mimetype='application/json')
 
 @app.route('/login', methods=['POST'])
-@cross_origin(origin='localhost', headers=['Content- Type','Authorization'])
+@cross_origin(origin=['localhost', 'rocket-coding-challenge.herokuapp.com'], headers=['Content- Type','Authorization'])
 def login():
     data = json.loads(request.data.decode('utf-8'))
     user = data['user']
