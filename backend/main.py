@@ -78,7 +78,7 @@ def read_root() -> dict:
     return { "message": "GRM Dashboard" }
 
 #reset sample data
-@app.get("/reset")
+@app.get("/loadtestdata")
 def resetData(db: Session = Depends(get_db)):
     
     message = ""
