@@ -1,0 +1,92 @@
+{
+  "name": "rocket-alerts",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@astrouxds/rux-button": "^3.0.0",
+    "@astrouxds/rux-clock": "^3.0.1",
+    "@astrouxds/rux-global-status-bar": "^3.0.0",
+    "@astrouxds/rux-modal": "^3.0.0",
+    "@astrouxds/rux-notification": "^3.0.0",
+    "@astrouxds/rux-pop-up-menu": "^3.0.0",
+    "@astrouxds/rux-segmented-button": "^3.0.1",
+    "@astrouxds/rux-slider": "^3.0.2",
+    "@astrouxds/rux-spectrum-analyzer": "^1.0.0",
+    "@astrouxds/rux-status": "^3.1.1",
+    "@astrouxds/rux-tabs": "^3.0.0",
+    "@astrouxds/rux-timeline": "^3.0.0",
+    "@astrouxds/rux-toggle": "^3.0.0",
+    "@astrouxds/rux-tree": "^3.0.0",
+    "@polymer/polymer": "^3.0.2",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^12.20.5",
+    "@types/react-dom": "^17.0.2",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "polymer-cli": "^1.9.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.2.3",
+    "web-vitals": "^1.1.0"
+  },
+  "devDependencies": {
+    "@astrouxds/rux-button": "^3.0.0",
+    "@astrouxds/rux-clock": "^3.0.1",
+    "@astrouxds/rux-global-status-bar": "^3.0.0",
+    "@astrouxds/rux-icon": "^3.0.2",
+    "@astrouxds/rux-modal": "^3.0.0",
+    "@astrouxds/rux-notification": "^3.0.0",
+    "@astrouxds/rux-pop-up-menu": "^3.0.0",
+    "@astrouxds/rux-segmented-button": "^3.0.1",
+    "@astrouxds/rux-slider": "^3.0.2",
+    "@astrouxds/rux-spectrum-analyzer": "^1.0.0",
+    "@astrouxds/rux-status": "^3.1.1",
+    "@astrouxds/rux-tabs": "^3.0.0",
+    "@astrouxds/rux-timeline": "^3.0.0",
+    "@astrouxds/rux-toggle": "^3.0.0",
+    "@astrouxds/rux-tree": "^3.0.0",
+    "@polymer/polymer": "^3.0.2",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^12.20.5",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "polymer-cli": "^1.9.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.2.3",
+    "web-vitals": "^1.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
