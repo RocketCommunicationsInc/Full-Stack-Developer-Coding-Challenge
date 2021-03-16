@@ -46,3 +46,31 @@ class Contact(Base):
     contactResolution = Column(String(50))
     contactResolutionStatus = Column(String(50))
 
+class User(models.BaseUser):
+    pass
+
+class UserCreate(models.BaseUserCreate):
+    pass
+
+class UserUpdate(User, models.BaseUserUpdate):
+    pass
+
+class UserDB(User, models.BaseUserDB):
+    pass
+
+class UserTable(Base, SQLAlchemyBaseUserTable):
+    pass
+
+users = UserTable.__table__
+user_db = SQLAlchemyUserDatabase(UserDB, database, users)
+SECRET = "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTYxNTg1ODczNiwiaWF0IjoxNjE1ODU4NzM2fQ.sBgHoyWOByqWPXLj611kb0yf7GncUD76WX4rJeOWKho"
+jwt_authentication = JWTAuthentication(secret=SECRET, lifetime_seconds=3600)
+
+fastapi_users = FastAPIUsers(
+    user_db,
+    [jwt_authentication],
+    User,
+    UserCreate,
+    UserUpdate,
+    UserDB,
+)
