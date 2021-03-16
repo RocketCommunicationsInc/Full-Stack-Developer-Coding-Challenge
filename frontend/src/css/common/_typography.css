@@ -1,0 +1,102 @@
+h1,
+h2,
+h3 {
+	font-family: var(--fontFamily);
+  font-weight: 300;
+  color: var(--defaultText);
+  margin: 0 0 0.5rem 0;
+}
+
+h1,
+.h1 {
+  font-size: 2.375rem;
+}
+
+h2,
+.h2 {
+  font-size: 1.75rem;
+}
+
+h3,
+.h3 {
+  font-size: 1.375rem;
+}
+
+p {
+  margin: 0 0 1rem 0;
+  color: var(--defaultText);
+}
+
+a {
+  color: var(--fontLinkColor);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--fontLinkHoverColor);
+}
+
+dt {
+  font-weight: 600;
+  margin: 0;
+}
+dd {
+  margin: 0 0 0.5rem 0;
+}
+
+.light {
+  font-weight: 300;
+}
+.regular {
+  font-weight: 500;
+}
+.semi-bold {
+  font-weight: 600;
+}
+.bold {
+  font-weight: 700;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.condensed {
+  font-stretch: condensed;
+}
+
+.monospace {
+  font-family: "Roboto Mono", sans-serif;
+}
+
+.invert,
+.inverted {
+  background-color: var(--fontInvertedBackgroundColor);
+  color: var(--fontInvertedColor);
+  padding: 0 0.25rem;
+}
+
+.low-contrast {
+  opacity: 0.2;
+}
+
+/* Size Options */
+.xl {
+  font-size: var(--fontSizeXL);
+}
+
+.lg {
+  font-size: var(--fontSize);
+}
+
+.md {
+  font-size: var(--fontSizeMD);
+}
+
+.sm {
+  font-size: var(--fontSizeSM);
+}
+
+.xs {
+  font-size: var(--fontSizeXS);
+}

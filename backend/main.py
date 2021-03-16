@@ -39,7 +39,7 @@ def get_db():
         db.close()
 
 def on_after_register(user: UserDB, request: Request):
-    print(f"User {user.id} has registered.")
+    print(f"User {user.id} has registered. ")
 
 
 def on_after_forgot_password(user: UserDB, token: str, request: Request):

@@ -1,0 +1,189 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}  
+
+:host {
+	--gridGutter: .5rem;
+	--appMenuDefault: #455D6E;
+	--appMenuHover: #6A7D8B;
+	--appMenuActive: #FFF;
+}
+
+.grid-zone {
+	grid-column-start: auto;
+	grid-column-end: auto;
+	grid-row-start: auto;
+	grid-row-end: auto;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-flow: column;
+	flex-grow: 1;
+}
+
+.grid-zone--header {
+	grid-area: header;
+}
+.grid-zone--sidebar {
+	grid-area: sidebar;
+	border: 1px solid rgba(255,255,255, .125);
+	border-width: 0 1px 1px 0;
+
+}
+.grid-zone--main {
+	grid-area: main;
+	background-color: rgb(32, 50, 70);
+	background:
+		linear-gradient(
+			to top,
+			rgb(26, 40, 56) 0%,
+			rgb(32, 50, 70) 80%,
+			rgb(40, 63, 88) 100%
+		);
+	padding: 0 var(--gridGutter);
+
+}
+.grid-zone--main__subheader {
+	grid-area: subheader;
+	padding: var(--gridGutter) 0;
+
+}
+.grid-zone--main__content {
+	grid-area: content;
+	background: rgb(26, 40, 56);
+	border: 1px solid rgba(255,255,255, .125);
+}
+.grid-zone--main__content rux-tab-panel {
+	overflow: hidden;
+	flex-grow: 1;
+}
+
+.grid-zone--main__content__upper {
+	flex: 2 1 25vw;
+	position: relative;
+}
+.grid-zone--main__content__upper:after {
+	content: "";
+	box-shadow: 0 -0.5rem 1.25rem rgba(0, 0, 0, 0.25);
+	position: absolute;
+	width: 100%;
+	bottom: -1rem;
+	height: 1rem;
+	display: block;
+}
+.grid-zone--main__content__lower {
+	flex: 1 1 20vw;
+}
+.grid-zone--main__content__lower .grid-zone__label {
+	border-top: 1px solid rgba(255,255,255, .125);
+}
+.grid-zone--main__content__lower .grid-zone__content {
+	flex-flow: row nowrap;
+	align-items: center
+}
+.grid-zone--main__content__lower grm-contacts-summary {
+	flex: 1;
+}
+
+.grid-zone__label {
+	flex: none;
+	background: rgba(20, 31, 44, 1);
+	padding: 10px;
+	color: white;
+	font-size: 1.2rem;
+}
+
+.grid-zone__content {
+	overflow: hidden;
+	display: flex;
+	flex-flow: column;
+	flex-grow: 1;
+}
+.grid-zone__content.scroll {
+	height: 100%;
+  min-height: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 1rem;
+}
+
+/* Grid containers */
+.app-grid {
+	background: rgb(26, 40, 56);
+	display: grid;
+	width: 100vw;
+	height: 98vh;
+	padding: 0 0 2vh;
+	grid-column-gap: 0;
+	grid-row-gap: 0;
+	grid-template-rows: fit-content(100%) 0 fit-content(100%);
+	grid-template-columns: minmax(600px, 28%) auto;
+	grid-template-areas:
+		"header header"
+		"sidebar subheader"
+		"sidebar main";
+}
+.inner-grid {
+	height: 100%;
+}
+
+.bin-header {
+  display: flex;
+  flex: none;
+  flex-flow: row nowrap;
+  padding: 1rem;
+  padding-bottom: 1.5rem;
+}
+.bin-header h2 {
+  font-size: 2.75rem;
+  line-height: 2.6rem;
+  font-weight: 300;
+  margin: 1rem 1.5rem 0 0.5rem;
+}
+.summary {
+  flex: 0 1 8rem;
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: center;
+}
+.count {
+  font-size: 2.75rem;
+  line-height: 2.6rem;
+  font-weight: 600;
+}
+.rux-table td {
+  width: 25%
+}
+
+.loginText{
+  cursor:pointer;
+  color:  rgb(69, 160, 240);
+}
+.registerMessage{
+  margin-top:1em;
+}
+.card{
+  border-radius: 0;
+  background: rgb(32, 50, 70);
+  padding:1em;
+}
+.rux-button{
+  border: 1px solid rgb(0, 90, 143) !important;
+  background-color: rgb(0, 90, 143) !important;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 14%), 0 3px 4px rgb(0 0 0 / 12%), 0 1px 5px rgb(0 0 0 / 20%);
+  cursor: pointer;
+  color: rgb(255, 255, 255) !important;
+}
+.rux-button:hover{
+  background-color: rgb(58, 129, 191) !important;
+}
+.data-contain{
+	width:100% !important;
+}
