@@ -1,46 +1,58 @@
-# Getting Started with Create React App
+# Full-Stack-Developer-Coding-Challenge
+As the next step in the interview process, we’d like you to complete a coding challenge.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## The Project
 
-## Available Scripts
+You will be building a basic version of a Ground Resources Management (GRM) Dashboard. There are two JSON files in this repository, *contacts.json* and *alerts.json*. Contacts (satellites) is a list of satellites in orbit and includes pertinent information about each device. Alerts is a list of unrelated status alerts with varying levels of severity. You will need to take this JSON data and persist it in a backend database. You will then develop a backend API, to be called upon by your frontend, which will display the data. This dashboard should allow registration and login of a user, requiring a password, and the user's credentials should also be persisted in your database.
 
-In the project directory, you can run:
+The result should be a dashboard with two pages (the application can be single-page (SPA), or multiple pages):
 
-### `npm start`
+* A registration/login page
+* A main page that displays contact and alert information in a clean, user-friendly format
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Because this position requires familiarity with web components, we would like you to refer to our Astro UX Design site (https://astrouxds.com/) for this project. You may work with the web components directly, or build your own. We also encourage you to utilize our CSS-only library to better match Astro styling.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Refer to the section *Astro Storybook and Sample Apps* at this link to get more details about Astro components, and to see several sample apps that may provide you with inspiration (https://astrouxds.com/getting-started/developers/).
 
-### `npm test`
+## Requirements
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Backend**
+* The backend of this project can be done in Ruby or Python. You are permitted to use generators such as Ruby on Rails, Flask, etc.
+* *contacts.json*, *alerts.json*, and *user credentials* data is persisted in a database. 
+  * Each data point should have a corresponding column in the database.
+  * You may use any databse tool of your choice, such as PostgresQL, MongoDB, SQLite, etc.
+* API provides frontend with *contacts.json*, *alerts.json*, and *verified user credentials*.
 
-### `npm run build`
+**Frontend**
+* The frontend of this project can be done in React, Vue, or Angular. You are permitted to use any of these frameworks CLI generators to quickly start a project (npx create-react-app, ng new my-app, etc.)
+* The application utilizes either Astro UXDS components, or Astro UXDS styling
+* Login Page Reuirements
+  * Authentication is required to access the application
+  * User must register for a new account, or login with an existing account, to proceed to the dashboard
+* Main Page/Dashboard Requirements
+  * The dashboard page cleanly displays the data from *contacts.json*, *alerts.json* in two separate tables
+  * The following should be displayed in the Contacts pane:
+    * Display the total number of Contacts.
+    * Display the total different Contact states (*contactState*).
+    * For each Contact, display Name (*contactName*), Status (*contactStatus*), and Begin/End timestamp (*contactBeginTimestamp/contactEndTimestamp*).
+    * Allow sorting on the name.
+  * The following should be displayed in the Alerts pane:
+    * Display each Alert message (*errorMessage*).
+    * Display each Alert category (*errorCategory*).
+    * Display each Alert time (*errorTime*).
+    * Allow sorting on the category.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Additional Information
+* You are free to use any third-party libraries.
+* Have fun and be as creative as you like!
+* Please feel free to reach out to ask any questions (chris.kerbo@rocketcom.com).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How to submit this challenge:
+1. Fork this repository
+2. Work on your solution
+3. Deploy the frontend and backend of your application using free services (Netlify, Heroku, etc).
+4. Create a pull request with @github/cskerbo as the reviewer.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Timeframe
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+We would like the take home challenge to be completed within 3 days. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
