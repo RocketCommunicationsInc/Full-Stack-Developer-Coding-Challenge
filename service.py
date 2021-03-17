@@ -1,36 +1,40 @@
 from flask import Flask
 from flask_cors import CORS
-from pymongo_inmemory import MongoClient
+import pymongo
 import json
 from bson import json_util, ObjectId
 from flask import jsonify
 from flask import request
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
 CORS(app)
 
-alert = open("alerts.json", "r").read()
-contact = open("contacts.json", "r").read()
-
-client = MongoClient()  # No need to provide host
-db = client['rocketdb']
+client = pymongo.MongoClient(
+    "mongodb+srv://alex:Slnx=xlnx-x@cluster0.qjtr4.mongodb.net/rocket?retryWrites=true&w=majority")
+db = client["rocket"]
 alertsCollection = db['alerts']
 contactsCollection = db['contacts']
 accountsCollection = db['accounts']
-
-alertsCollection.delete_many({})
-alertsCollection.insert_many(json.loads(alert))
-
-contactsCollection.delete_many({})
-contactsCollection.insert_many(json.loads(contact))
-
-accountsCollection.delete_many({})
 
 
 @app.route('/', methods=['GET'])
 def home():
     return "<h1>Rocket Communications Full Stack Developer Coding Challenge</h1>"
+
+
+# Only used once to initialize data
+# @app.route('/load', methods=['GET'])
+# def home():
+#     alert = open("alerts.json", "r").read()
+#     data = json.loads(alert)
+#     alertsCollection.delete_many({})
+#     alertsCollection.insert_many(data)
+#
+#     contact = open("contacts.json", "r").read()
+#     data = json.loads(contact)
+#     contactsCollection.delete_many({})
+#     contactsCollection.insert_many(data)
+#     return "data loaded"
 
 
 @app.route('/alerts', methods=['GET'])

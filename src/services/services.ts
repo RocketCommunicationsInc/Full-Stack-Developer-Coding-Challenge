@@ -4,7 +4,8 @@ import RegisterResponse from '../model/RegisterResponse';
 
 export default class Services {
 
-    static BASE_URL = "http://localhost:5000";
+    // static BASE_URL = "http://localhost:5000";
+    static BASE_URL = "https://protected-meadow-44003.herokuapp.com";
 
     static parseJSON = <T>() => (response: Response): Promise<T> => {
         if(response.status >= 200 && response.status <= 299){

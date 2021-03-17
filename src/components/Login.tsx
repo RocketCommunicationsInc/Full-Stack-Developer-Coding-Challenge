@@ -95,10 +95,10 @@ class Login extends Component<LoginProps, LocalState> {
    
     return (
       <div className="login">
-        {this.state.message == Message.Invalid && <AstroNotification opened={true} message = "Account/Password not recognized" target = "" onclick={this.clearMessage}/>}
-        {this.state.message == Message.Existing && <AstroNotification opened={true} message = "Account already exists" target = "" onclick={this.clearMessage}/>}
-        {this.state.message == Message.Created && <AstroNotification opened={true} message = "Account successfully created" target = "" onclick={this.clearMessage}/>}
-        {this.state.message == Message.Empty && <AstroNotification opened={true} message = "Username and Password must not be empty" target = "" onclick={this.clearMessage}/>}
+        {this.state.message === Message.Invalid && <AstroNotification opened={true} message = "Account/Password not recognized" target = "" onclick={this.clearMessage}/>}
+        {this.state.message === Message.Existing && <AstroNotification opened={true} message = "Account already exists" target = "" onclick={this.clearMessage}/>}
+        {this.state.message === Message.Created && <AstroNotification opened={true} message = "Account successfully created" target = "" onclick={this.clearMessage}/>}
+        {this.state.message === Message.Empty && <AstroNotification opened={true} message = "Username and Password must not be empty" target = "" onclick={this.clearMessage}/>}
         {/* <AstroNotification opened={this.state.message == Message.Invalid} message = "Account not recognized" target = ""/>
         <AstroNotification opened={this.state.message == Message.Existing} message = "Account already exists" target = ""/>
         <AstroNotification opened={this.state.message == Message.Created} message = "Account successfully created" target = ""/> */}
