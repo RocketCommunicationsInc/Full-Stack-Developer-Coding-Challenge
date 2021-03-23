@@ -5,7 +5,6 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 
 from models import db, Alerts as AlertsModel, User as UserModel, Contacts as ContactsModel
@@ -21,6 +20,7 @@ bcrypt = Bcrypt()
 db.init_app(app)
 bcrypt.init_app(app)
 api = Api(app)
+jwt = JWTManager(app)
 
 alerts_fields = {
     'id': fields.Integer,
@@ -66,6 +66,8 @@ user_fields = {
 
 class Alerts(Resource):
     @marshal_with(alerts_fields)
+    @jwt_required()
+    # jwt_required needs a header: Authorization : Bearer <token>
     def get(self):
         res = AlertsModel.query.all()
         return res
@@ -73,6 +75,7 @@ class Alerts(Resource):
 
 class Contacts(Resource):
     @marshal_with(contacts_fields)
+    @jwt_required()
     def get(self):
         res = ContactsModel.query.all()
         return res
@@ -82,22 +85,33 @@ class Register(Resource):
     @marshal_with(user_fields)
     def post(self):
         # Make sure username and email were part of the req
-        print(request, 'REQ HERE')
+
+        username = request.json['username']
+
         if 'username' in request.json and 'password' in request.json:
             # ! We're assuming here that the request will be formated as such.
-            username = request.json['username']
+            # username = request.json['username']
             password = bcrypt.generate_password_hash(
                 request.json['password'], 10)
+            password_hash = password.decode(
+                'utf-8')  # * preventing double encode
 
-        if username:
-            # check if already exists
-            user = UserModel.query.filter_by(username=username).first()
-            if user:
-                return abort(409, message="User already exists.")
-            else:
-                db.session.add(user)
-                db.session.commit()
-                return user, 201
+            if username:
+                # check if already exists
+                user = UserModel.query.filter_by(username=username).first()
+                # print(user, "USER HERE")
+                if user:
+                    return abort(409, "User already exists.")
+                else:
+                    new_user = UserModel(
+                        username=username, password=password_hash)
+                    db.session.add(new_user)
+                    db.session.commit()
+                    token = create_access_token(identity=username)
+                    print(token, "TOKEN")
+                    return {"Success": "Account created", "token": token}, 201
+        else:
+            return abort(400, 'Missing username or password')
 
 
 class Login(Resource):
@@ -107,13 +121,18 @@ class Login(Resource):
             username = request.json['username']
             password = request.json['password']
             user = UserModel.query.filter_by(username=username).first()
-            print(user, "USER OBJ HERE")
+            # print(user.username, user.password, "USER OBJ HERE")
             if user:
                 pw_hash = user.password  # ! Assuming the structure of User
+                # print(pw_hash, "PWHASH")
                 if bcrypt.check_password_hash(pw_hash, password):
                     # create a token
+
                     token = create_access_token(identity=username)
-                    return {"Message": "Login worked!"}, 201
+                    print(token, "TOKEN")
+                    msg = {"success": "Account created", "token": token}
+                    # print(msg, "MSG")
+                    return msg, 201
                 else:
                     return {"Message": "Invalid Credentials."}, 401
             else:
@@ -129,5 +148,7 @@ class Login(Resource):
 # adding resources to api
 api.add_resource(Alerts, "/alerts")
 api.add_resource(Contacts, "/contacts")
+api.add_resource(Register, "/register")
+api.add_resource(Login, "/login")
 if __name__ == '__main__':
     app.run(debug=True)
