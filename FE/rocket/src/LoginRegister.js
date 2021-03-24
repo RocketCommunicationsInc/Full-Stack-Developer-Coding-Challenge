@@ -54,7 +54,7 @@ const LoginRegister = (props) => {
     const creds = { username: userName, password: password };
     axios
       //   .post("http://127.0.0.1:5000/login", creds)
-      .post("https://evening-falls-37216.herokuapp.com/register", creds)
+      .post("https://evening-falls-37216.herokuapp.com/login", creds)
       .then((res) => {
         setIsLoggingIn(false);
         localStorage.setItem("token", res.data.token);
