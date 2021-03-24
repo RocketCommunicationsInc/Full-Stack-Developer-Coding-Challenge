@@ -1,5 +1,49 @@
 .App {
   text-align: center;
+  background: rgb(43, 42, 42);
+}
+
+.login-register-wrapper {
+  background-color: black;
+  background-image: url("./assets/2.jpg");
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-register-wrapper a {
+  color: pink;
+}
+.login-register-wrapper form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(34, 34, 34);
+  border: 1px solid white;
+  width: 20%;
+}
+.login-register-wrapper .error-div {
+  color: red;
+}
+.login-register-wrapper form input {
+  margin: 2%;
+}
+.login-register-wrapper form .button {
+  margin: 10%;
+}
+.login-register-wrapper form label {
+  margin-top: 5%;
+}
+.dash-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {

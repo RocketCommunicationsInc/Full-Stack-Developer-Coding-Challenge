@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import React, { useState } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import "./App.css";
+import LoginRegister from "./LoginRegister";
+import Dash from "./Dash";
+import Nav from "./Nav";
 
 function App() {
+  const path = window.location.pathname;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <LoginRegister {...props} loginRegister={"login"} />
+          )}
+        ></Route>
+        <Route
+          path="/login"
+          render={(props) => (
+            <LoginRegister {...props} loginRegister={"login"} />
+          )}
+        ></Route>
+        <Route
+          path="/register"
+          render={(props) => (
+            <LoginRegister {...props} loginRegister={"register"} />
+          )}
+        ></Route>
+        <Route
+          path="/dash"
+          render={(props) => (
+            <Dash {...props} token={localStorage.getItem("token")} />
+          )}
+        ></Route>
+      </Switch>
     </div>
   );
 }

@@ -1,11 +1,12 @@
 from flask import Flask, jsonify, request, abort
-from flask_restful import Api, Resource, fields, marshal_with
+from flask_restful import Api, Resource, fields, marshal_with, reqparse
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 from models import db, Alerts as AlertsModel, User as UserModel, Contacts as ContactsModel
 import os
@@ -21,6 +22,8 @@ db.init_app(app)
 bcrypt.init_app(app)
 api = Api(app)
 jwt = JWTManager(app)
+CORS(app)
+
 
 alerts_fields = {
     'id': fields.Integer,
@@ -82,14 +85,15 @@ class Contacts(Resource):
 
 
 class Register(Resource):
-    @marshal_with(user_fields)
+    # @marshal_with(user_fields)
     def post(self):
         # Make sure username and email were part of the req
 
         username = request.json['username']
+        # print(request.json)
+        username_length = len(username)
+        if 'username' in request.json and 'password' in request.json and username_length > 0:
 
-        if 'username' in request.json and 'password' in request.json:
-            # ! We're assuming here that the request will be formated as such.
             # username = request.json['username']
             password = bcrypt.generate_password_hash(
                 request.json['password'], 10)
@@ -105,21 +109,24 @@ class Register(Resource):
                 else:
                     new_user = UserModel(
                         username=username, password=password_hash)
+
                     db.session.add(new_user)
                     db.session.commit()
                     token = create_access_token(identity=username)
                     print(token, "TOKEN")
                     return {"Success": "Account created", "token": token}, 201
         else:
-            return abort(400, 'Missing username or password')
+            return {"Message": "Need username and password"}, 400
 
 
 class Login(Resource):
-    @marshal_with(user_fields)
+    # @marshal_with(user_fields)
     def post(self):
-        if 'username' in request.json and 'password' in request.json:
-            username = request.json['username']
-            password = request.json['password']
+        username = request.json['username']
+        password = request.json['password']
+
+        if username and password and len(username) > 0 and len(password) > 0:
+
             user = UserModel.query.filter_by(username=username).first()
             # print(user.username, user.password, "USER OBJ HERE")
             if user:
@@ -130,7 +137,7 @@ class Login(Resource):
 
                     token = create_access_token(identity=username)
                     print(token, "TOKEN")
-                    msg = {"success": "Account created", "token": token}
+                    msg = {"success": "Account logged in", "token": token}
                     # print(msg, "MSG")
                     return msg, 201
                 else:

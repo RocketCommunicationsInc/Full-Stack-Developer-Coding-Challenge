@@ -15,6 +15,7 @@ flask-jwt-extended = "*"
 flask-script = "*"
 flask-migrate = "*"
 psycopg2 = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"
