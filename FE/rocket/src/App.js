@@ -1,13 +1,10 @@
-import logo from "./logo.svg";
-import React, { useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import LoginRegister from "./LoginRegister";
 import Dash from "./Dash";
-import Nav from "./Nav";
 
 function App() {
-  const path = window.location.pathname;
   return (
     <div className="App">
       <Switch>

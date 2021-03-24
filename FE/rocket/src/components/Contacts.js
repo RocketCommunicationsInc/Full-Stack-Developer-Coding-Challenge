@@ -3,11 +3,11 @@ import { AgGridColumn, AgGridReact } from "ag-grid-react";
 import "ag-grid-enterprise";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine-dark.css";
-import axios from "axios";
+
 const Contacts = (props) => {
-  const [gridApi, setGridApi] = useState(null);
-  const [gridColumnApi, setGridColumnApi] = useState(null);
-  const [contactLength, setContactLength] = useState(0);
+  //   const [gridApi, setGridApi] = useState(null);
+  //   const [gridColumnApi, setGridColumnApi] = useState(null);
+  //   const [contactLength, setContactLength] = useState(0);
 
   let contact_states = [];
 
