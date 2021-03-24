@@ -14,6 +14,7 @@ Flask-RESTful==0.3.8
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.5.1
 greenlet==1.0.0
+gunicorn==20.0.4
 importlib-metadata==3.7.3
 isort==5.8.0
 itsdangerous==1.1.0
