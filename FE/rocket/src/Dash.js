@@ -12,7 +12,6 @@ const Dash = (props) => {
   const [contacts, setContacts] = React.useState([]);
 
   useEffect(() => {
-    console.log("RUNNIGN GETALERTS");
     setToken(localStorage.getItem("token"));
     axiosWithAuth()
       .get("alerts")
@@ -23,7 +22,6 @@ const Dash = (props) => {
       //   })
       //* Wanted this to work, adding an axios auth route did the trick
       .then((res) => {
-        // console.log(res, "GET ALERTS RES");
         setAlerts(res.data);
       })
       .catch((err) => {
@@ -32,7 +30,6 @@ const Dash = (props) => {
     axiosWithAuth()
       .get("contacts")
       .then((res) => {
-        // console.log(res, "GET CONTACTS RES");
         setContacts(res.data);
       })
       .catch((err) => {

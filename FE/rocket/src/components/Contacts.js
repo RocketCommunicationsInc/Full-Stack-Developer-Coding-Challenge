@@ -10,8 +10,6 @@ const Contacts = (props) => {
   const [gridColumnApi, setGridColumnApi] = useState(null);
   const [contactLength, setContactLength] = useState(0);
 
-  console.log(props, "contact props");
-  console.log(props.contacts.length, "this");
   let contact_states = [];
 
   props.contacts.map((el) => {
@@ -26,7 +24,6 @@ const Contacts = (props) => {
     }
   }
   let size = Object.keys(my_obj).length;
-  console.log(size);
 
   let contact_columns = [
     "contactName",
@@ -50,7 +47,7 @@ const Contacts = (props) => {
   return (
     <div
       className="ag-theme-alpine-dark"
-      style={{ height: "45vh", width: "100%" }}
+      style={{ height: "42vh", width: "100%" }}
     >
       <h3>Total Unique Status's: {size}</h3>
       <AgGridReact rowData={props.contacts} gridOptions={gridOptions}>

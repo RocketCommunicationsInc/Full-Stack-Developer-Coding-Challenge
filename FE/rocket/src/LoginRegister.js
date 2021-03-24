@@ -26,7 +26,7 @@ const LoginRegister = (props) => {
   function handleRegisterSubmit(e) {
     e.preventDefault();
     setIsLoggingIn(true);
-    console.log("inside handleReg");
+
     const creds = {
       username: userName,
       password: password,
@@ -34,7 +34,6 @@ const LoginRegister = (props) => {
     axios
       .post("http://127.0.0.1:5000/register", creds)
       .then((res) => {
-        console.log(res, "REGISTER RES");
         localStorage.setItem("token", res.data.token);
         setToken(res.data.token);
         props.history.push("/dash");
@@ -54,7 +53,6 @@ const LoginRegister = (props) => {
     axios
       .post("http://127.0.0.1:5000/login", creds)
       .then((res) => {
-        console.log(res, "LOGIN RES");
         setIsLoggingIn(false);
         localStorage.setItem("token", res.data.token);
         props.history.push("/dash");
@@ -63,7 +61,6 @@ const LoginRegister = (props) => {
         console.log(err.message);
         setError(err);
         setIsLoggingIn(false);
-        // alert(error.message);
       });
     setIsLoggingIn(false);
     clearInputs();
