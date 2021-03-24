@@ -24,7 +24,6 @@ Mako==1.1.4
 MarkupSafe==1.1.1
 marshmallow==3.10.0
 mccabe==0.6.1
-psycopg2==2.8.6
 pycparser==2.20
 PyJWT==2.0.1
 pylint==2.7.2
