@@ -1,1 +1,3 @@
 backend/config/master.key
+backend/config/secret.rb
+.gitignore
