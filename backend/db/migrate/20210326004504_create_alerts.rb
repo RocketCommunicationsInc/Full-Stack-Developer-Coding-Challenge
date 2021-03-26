@@ -10,8 +10,6 @@ class CreateAlerts < ActiveRecord::Migration[6.1]
       t.boolean :selected
       t.boolean :new
       t.boolean :expanded
-
-      t.timestamps
     end
   end
 end
