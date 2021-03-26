@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  _id: MyString
+  contactid: MyString
+  contactStatus: MyString
+  contactName: 1
+  contactGround: MyString
+  contactSatellite: MyString
+  contactEquipment: MyString
+  contactState: MyString
+  contactStep: MyString
+  contactDetail: MyText
+  contactBeginTimestamp: 1
+  contactEndTimestamp: 1
+  contactlatitude: 9.99
+  contactLongitude: 9.99
+  contactAzimuth: 9.99
+  contactElevation: 9.99
+  contactResolution: MyString
+  contactResolutionStatus: MyString
+
+two:
+  _id: MyString
+  contactid: MyString
+  contactStatus: MyString
+  contactName: 1
+  contactGround: MyString
+  contactSatellite: MyString
+  contactEquipment: MyString
+  contactState: MyString
+  contactStep: MyString
+  contactDetail: MyText
+  contactBeginTimestamp: 1
+  contactEndTimestamp: 1
+  contactlatitude: 9.99
+  contactLongitude: 9.99
+  contactAzimuth: 9.99
+  contactElevation: 9.99
+  contactResolution: MyString
+  contactResolutionStatus: MyString
