@@ -18,9 +18,7 @@ class CreateContacts < ActiveRecord::Migration[6.1]
       t.decimal :contactAzimuth
       t.decimal :contactElevation
       t.string :contactResolution
-      t.string :contactResolutionStatus
-
-      t.timestamps
+      t.string :contactResolutionStatus   
     end
   end
 end
