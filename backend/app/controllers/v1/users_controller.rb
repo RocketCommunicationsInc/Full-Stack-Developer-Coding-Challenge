@@ -3,8 +3,10 @@ class Api::V1::UsersController < ApplicationController
   
     def profile
       user = current_user
+      tweets = user.get_tweets
+      comments = user.get_comments
      
-      render json: { user: UserSerializer.new(current_user)}, status: :accepted
+      render json: { user: UserSerializer.new(current_user), tweets: tweets, comments: comments}, status: :accepted
     end
   
     def create
