@@ -1,3 +1,5 @@
 backend/config/master.key
 backend/config/secret.rb
 .gitignore
+backend/db/schema.rb
+backend/db/development.sqlite3

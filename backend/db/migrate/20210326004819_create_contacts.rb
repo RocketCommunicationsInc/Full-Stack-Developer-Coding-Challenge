@@ -2,7 +2,7 @@ class CreateContacts < ActiveRecord::Migration[6.1]
   def change
     create_table :contacts do |t|
       t.string :_id
-      t.string :contactid
+      t.string :contactId
       t.string :contactStatus
       t.integer :contactName
       t.string :contactGround
@@ -13,7 +13,7 @@ class CreateContacts < ActiveRecord::Migration[6.1]
       t.text :contactDetail
       t.integer :contactBeginTimestamp
       t.integer :contactEndTimestamp
-      t.decimal :contactlatitude
+      t.decimal :contactLatitude
       t.decimal :contactLongitude
       t.decimal :contactAzimuth
       t.decimal :contactElevation
