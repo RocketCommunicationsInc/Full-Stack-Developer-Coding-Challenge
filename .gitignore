@@ -3,3 +3,4 @@ backend/config/secret.rb
 .gitignore
 backend/db/schema.rb
 backend/db/development.sqlite3
+backend/config/database.yml
