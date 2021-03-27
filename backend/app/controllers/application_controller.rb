@@ -1,4 +1,4 @@
-require '../config/secret.rb'
+require './config/secret.rb'
 include MySecret
 
 class ApplicationController < ActionController::API
