@@ -30,4 +30,12 @@ userSchema.statics.findByUsername = function (username, password) {
     });
 };
 
+userSchema.statics.checkAvailableUsername = function (username){
+  return this.findOne({username}).then(user => {
+    if (user){
+      return false
+    }
+  })
+}
+
 module.exports = mongoose.model('user', userSchema);

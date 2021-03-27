@@ -1,0 +1,10 @@
+.account-form{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.account-form__submit{
+    margin: auto;
+    background-color: var(--colorPrimary);
+}

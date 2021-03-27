@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-const createUser = (req, res, next) => {
+const signUp = (req, res, next) => {
   console.log('req.body', req.body);
   const { username, password } = req.body;
 
@@ -24,12 +24,13 @@ const createUser = (req, res, next) => {
         res.send(user);
       })
       .catch((err) => {
-        console.lo(err);
+        console.log("ERROR CREATING USER", err);
+        return console.log("req.body", req.body)
       });
   });
 };
 
-const login = (req, res, next) => {
+const signIn = (req, res, next) => {
   const { username, password } = req.body;
   User.findByUsername(username, password).then((user) => {
     const token = jwt.sign(
@@ -43,8 +44,8 @@ const login = (req, res, next) => {
       httpOnly: true
     });
 
-    res.send(token)
+    res.send({token})
   });
 };
 
-module.exports = { createUser, login };
+module.exports = { signUp, signIn };
