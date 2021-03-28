@@ -15,13 +15,9 @@ class App extends Component {
     return (
       
       <Router>
-        <div  >
-          <NavigationBar signOut={this.signOut} />
-          <div className="header">
+          <NavigationBar />
           <Route exact path='/' render={routerProps => <HomeContainer {...routerProps} handleUserInfo={this.handleUserInfo} />} />
           <Route exaxt path='/home' render={routerProps => <HomePage {...routerProps}/>  } />
-          </div>
-        </div>
       </Router>
     );
   }

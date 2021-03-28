@@ -12,7 +12,7 @@ const NavigationBar = (props) => {
 
     
     return (
-    <div >
+    <div className="header">
             <Navbar bg="transparent" variant="dark" >
                 <Nav className="mr-auto">
                   <Nav.Link href="#" onSelect={logout}> Logout</Nav.Link>

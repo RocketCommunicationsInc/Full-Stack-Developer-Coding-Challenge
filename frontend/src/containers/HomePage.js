@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import DataTable from '../components/DataTable'
+import SortingTable from '../components/SortingTable'
 import {ALERTCOLUMNS} from '../components/AlertColumns'
 import {CONTACTCOLUMNS} from '../components/ContactColumns'
 
@@ -49,11 +50,10 @@ class HomePage extends Component {
 
     render() {
         return(
-            this.state.alerts ? 
+            this.state.contacts && this.state.alerts ? 
             <div>
-                made it to this page!
-                <DataTable table={this.state.alerts} columns={ALERTCOLUMNS}/>
-                <DataTable table={this.state.contacts} columns={CONTACTCOLUMNS}/>
+                <SortingTable table={this.state.alerts} columns={ALERTCOLUMNS}/>
+                <SortingTable table={this.state.contacts} columns={CONTACTCOLUMNS}/>
             </div>
             : <div>
                 made it to this page!
