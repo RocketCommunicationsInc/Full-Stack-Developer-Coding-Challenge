@@ -52,8 +52,9 @@ class HomePage extends Component {
         return(
             this.state.contacts && this.state.alerts ? 
             <div>
-                <SortingTable table={this.state.alerts} columns={ALERTCOLUMNS}/>
-                <SortingTable table={this.state.contacts} columns={CONTACTCOLUMNS}/>
+                <p>{`total contacts: ${this.state.contacts.length}`}</p>
+                <SortingTable table={this.state.contacts} columns={CONTACTCOLUMNS}/> <SortingTable table={this.state.alerts} columns={ALERTCOLUMNS}/>
+                
             </div>
             : <div>
                 made it to this page!
