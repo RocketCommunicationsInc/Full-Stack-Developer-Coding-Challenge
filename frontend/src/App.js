@@ -2,7 +2,6 @@ import React from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { RuxButton } from '@astrouxds/rux-button/rux-button.js';
 
-
 import AccountForm from './components/AccountForm';
 import SignupSignin from './components/SignupSignin';
 import Dashboard from './components/Dashboard';
@@ -40,6 +39,12 @@ function App() {
     });
   }
 
+  function handleSignOut() {
+    setIsLoggedIn(false);
+    localStorage.removeItem('token');
+    history.push('/');
+  }
+
   function handleGetAlerts(token) {
     api.getAlerts(token).then((data) => {
       setAlerts(data);
@@ -70,6 +75,7 @@ function App() {
         <ProtectedRoute
           path='/dashboard'
           component={Dashboard}
+          onSignOut={handleSignOut}
           isLoggedIn={isLoggedIn}
           alerts={alerts}
           contacts={contacts}
