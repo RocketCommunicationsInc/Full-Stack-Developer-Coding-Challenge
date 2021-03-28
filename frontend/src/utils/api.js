@@ -1,8 +1,9 @@
 const baseUrl = 'http://localhost:5000';
 
 const signUp = (username, password) => {
+  console.log('username, password', username, password);
   return fetch(`${baseUrl}/signup`, {
-    methods: 'POST',
+    method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -14,8 +15,14 @@ const signUp = (username, password) => {
         return res.json();
       }
     })
+    .then((data) => {
+      if (data) {
+        localStorage.setItem('token', data.token);
+        return data;
+      }
+    })
     .catch((err) => {
-      console.log('failed to create user');
+      console.log('failed to create user', err);
     });
 };
 

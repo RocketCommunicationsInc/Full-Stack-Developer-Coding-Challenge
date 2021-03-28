@@ -30,11 +30,12 @@ userSchema.statics.findByUsername = function (username, password) {
     });
 };
 
-userSchema.statics.checkAvailableUsername = function (username){
-  return this.findOne({username}).then(user => {
-    if (user){
+userSchema.statics.checkIfAvailable = function (username){
+  return this.find({username}).then(users => {
+    if (users.length === 0){
       return false
     }
+    return true
   })
 }
 

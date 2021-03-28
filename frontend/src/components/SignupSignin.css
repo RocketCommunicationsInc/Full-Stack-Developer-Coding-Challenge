@@ -1,0 +1,8 @@
+.signup-signin-container {
+  display: flex;
+  height: 100vh;
+  background-image: url('../images/bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

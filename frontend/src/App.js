@@ -19,10 +19,6 @@ function App() {
 
   const history = useHistory();
 
-  function handleLoggedIn() {
-    setIsLoggedIn(true);
-  }
-
   function handleSignUp(username, password) {
     api.signUp(username, password).then((user) => {
       if (user) {
@@ -33,9 +29,7 @@ function App() {
 
   function handleSignIn(username, password) {
     api.signIn(username, password).then((data) => {
-      if (data) {
-        setIsLoggedIn(true);
-      }
+      setIsLoggedIn(true);
     });
   }
 
@@ -57,7 +51,20 @@ function App() {
     });
   }
 
+  function checkToken() {
+    let token;
+    if (localStorage.getItem('token')) {
+      token = localStorage.getItem('token');
+    }
+    setIsLoggedIn(true);
+  }
+
   React.useEffect(() => {
+    checkToken();
+  }, []);
+
+  React.useEffect(() => {
+    console.log('');
     let token;
     if (localStorage.getItem('token')) {
       token = localStorage.getItem('token');
@@ -82,14 +89,21 @@ function App() {
         />
 
         <Route path='/signin'>
-          <SignupSignin title='Sign In' onSubmit={handleSignIn} />
+          <SignupSignin
+            title='Sign In'
+            onSubmit={handleSignIn}
+            linkPath='/signup'
+            altText='Sign Up'
+          />
         </Route>
 
         <Route path='/signup'>
-          <SignupSignin title='Sign Up' onSubmit={handleSignUp}>
-            <label>Confirm Password</label>
-            <input type='password' />
-          </SignupSignin>
+          <SignupSignin
+            title='Sign Up'
+            onSubmit={handleSignUp}
+            linkPath='/signin'
+            altText='Sign In'
+          />
         </Route>
 
         <Route path='/'>
