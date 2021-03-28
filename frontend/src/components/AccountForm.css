@@ -13,7 +13,7 @@
 }
 
 .account-form {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 30px;
   border-radius: 10px;
   position: relative;
@@ -26,8 +26,16 @@
   flex-direction: column;
 }
 
-.account-form__title{
+.account-form_dark_theme {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.account-form__title {
   margin-bottom: 20px;
+}
+
+.account-form__input-label {
+  color: var(--defaultText);
 }
 
 .account-form__input {
@@ -36,7 +44,7 @@
 }
 
 .account-form__alt-text {
-  color: var(	--colorTag1);
+  color: var(--colorTag1);
   text-decoration: underline;
 }
 

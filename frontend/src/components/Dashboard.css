@@ -1,6 +1,10 @@
 .dashboard-container {
   height: 100vh;
   padding: 150px 5% 0 5%;
+  background-color: var(--colorSecondaryLighten2);
+}
+
+.dashboard-container_dark_theme {
   background-color: var(--colorPrimaryDarken4);
 }
 

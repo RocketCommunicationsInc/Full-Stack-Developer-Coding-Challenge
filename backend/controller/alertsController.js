@@ -8,7 +8,7 @@ const getAlerts = (req, res, next) => {
       }
       res.send(alerts);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("Failed to get alerts data", err));
 };
 
 module.exports = { getAlerts };

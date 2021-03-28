@@ -1,5 +1,4 @@
 .signup-signin-container {
-  overflow: hidden;
   display: flex;
   height: 100vh;
   background-image: url('../images/bg.png');

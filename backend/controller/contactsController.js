@@ -8,7 +8,7 @@ const getContacts = (req, res, next) => {
       }
       res.send(contacts);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("Failed to get contacts data", err));
 };
 
 module.exports = { getContacts };

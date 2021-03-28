@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../model/user');
-const { NODE_ENV, JWT_SECRET } = process.env;
 
 const signUp = (req, res, next) => {
   console.log('req.body', req.body);
@@ -14,7 +13,7 @@ const signUp = (req, res, next) => {
 
   User.checkIfAvailable(username, password).then((userExists) => {
     if (userExists === true) {
-      return Promise.reject('Error username already exists');
+      Promise.reject('Error username already exists');
     }
 
     bcrypt.hash(password, 10).then((hash) => {
@@ -24,14 +23,12 @@ const signUp = (req, res, next) => {
       })
         .then((user) => {
           if (!user) {
-            console.log('failed to create user');
+            console.log('Failed to create user');
           }
 
-          const token = jwt.sign(
-            { _id: user._id },
-            NODE_ENV === 'production' ? JWT_SECRET : 'dev_key',
-            { expiresIn: '1d' }
-          );
+          const token = jwt.sign({ _id: user._id }, 'dev_key', {
+            expiresIn: '1d'
+          });
 
           res.cookie('jwt', token, {
             maxAge: 3600000 * 24 * 1,
@@ -41,7 +38,7 @@ const signUp = (req, res, next) => {
           res.send({ token });
         })
         .catch((err) => {
-          console.log('ERROR CREATING USER', err);
+          console.log('Error creating user', err);
         });
     });
   });
@@ -50,11 +47,7 @@ const signUp = (req, res, next) => {
 const signIn = (req, res, next) => {
   const { username, password } = req.body;
   User.findByUsername(username, password).then((user) => {
-    const token = jwt.sign(
-      { _id: user._id },
-      NODE_ENV === 'production' ? JWT_SECRET : 'dev_key',
-      { expiresIn: '1d' }
-    );
+    const token = jwt.sign({ _id: user._id }, 'dev_key', { expiresIn: '1d' });
 
     res.cookie('jwt', token, {
       maxAge: 3600000 * 24 * 1,

@@ -18,14 +18,24 @@ function Dashboard(props) {
   ];
 
   return (
-    <div className='dashboard-container'>
+    <div
+      className={`dashboard-container ${
+        props.isDarkMode ? 'dashboard-container_dark_theme' : ''
+      }`}
+    >
       <div className='dashboard__pane-container'>
         <div className='dashboard__pane dashboard__pane_alerts'>
-          <Table title='Alerts' data={props.alerts} columns={alertsColumns} />
+          <Table
+            title='Alerts'
+            data={props.alerts}
+            columns={alertsColumns}
+            isDarkMode={props.isDarkMode}
+          />
         </div>
 
         <div className='dashboard__pane dashboard__pane_contacts'>
           <Table
+            isDarkMode={props.isDarkMode}
             title='Contacts'
             data={props.contacts}
             columns={contactsColumns}

@@ -1,5 +1,10 @@
-.header{
-    position: absolute;
-    z-index: 1;
-    width: 100%;
+.header {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+.header__status-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
 }

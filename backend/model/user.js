@@ -23,7 +23,7 @@ userSchema.statics.findByUsername = function (username, password) {
       }
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
-          console.log('incorrect password');
+          console.log('Incorrect password');
         }
         return user;
       });

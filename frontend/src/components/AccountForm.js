@@ -22,9 +22,14 @@ function AccountForm(props) {
   return (
     <div className='account-form-container'>
       <div className='account-form__underlay'></div>
-      <form className='account-form' onSubmit={handleSubmit}>
+      <form
+        className={`account-form ${
+          props.isDarkMode ? 'account-form_dark_theme' : ''
+        }`}
+        onSubmit={handleSubmit}
+      >
         <h2 className='account-form__title'>{props.title}</h2>
-        <label>Username</label>
+        <label className={`account-form__input-label `}>Username</label>
         <input
           id='input__username'
           className='rux-input account-form__input account-form__input_username'
@@ -34,7 +39,7 @@ function AccountForm(props) {
           onChange={handleUsernameInput}
         />
 
-        <label>Password</label>
+        <label className={`account-form__input-label `}>Password</label>
         <input
           id='input__password'
           className='rux-input account-form__input account-form__input_password'

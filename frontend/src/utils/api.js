@@ -22,7 +22,7 @@ const signUp = (username, password) => {
       }
     })
     .catch((err) => {
-      console.log('failed to create user', err);
+      console.log('Failed to create user', err);
     });
 };
 
@@ -41,11 +41,13 @@ const signIn = (username, password) => {
       }
     })
     .then((data) => {
-      console.log('data', data);
       if (data) {
         localStorage.setItem('token', data.token);
         return data;
       }
+    })
+    .catch((err) => {
+      console.log('Failed to sign in', err);
     });
 };
 
@@ -57,11 +59,15 @@ const getAlerts = (token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     }
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-  });
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .catch((err) => {
+      console.log('Failed to get alerts', err);
+    });
 };
 
 const getContacts = (token) => {
@@ -72,11 +78,15 @@ const getContacts = (token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     }
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-  });
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .catch((err) => {
+      console.log('Failed to get contacts', err);
+    });
 };
 
 export { signUp, signIn, getAlerts, getContacts };
