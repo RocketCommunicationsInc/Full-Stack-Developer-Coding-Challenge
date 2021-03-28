@@ -14,50 +14,55 @@ import * as api from './utils/api';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  const handleSignUp = (username, password) => {
+  function handleLoggedIn() {
+    setIsLoggedIn(true);
+  }
+
+  function handleSignUp(username, password) {
     api.signUp(username, password).then((user) => {
       if (user) {
         setIsLoggedIn(true);
-        return;
       }
     });
-  };
+  }
 
-  const handleSignIn = (username, password) => {
+  function handleSignIn(username, password) {
     api.signIn(username, password).then((data) => {
-      if (data.token) {
+      if (data) {
         setIsLoggedIn(true);
-        return;
       }
     });
-  };
+  }
+
+  React.useEffect(() => {
+    console.log('isLoggedIn status', isLoggedIn);
+  }, [isLoggedIn]);
 
   return (
     <div className='App'>
+        {/* {isLoggedIn ? <Redirect to='/dashboard' /> : <Redirect to='/signin' />} */}
       <Switch>
-        <Route path='/signin'>
-          <SignupSignin title='Sign In' onSubmit={handleSignIn} />
-        </Route>
-
-        <Route path='/signup'>
-          <SignupSignin title='Sign Up' onSubmit={handleSignUp}>
-            <label>Confirm Password</label>
-            <input type='password' />
-          </SignupSignin>
-        </Route>
 
         <Route path='/dashboard'>
           <Dashboard />
         </Route>
+      <Route path='/signin'>
+        <SignupSignin title='Sign In' onSubmit={handleSignIn} />
+      </Route>
 
-        {/* <Route exact path='/'>
-          {isLoggedIn ? <Redirect to='/dashboard' /> : }
-        </Route> */}
+      <Route path='/signup'>
+        <SignupSignin title='Sign Up' onSubmit={handleSignUp}>
+          <label>Confirm Password</label>
+          <input type='password' />
+        </SignupSignin>
+      </Route>
 
-        <Route path='*'>
-          <Redirect to='/signin' />
-        </Route>
+      <Route path='*'>
+        <Redirect to='/signin' />
+      </Route>
+
       </Switch>
+
     </div>
   );
 }
