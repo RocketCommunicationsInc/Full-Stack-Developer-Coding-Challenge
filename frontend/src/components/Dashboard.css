@@ -1,27 +1,38 @@
-.dashboard-container{
-    height: 100vh;
-    background-color: rgb(32, 32, 32);
+.dashboard-container {
+  height: 100vh;
+  padding: 150px 5% 0 5%;
+  background-color: var(--colorPrimaryDarken4);
 }
 
 .sign-out-button {
-    margin: 10px;
-    float: right;
-    background-color: var(--colorPrimary);
-  }
+  margin: 10px;
+  float: right;
+}
 
-.dashboard-pane-container {
+.dashboard__pane-container {
   width: 100%;
-  /* height: 80vh; */
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .dashboard__pane {
-  /* overflow-y: scroll; */
-  border-radius: 10px;
+  width: 48%;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
-.dashboard__contacts-count{
-    float: right;
-    margin: 10px;
+.dashboard__counts-total-container {
+  float: right;
+  margin: 10px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.dashboard__count {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

@@ -10,7 +10,6 @@ function Dashboard(props) {
     { title: 'Error Message', field: 'errorMessage' },
     { title: 'Error Time', field: 'errorTime' }
   ];
-
   const contactsColumns = [
     { title: 'Contact Name', field: 'contactName' },
     { title: 'Contact Status', field: 'contactStatus' },
@@ -20,15 +19,7 @@ function Dashboard(props) {
 
   return (
     <div className='dashboard-container'>
-      <rux-button
-        class='rux-button--buttonBackgroundColor sign-out-button'
-        size='large'
-        onClick={props.onSignOut}
-      >
-        Sign out
-      </rux-button>
-
-      <div className='dashboard-pane-container'>
+      <div className='dashboard__pane-container'>
         <div className='dashboard__pane dashboard__pane_alerts'>
           <Table title='Alerts' data={props.alerts} columns={alertsColumns} />
         </div>
@@ -41,9 +32,21 @@ function Dashboard(props) {
           />
         </div>
       </div>
-      <p className='dashboard__contacts-count'>
-        Total contacts: {props.contacts.length}
-      </p>
+
+      <div className='dashboard__counts-total-container'>
+        <div className='dashboard__count dashboard__count_contacts'>
+          <p>
+            <strong>Total contacts:</strong>
+          </p>
+          <p>{props.contacts.length}</p>
+        </div>
+        <div className='dashboard__count dashboard__count_contacts-states'>
+          <p>
+            <strong>Contact states ({props.contactStates.length}):</strong>
+          </p>
+          <p>{props.contactStates.join(', ')}</p>
+        </div>
+      </div>
     </div>
   );
 }

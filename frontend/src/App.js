@@ -1,8 +1,11 @@
 import React from 'react';
+import moment from 'moment';
+
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { RuxButton } from '@astrouxds/rux-button/rux-button.js';
 
 import AccountForm from './components/AccountForm';
+import Header from './components/Header';
 import SignupSignin from './components/SignupSignin';
 import Dashboard from './components/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -13,9 +16,11 @@ import './App.css';
 import * as api from './utils/api';
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = React.useState(true);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [alerts, setAlerts] = React.useState([]);
   const [contacts, setContacts] = React.useState([]);
+  const [contactStates, setContactStates] = React.useState([]);
 
   const history = useHistory();
 
@@ -23,6 +28,7 @@ function App() {
     api.signUp(username, password).then((user) => {
       if (user) {
         setIsLoggedIn(true);
+        history.push('/dashboard');
       }
     });
   }
@@ -30,6 +36,7 @@ function App() {
   function handleSignIn(username, password) {
     api.signIn(username, password).then((data) => {
       setIsLoggedIn(true);
+      history.push('/dashboard');
     });
   }
 
@@ -41,13 +48,38 @@ function App() {
 
   function handleGetAlerts(token) {
     api.getAlerts(token).then((data) => {
+      data?.forEach((alert) => {
+        let formattedTime = moment(alert.errorTime).format(
+          'ddd, MMM Do YYYY, h:mm:ss a'
+        );
+        alert.errorTime = formattedTime;
+      });
+
       setAlerts(data);
     });
   }
 
   function handleGetContacts(token) {
     api.getContacts(token).then((data) => {
+      let states = [];
+
+      data?.forEach((contact) => {
+        let formattedBegin = moment(contact.contactBeginTimestamp).format(
+          'ddd, MMM Do YYYY, h:mm:ss a'
+        );
+        let formattedEnd = moment(contact.contactEndTimestamp).format(
+          'ddd, MMM Do YYYY, h:mm:ss a'
+        );
+        contact.contactBeginTimestamp = formattedBegin;
+        contact.contactEndTimestamp = formattedEnd;
+
+        if (!states.includes(contact.contactState)) {
+          states.push(contact.contactState);
+        }
+      });
+
       setContacts(data);
+      setContactStates(states);
     });
   }
 
@@ -55,8 +87,9 @@ function App() {
     let token;
     if (localStorage.getItem('token')) {
       token = localStorage.getItem('token');
+      setIsLoggedIn(true);
+      history.push('/dashboard');
     }
-    setIsLoggedIn(true);
   }
 
   React.useEffect(() => {
@@ -64,7 +97,6 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    console.log('');
     let token;
     if (localStorage.getItem('token')) {
       token = localStorage.getItem('token');
@@ -72,20 +104,20 @@ function App() {
     if (isLoggedIn && token) {
       handleGetAlerts(token);
       handleGetContacts(token);
-      history.push('/dashboard');
     }
   }, [isLoggedIn]);
 
   return (
-    <div className='App'>
+    <div className={`App ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
+      <Header onSignOut={handleSignOut} />
       <Switch>
         <ProtectedRoute
           path='/dashboard'
           component={Dashboard}
-          onSignOut={handleSignOut}
           isLoggedIn={isLoggedIn}
           alerts={alerts}
           contacts={contacts}
+          contactStates={contactStates}
         />
 
         <Route path='/signin'>

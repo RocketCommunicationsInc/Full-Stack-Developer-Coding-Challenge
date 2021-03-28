@@ -1,5 +1,6 @@
 import React from 'react';
 import { RuxButton } from '@astrouxds/rux-button/rux-button.js';
+
 import './AccountForm.css';
 
 function AccountForm(props) {
@@ -20,7 +21,7 @@ function AccountForm(props) {
 
   return (
     <div className='account-form-container'>
-      <div className="account-form__underlay"></div>
+      <div className='account-form__underlay'></div>
       <form className='account-form' onSubmit={handleSubmit}>
         <h2 className='account-form__title'>{props.title}</h2>
         <label>Username</label>
@@ -46,7 +47,7 @@ function AccountForm(props) {
         {props.children}
 
         <rux-button
-          class='rux-button--buttonBackgroundColor account-form__submit'
+          class='account-form__submit'
           size='large'
           onClick={handleSubmit}
         >
