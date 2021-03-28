@@ -1,17 +1,13 @@
 import React, {useMemo} from 'react'
 import { useTable} from 'react-table'
-import {ALERTCOLUMNS} from './AlertColumns'
 
-const AlertsTable = (props) => {
-    const columns = useMemo(() => ALERTCOLUMNS, [])
-    const data = useMemo(() => props.alerts, [])
+const DataTable = (props) => {
 
-    const alertTable = useTable({
-        columns: columns,
-        data: data
+    const dataTable = useTable({
+        columns: props.columns,
+        data: props.table
     })
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = alertTable
-    
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = dataTable
     return (
         <table {...getTableProps()}>
             <thead>
@@ -44,4 +40,4 @@ const AlertsTable = (props) => {
         </table>
     )
 }
-export default AlertsTable
+export default DataTable

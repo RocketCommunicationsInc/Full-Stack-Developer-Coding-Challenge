@@ -1,14 +1,12 @@
 import React, {Component} from 'react'
-import {useTable} from 'react-table'
-import AlertsTable from '../components/AlertTable'
+import DataTable from '../components/DataTable'
+import {ALERTCOLUMNS} from '../components/AlertColumns'
+import {CONTACTCOLUMNS} from '../components/ContactColumns'
 
 
 class HomePage extends Component {
 
-
-   state = {
-
-    
+   state = {    
    }
 
    getInfo (database) {
@@ -54,7 +52,8 @@ class HomePage extends Component {
             this.state.alerts ? 
             <div>
                 made it to this page!
-                <AlertsTable alerts={this.state.alerts} />
+                <DataTable table={this.state.alerts} columns={ALERTCOLUMNS}/>
+                <DataTable table={this.state.contacts} columns={CONTACTCOLUMNS}/>
             </div>
             : <div>
                 made it to this page!
