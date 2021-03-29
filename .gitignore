@@ -4,3 +4,5 @@ backend/config/secret.rb
 backend/db/schema.rb
 backend/db/development.sqlite3
 backend/config/database.yml
+frontend/src/astro-components
+Rocket-Com-backend
