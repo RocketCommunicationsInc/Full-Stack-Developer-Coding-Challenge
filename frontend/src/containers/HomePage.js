@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import DataTable from '../components/DataTable'
 import SortingTable from '../components/SortingTable'
 import {ALERTCOLUMNS} from '../components/AlertColumns'
 import {CONTACTCOLUMNS} from '../components/ContactColumns'
