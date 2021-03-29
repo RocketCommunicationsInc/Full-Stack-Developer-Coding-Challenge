@@ -24,7 +24,7 @@ class Signup extends Component {
                         <Form.Control name="password" type="password" placeholder="Password" onChange={(e) => this.props.handleLoginChange(e)}/>
                     </Form.Group>
                     <Button variant="primary" type="button" onClick={(e) => this.props.handleSignupSubmit(e)}>
-                        Signup!
+                        Create account
                     </Button>
                     <Button variant="success" type="button" onClick={(e) => this.props.toggleLogin(e)}>
                         I already have an account

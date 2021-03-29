@@ -56,7 +56,7 @@ class HomePage extends Component {
                 
             </div>
             : <div>
-                made it to this page!
+                Loading data...
             </div>
         )
     }
