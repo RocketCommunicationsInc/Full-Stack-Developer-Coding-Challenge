@@ -1,13 +1,19 @@
-### Rocket Communications Code Challenge
-This is the front of portion of the coding challenge. It was built using React.js. 
+## Rocket Communications Code Challenge
 
-I used react-router to handle the different URLs for each "page" and implemented JSON web tokens to direct users to the dashboard if they were previously signed in or to the sign in page if the user was not signed in.
+Live Link: https://awong-rocket.netlify.app
+
+This is the frontend portion of the coding challenge. It was built using React.js. 
+
+I used react-router to handle the different URLs for each "page" and implemented JSON web tokens for user log ins. Tokens currently only serve the purpose to determine if a previous user was still signed in when they closed the window.
 
 A simple dark mode button was added that changed the color theme accordingly.
 
-Tables were built using the material-table library which allows for easy user manipulation (sorting, filtering, searching, etc) if enabled.
+Tables were built using the material-table library which allows for easy user manipulation (sorting, filtering, searching, etc) if enabled. Unix times were converted to local date/times for readability.
 
-Due to time constraints, there were some features I would have liked to include. Even though tokens were implemented, the token value itself does not currently hold any significance. Ideally, I would like to have taken the token value and decrypt it to determine the user associated with it to determine authentication.
+For testing purposes, I did not implement any sort of username/password requirements (ie. minimum length, special characters/numbers, password confirmation). 
+Username/password combinations can be as simple as 1/1 or user/pass.
+
+Due to my current work schedule and time constraints, there were some features I was not able to implement. Even though tokens were implemented, the token value itself does not currently hold any significance. Ideally, I would like to have taken the token value and decrypt it to determine the user associated with it to determine authentication. 
 
 ## `npm run build`
 

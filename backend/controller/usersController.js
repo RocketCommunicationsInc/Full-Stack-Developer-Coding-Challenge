@@ -15,7 +15,7 @@ const signUp = (req, res, next) => {
   }
   usersCollection.findOne({ username }).then((user) => {
     if (user) {
-      res.status(409).send({ message: 'Username already exists' });
+      return res.status(409).send({ message: 'Username already exists' });
     }
     bcrypt.hash(password, 10).then((hash) => {
       usersCollection

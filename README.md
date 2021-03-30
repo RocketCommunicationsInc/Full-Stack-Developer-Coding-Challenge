@@ -1,3 +1,13 @@
+Thank you for allowing me the opportunity to complete this coding challenge. It was fun challenge that I enjoyed working on. While there are things I would have like to add for the sake of perfection, I believe most of the requirements have been met, with 1 exception. 
+
+Instructions did mention to complete the backend portion in Ruby or Python, however, I do not have enough knowledge to comfortably complete this challenge in the allotted time. For that reason, I chose to built the backend using Node.js instead. I am currently learning the basics of Python, this would be a fun project to re-do once I have learned a little more.
+
+Thank you again for your consideration and taking the time to review my project.
+
+Alvin Wong
+
+
+
 # Full-Stack-Developer-Coding-Challenge
 As the next step in the interview process, we’d like you to complete a coding challenge.
 
