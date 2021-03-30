@@ -125,9 +125,6 @@ function App() {
       token = localStorage.getItem('token');
     }
     if (isLoggedIn && token) {
-      console.log(
-        'getting alerts and contacts after logging in and received token'
-      );
       handleGetAlerts(token);
       handleGetContacts(token);
     }
