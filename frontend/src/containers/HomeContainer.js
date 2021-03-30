@@ -27,7 +27,7 @@ class HomeContainer extends Component {
         let username = this.state.username
         let password = this.state.password
         let info = {username: username, password: password}
-        fetch("http://localhost:3000//api/v1/login",{
+        fetch("https://intense-castle-68633.herokuapp.com/api/v1/login",{
           method: "POST",
           headers: {
             "Content-Type" : "application/json",
@@ -79,7 +79,7 @@ class HomeContainer extends Component {
         let username = this.state.username
         let password = this.state.password
         let info = {username: username, password: password}
-        fetch("http://localhost:3000/api/v1/users/",{
+        fetch("https://intense-castle-68633.herokuapp.com/api/v1/users/",{
           method: "POST",
           headers: {
             "Content-Type" : "application/json",

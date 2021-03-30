@@ -11,7 +11,7 @@ class HomePage extends Component {
 
    getInfo (database) {
        let token = localStorage.getItem("token")
-       fetch(`http://localhost:3000/${database}`,{
+       fetch(`https://intense-castle-68633.herokuapp.com/${database}`,{
            method: "GET",
            headers: {
                Authorization: `Bearer ${token}`
@@ -26,7 +26,7 @@ class HomePage extends Component {
     componentDidMount() {
         let token = localStorage.getItem("token")
         token ? (
-        fetch(`http://localhost:3000/api/v1/profile`,{
+        fetch(`https://intense-castle-68633.herokuapp.com/api/v1/profile`,{
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`

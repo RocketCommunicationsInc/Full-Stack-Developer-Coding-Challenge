@@ -1,0 +1,5 @@
+[submodule "Submod"]
+	url = https://github.com/AlexanderBowers/Rocket-Com-backend.git
+
+[submodule "Submod"]
+	url = https://github.com/RocketCommunicationsInc/astro-components.git
