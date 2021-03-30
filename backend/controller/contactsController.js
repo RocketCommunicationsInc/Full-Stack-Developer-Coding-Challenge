@@ -1,14 +1,19 @@
 const Contact = require('../model/contact');
+const { MONGO_DATABASE } = process.env;
+
+let contactsCollection;
+var MongoClient = require('mongodb').MongoClient;
+MongoClient.connect(MONGO_DATABASE, function (err, client) {
+  contactsCollection = client.db('rocket').collection('contacts');
+});
 
 const getContacts = (req, res, next) => {
-  Contact.find({})
+  contactsCollection
+    .find()
+    .toArray()
     .then((contacts) => {
-      if (!contacts) {
-        return new Promise.reject();
-      }
       res.send(contacts);
-    })
-    .catch((err) => console.log("Failed to get contacts data", err));
+    });
 };
 
 module.exports = { getContacts };

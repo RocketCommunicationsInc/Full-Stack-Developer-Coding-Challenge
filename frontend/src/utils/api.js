@@ -1,7 +1,7 @@
-const baseUrl = 'http://localhost:5000';
+const baseUrl = 'https://awong-rocket.herokuapp.com';
 
 const signUp = (username, password) => {
-  console.log('username, password', username, password);
+  console.log('sign up username, password', username, password);
   return fetch(`${baseUrl}/signup`, {
     method: 'POST',
     headers: {
@@ -27,6 +27,7 @@ const signUp = (username, password) => {
 };
 
 const signIn = (username, password) => {
+  console.log('sign in username, password', username, password);
   return fetch(`${baseUrl}/signin`, {
     method: 'POST',
     headers: {
@@ -57,10 +58,11 @@ const getAlerts = (token) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      // Authorization: `Bearer ${token}`
     }
   })
     .then((res) => {
+      console.log("alerts response is", res)
       if (res.ok) {
         return res.json();
       }

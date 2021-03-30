@@ -43,7 +43,9 @@ function App() {
     api
       .signIn(username, password)
       .then((data) => {
-        userHasSignedIn();
+        if (data) {
+          userHasSignedIn();
+        }
       })
       .catch((err) => {
         console.log('Failed to sign in', err);
@@ -123,6 +125,9 @@ function App() {
       token = localStorage.getItem('token');
     }
     if (isLoggedIn && token) {
+      console.log(
+        'getting alerts and contacts after logging in and received token'
+      );
       handleGetAlerts(token);
       handleGetContacts(token);
     }
@@ -166,16 +171,12 @@ function App() {
           />
         </Route>
 
-        <Route exact path='/'>
+        <Route path='/'>
           {isLoggedIn ? (
             <Redirect to='/dashboard' />
           ) : (
             <Redirect to='/signin' />
           )}
-        </Route>
-
-        <Route path='*'>
-          <Redirect to='/' />
         </Route>
       </Switch>
     </div>

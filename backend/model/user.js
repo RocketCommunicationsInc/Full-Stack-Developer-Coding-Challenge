@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+let usersCollection;
+var MongoClient = require('mongodb').MongoClient;
+var uri =
+  'mongodb+srv://rocket:RocketComm@cluster0.od8zg.mongodb.net/test?authSource=admin&replicaSet=atlas-gaxx5g-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true';
+MongoClient.connect(uri, function (err, client) {
+  usersCollection = client.db('rocket').collection('users');
+});
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -30,13 +38,13 @@ userSchema.statics.findByUsername = function (username, password) {
     });
 };
 
-userSchema.statics.checkIfAvailable = function (username){
-  return this.find({username}).then(users => {
-    if (users.length === 0){
-      return false
+userSchema.statics.checkIfAvailable = function (username) {
+  return this.find({ username }).then((users) => {
+    if (users.length === 0) {
+      return false;
     }
-    return true
-  })
-}
+    return true;
+  });
+};
 
 module.exports = mongoose.model('user', userSchema);

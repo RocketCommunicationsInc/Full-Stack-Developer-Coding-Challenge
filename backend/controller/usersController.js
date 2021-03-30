@@ -1,60 +1,59 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { MONGO_DATABASE } = process.env;
 
-const User = require('../model/user');
+let usersCollection;
+var MongoClient = require('mongodb').MongoClient;
+MongoClient.connect(MONGO_DATABASE, function (err, client) {
+  usersCollection = client.db('rocket').collection('users');
+});
 
 const signUp = (req, res, next) => {
-  console.log('req.body', req.body);
   const { username, password } = req.body;
-
   if (!username || !password) {
-    console.log('username and password must not be empty');
+    return console.log('username and password must not be empty');
   }
 
-  User.checkIfAvailable(username, password).then((userExists) => {
-    if (userExists === true) {
-      Promise.reject('Error username already exists');
-    }
-
-    bcrypt.hash(password, 10).then((hash) => {
-      User.create({
+  bcrypt.hash(password, 10).then((hash) => {
+    usersCollection
+      .insertOne({
         username,
         password: hash
       })
-        .then((user) => {
-          if (!user) {
-            console.log('Failed to create user');
-          }
-
-          const token = jwt.sign({ _id: user._id }, 'dev_key', {
-            expiresIn: '1d'
-          });
-
-          res.cookie('jwt', token, {
-            maxAge: 3600000 * 24 * 1,
-            httpOnly: true
-          });
-
-          res.send({ token });
-        })
-        .catch((err) => {
-          console.log('Error creating user', err);
+      .then((user) => {
+        if (!user) {
+          console.log('Failed to create user');
+        }
+        const token = jwt.sign({ _id: user._id }, 'dev_key', {
+          expiresIn: '1d'
         });
-    });
+        res.cookie('jwt', token, {
+          maxAge: 3600000 * 24 * 1,
+          httpOnly: true
+        });
+        res.send({ token });
+      })
+      .catch((err) => {
+        console.log('Error creating user', err);
+      });
   });
 };
 
 const signIn = (req, res, next) => {
   const { username, password } = req.body;
-  User.findByUsername(username, password).then((user) => {
-    const token = jwt.sign({ _id: user._id }, 'dev_key', { expiresIn: '1d' });
+  usersCollection.findOne({ username }).then((user) => {
+    if (user) {
+      const token = jwt.sign({ _id: user._id }, 'dev_key', {
+        expiresIn: '1d'
+      });
 
-    res.cookie('jwt', token, {
-      maxAge: 3600000 * 24 * 1,
-      httpOnly: true
-    });
+      res.cookie('jwt', token, {
+        maxAge: 3600000 * 24 * 1,
+        httpOnly: true
+      });
 
-    res.send({ token });
+      res.send({ token });
+    }
   });
 };
 
