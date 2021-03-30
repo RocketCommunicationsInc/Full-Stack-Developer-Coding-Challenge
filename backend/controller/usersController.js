@@ -13,48 +13,64 @@ const signUp = (req, res, next) => {
   if (!username || !password) {
     return console.log('username and password must not be empty');
   }
-
-  bcrypt.hash(password, 10).then((hash) => {
-    usersCollection
-      .insertOne({
-        username,
-        password: hash
-      })
-      .then((user) => {
-        if (!user) {
-          console.log('Failed to create user');
-        }
-        const token = jwt.sign({ _id: user._id }, 'dev_key', {
-          expiresIn: '1d'
+  usersCollection.findOne({ username }).then((user) => {
+    if (user) {
+      res.status(409).send({ message: 'Username already exists' });
+    }
+    bcrypt.hash(password, 10).then((hash) => {
+      usersCollection
+        .insertOne({
+          username,
+          password: hash
+        })
+        .then((user) => {
+          if (!user) {
+            res.status(409).send({ message: 'Failed to create user' });
+          }
+          const token = jwt.sign({ _id: user._id }, 'dev_key', {
+            expiresIn: '1d'
+          });
+          res.cookie('jwt', token, {
+            maxAge: 3600000 * 24 * 1,
+            httpOnly: true
+          });
+          res.send({ token });
+        })
+        .catch((err) => {
+          res.status(409).send({ message: 'Failed to create user' });
         });
-        res.cookie('jwt', token, {
-          maxAge: 3600000 * 24 * 1,
-          httpOnly: true
-        });
-        res.send({ token });
-      })
-      .catch((err) => {
-        console.log('Error creating user', err);
-      });
+    });
   });
 };
 
 const signIn = (req, res, next) => {
   const { username, password } = req.body;
-  usersCollection.findOne({ username }).then((user) => {
-    if (user) {
-      const token = jwt.sign({ _id: user._id }, 'dev_key', {
-        expiresIn: '1d'
-      });
+  usersCollection
+    .findOne({ username })
+    .then((user) => {
+      if (user) {
+        bcrypt.compare(password, user.password).then((matched) => {
+          if (!matched) {
+            res
+              .status(404)
+              .send({ message: 'Username and/or password does not match' });
+          }
+          const token = jwt.sign({ _id: user._id }, 'dev_key', {
+            expiresIn: '1d'
+          });
 
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 1,
-        httpOnly: true
-      });
+          res.cookie('jwt', token, {
+            maxAge: 3600000 * 24 * 1,
+            httpOnly: true
+          });
 
-      res.send({ token });
-    }
-  });
+          res.send({ token });
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(404).send({ message: 'Failed to sign in' });
+    });
 };
 
 module.exports = { signUp, signIn };

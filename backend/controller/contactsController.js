@@ -13,6 +13,9 @@ const getContacts = (req, res, next) => {
     .toArray()
     .then((contacts) => {
       res.send(contacts);
+    })
+    .catch((err) => {
+      res.status(404).send({ message: 'Failed to find contacts data' });
     });
 };
 

@@ -14,6 +14,9 @@ const getAlerts = (req, res, next) => {
     .toArray()
     .then((alerts) => {
       res.send(alerts);
+    })
+    .catch((err) => {
+      res.status(404).send({ message: 'Failed to find alerts data' });
     });
 };
 
