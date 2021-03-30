@@ -3,8 +3,17 @@
   z-index: 1;
   width: 100%;
 }
+
 .header__status-bar {
   display: flex;
-  flex-direction: column;
-  justify-content: right;
+  font-size: 500px;
+}
+
+.nav__button-container {
+  margin: 10px;
+  display: flex;
+}
+
+.nav__button{
+  margin-left: 15px;
 }

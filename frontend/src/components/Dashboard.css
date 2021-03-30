@@ -1,16 +1,11 @@
 .dashboard-container {
-  height: 100vh;
-  padding: 150px 5% 0 5%;
+  height: 100%;
+  padding: 150px 25px;
   background-color: var(--colorSecondaryLighten2);
 }
 
 .dashboard-container_dark_theme {
   background-color: var(--colorPrimaryDarken4);
-}
-
-.sign-out-button {
-  margin: 10px;
-  float: right;
 }
 
 .dashboard__pane-container {
@@ -39,4 +34,14 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 750px) {
+  .dashboard__pane-container {
+    flex-direction: column;
+  }
+  .dashboard__pane {
+    width: 100%;
+    margin-top: 25px;
+  }
 }

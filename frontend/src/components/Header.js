@@ -11,13 +11,20 @@ function Header(props) {
         }`}
         appname='Rocket Communications Code Challenge'
       >
-        <rux-button class='theme-select-button' onClick={props.onThemeSelect}>
-          Dark Mode {props.isDarkMode ? 'On' : 'Off'}
-        </rux-button>
-
-        <rux-button class='sign-out-button' onClick={props.onSignOut}>
-          Sign out
-        </rux-button>
+        <div className='nav__button-container'>
+          <rux-button
+            class='nav__button nav__button_theme-select'
+            onClick={props.onThemeSelect}
+          >
+            Dark Mode {props.isDarkMode ? 'On' : 'Off'}
+          </rux-button>
+          <rux-button
+            class='nav__button nav__button_sign-out'
+            onClick={props.onSignOut}
+          >
+            Sign out
+          </rux-button>
+        </div>
       </rux-global-status-bar>
     </header>
   );
