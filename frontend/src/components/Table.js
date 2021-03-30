@@ -31,6 +31,16 @@ function Table(props) {
                     backgroundColor: 'var(--colorPrimaryDarken3)',
                     color: 'white'
                   };
+            } else {
+              return index % 2
+                ? {
+                    backgroundColor: 'var(--colorSecondaryLighten4)',
+                    color: 'black'
+                  }
+                : {
+                    backgroundColor: 'var(--colorSecondaryLighten3)',
+                    color: 'black'
+                  };
             }
           }
         }}
