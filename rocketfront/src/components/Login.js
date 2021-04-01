@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
+import { login } from "../redux/actions/UsersActions";
 
 class Login extends Component {
 	constructor(props) {
@@ -13,10 +14,6 @@ class Login extends Component {
 		};
 	}
 
-	componentWillMount() {
-		return this.props.loggedInStatus ? this.redirect() : null;
-	}
-
 	handleChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({
@@ -26,31 +23,8 @@ class Login extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		const { username, email, password } = this.state;
-
-		let user = {
-			username: username,
-			email: email,
-			password: password,
-		};
-
-		axios
-			.post("http://localhost:3001/login", { user }, { withCredentials: true })
-			.then((resp) => {
-				if (resp.data.logged_in) {
-					this.props.handleLogin(resp.data);
-					this.redirect();
-				} else {
-					this.setState({
-						errors: resp.data.errors,
-					});
-				}
-			})
-			.catch((error) => console.log("api errors:", error));
-	};
-
-	redirect = () => {
-		this.props.history.push("/");
+		this.props.login({ user: this.state });
+		this.props.history.push("/main");
 	};
 
 	handleErrors = () => {
@@ -66,42 +40,52 @@ class Login extends Component {
 	};
 
 	render() {
-		const { username, email, password } = this.state;
-		return (
-			<div>
-				<h1>Log In</h1>
-				<form onSubmit={this.handleSubmit}>
-					<input
-						placeholder="username"
-						type="text"
-						name="username"
-						value={username}
-						onChange={this.handleChange}
-					/>
-					<input
-						placeholder="email"
-						type="text"
-						name="email"
-						value={email}
-						onChange={this.handleChange}
-					/>
-					<input
-						placeholder="password"
-						type="password"
-						name="password"
-						value={password}
-						onChange={this.handleChange}
-					/>
-					<button placeholder="submit" type="submit">
-						Log In
-					</button>
-					<div>
-						or <Link to="/signup">sign up</Link>
-					</div>
-				</form>
-				<div>{this.state.errors ? this.handleErrors() : null}</div>
-			</div>
-		);
+		if (this.props.loggedIn) {
+			return <Redirect to="/main" />;
+		} else {
+			return (
+				<div>
+					<h1>Log In</h1>
+					<form onSubmit={this.handleSubmit}>
+						<input
+							placeholder="username"
+							type="text"
+							name="username"
+							value={this.state.username}
+							onChange={this.handleChange}
+						/>
+						<input
+							placeholder="email"
+							type="text"
+							name="email"
+							value={this.state.email}
+							onChange={this.handleChange}
+						/>
+						<input
+							placeholder="password"
+							type="password"
+							name="password"
+							value={this.state.password}
+							onChange={this.handleChange}
+						/>
+						<button placeholder="submit" type="submit">
+							Log In
+						</button>
+						<div>
+							or <Link to="/signup">Sign Up</Link>
+						</div>
+					</form>
+					<div>{this.state.errors ? this.handleErrors() : null}</div>
+				</div>
+			);
+		}
 	}
 }
-export default Login;
+
+const mSTP = (state) => {
+	return {
+		loggedIn: state.users.loggedIn,
+	};
+};
+
+export default connect(mSTP, { login })(Login);

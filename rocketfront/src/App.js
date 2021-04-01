@@ -1,95 +1,49 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Home from "./containers/Home";
-import Login from "./components/Login";
+import { connect } from "react-redux";
+import {
+	Redirect,
+	BrowserRouter as Router,
+	Switch,
+	Route,
+} from "react-router-dom";
 import Signup from "./components/Signup";
+import Login from "./components/Login";
+import Main from "./containers/Main";
+import Session from "./containers/Session";
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isLoggedIn: false,
-			user: {},
+			loggedIn: false,
 		};
 	}
 
-	componentDidMount() {
-		this.loginStatus();
-	}
-
-	loginStatus = () => {
-		axios
-			.get("http://localhost:3001/logged_in", { withCredentials: true })
-
-			.then((resp) => {
-				if (resp.data.logged_in) {
-					this.handleLogin(resp);
-				} else {
-					this.handleLogout();
-				}
-			})
-			.catch((error) => console.log("api errors:", error));
-	};
-
-	handleLogin = (data) => {
-		this.setState({
-			isLoggedIn: true,
-			user: data.user,
-		});
-	};
-
-	handleLogout = () => {
-		this.setState({
-			isLoggedIn: false,
-			user: {},
-		});
-	};
-
 	render() {
 		return (
-			<div>
-				<BrowserRouter>
+			<div className="app">
+				<Router>
 					<Switch>
-						<Route
-							exact
-							path="/"
-							render={(props) => (
-								<Home
-									{...props}
-									handleLogin={this.handleLogin}
-									handleLogout={this.handleLogout}
-									loggedInStatus={this.state.isLoggedIn}
-								/>
-							)}
-						/>
-						{/* <Route
-							exact
-							path="/login"
-							render={(props) => (
-								<Login
-									{...props}
-									handleLogin={this.handleLogin}
-									loggedInStatus={this.state.isLoggedIn}
-								/>
-							)}
-						/>
-						<Route
-							exact
-							path="/signup"
-							render={(props) => (
-								<Signup
-									{...props}
-									handleLogin={this.handleLogin}
-									loggedInStatus={this.state.isLoggedIn}
-								/>
-							)}
-						/> */}
+						<Route exact path="/Session" component={Session} />
+						<Route exact path="/main" component={Main} />
+						<Route exact path="/Signup" component={Signup} />
+						<Route exact path="/Login" component={Login} />
 					</Switch>
-				</BrowserRouter>
+					{this.props.loggedIn ? (
+						<Redirect to component="/main" />
+					) : (
+						<Redirect to="/Session" />
+					)}
+				</Router>
 			</div>
 		);
 	}
 }
 
-export default App;
+const mSTP = (state) => {
+	return {
+		loggedIn: state.loggedIn,
+	};
+};
+
+export default connect(mSTP)(App);

@@ -5,7 +5,7 @@ class AlertsController < ApplicationController
     end
 
     def index
-        alerts = Alerts.all
+        @alerts_data = Alert.all
         render_alerts
     end
 
@@ -28,7 +28,7 @@ class AlertsController < ApplicationController
 
         # format data before rendering
         def render_alerts
-            render json: AlertsSerializer.new(alerts).to_serialized_json
+            render json: AlertsSerializer.new(@alerts_data).to_serialized_json
         end
 
 end

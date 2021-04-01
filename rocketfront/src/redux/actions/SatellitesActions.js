@@ -1,9 +1,10 @@
 export const getSatellites = () => {
 	return (dispatch) => {
-		fetch("http://localhost:3000/satellites")
+		dispatch({ type: "START_ADDING_SATELLITES" });
+		fetch("http://localhost:3001/satellites")
 			.then((res) => res.json())
 			.then((JSON) => {
-				dispatch({ type: "SET_SATELLITES", alerts: { data: JSON } });
+				dispatch({ type: "SET_SATELLITES", satellites: JSON });
 			});
 	};
 };
