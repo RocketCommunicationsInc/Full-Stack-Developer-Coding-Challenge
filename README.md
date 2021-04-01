@@ -1,3 +1,14 @@
+For whatever reason I had a harder time importing the Astro components, so the design is a bit lacking. Thanks for the opportunity.
+
+Website is deployed at https://grm-front.herokuapp.com/
+
+Back-end is deployed at https://grm-back.herokuapp.com/contacts
+
+Front-end is here - https://github.com/bphillips95/GRM-front
+
+Back-end is here https://github.com/bphillips95/GRM-back
+
+
 # Full-Stack-Developer-Coding-Challenge
 As the next step in the interview process, we’d like you to complete a coding challenge.
 
