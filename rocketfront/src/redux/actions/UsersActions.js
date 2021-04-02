@@ -13,7 +13,7 @@ export const signup = (userData) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			credentials: "include",
+			// credentials: "include",
 			body: JSON.stringify({ user: userData }),
 		})
 			.then((res) => res.json())
@@ -47,7 +47,7 @@ export const login = (userData) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			credentials: "include",
+			// credentials: "include",
 			body: JSON.stringify(userData),
 		})
 			.then((resp) => resp.json())
@@ -75,9 +75,9 @@ export const login = (userData) => {
 
 export const checkLoggedIn = () => {
 	return (dispatch) => {
-		fetch("https://randirocket.herokuapp.com/" + "logged_in", {
-			credentials: "include",
-		})
+		fetch("https://randirocket.herokuapp.com/" + "logged_in")
+			// credentials: "include",
+			// })
 			.then((res) => res.json())
 
 			.then((data) => {
