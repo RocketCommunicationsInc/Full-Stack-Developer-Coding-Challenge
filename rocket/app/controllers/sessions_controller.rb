@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-    
+    skip_before_action :authorized, [:new, :create]
+
     def create
         @user = User.find_by(email: session_params[:email])
     
@@ -12,7 +13,7 @@ class SessionsController < ApplicationController
         else
             render json: { 
                 status: 401,
-                errors: ['no such user', 'verify credentials and try again or signup']
+                error: ['no such user', 'verify credentials and try again or signup']
             }
         end
     end
@@ -26,7 +27,7 @@ class SessionsController < ApplicationController
         else
             render json: {
                 logged_in: false,
-                message: 'no such user'
+                error: 'no such user'
             }
         end
     end
@@ -41,7 +42,7 @@ class SessionsController < ApplicationController
 
     private
         def session_params
-            params.require(:user).permit(:email, :username, :password, :errors)
+            params.require(:user).permit(:email, :username, :password, :error)
         end
 
 end

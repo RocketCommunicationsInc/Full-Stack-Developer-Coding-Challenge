@@ -21,21 +21,22 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="app">
-				<Router>
-					<Switch>
-						<Route exact path="/Session" component={Session} />
-						<Route exact path="/main" component={Main} />
-						<Route exact path="/Signup" component={Signup} />
-						<Route exact path="/Login" component={Login} />
-					</Switch>
-					{this.props.loggedIn ? (
-						<Redirect to component="/main" />
-					) : (
-						<Redirect to="/Session" />
-					)}
-				</Router>
-			</div>
+			// 	<div className="app">
+			<Router>
+				<Switch>
+					<Route exact path="/" component={Main} />
+					<Route exact path="/Session" component={Session} />
+					<Route exact path="/main" component={Main} />
+					<Route exact path="/Signup" component={Signup} />
+					<Route exact path="/Login" component={Login} />
+				</Switch>
+				{this.props.loggedIn ? (
+					<Redirect to component="/main" />
+				) : (
+					<Redirect to="/Session" />
+				)}
+			</Router>
+			// 	</div>
 		);
 	}
 }

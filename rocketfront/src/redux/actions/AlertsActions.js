@@ -4,8 +4,10 @@ export const getAlerts = () => {
 		fetch("http://localhost:3001/alerts")
 			.then((res) => res.json())
 			.then((JSON) => {
-				console.log(JSON);
 				dispatch({ type: "SET_ALERTS", alerts: JSON });
+			})
+			.catch((error) => {
+				throw error;
 			});
 	};
 };

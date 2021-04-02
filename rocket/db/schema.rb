@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_183722) do
     t.text "_id"
     t.text "contactId"
     t.text "contactStatus"
-    t.integer "contactName"
+    t.bigint "contactName"
     t.text "contactGround"
     t.text "contactSatellite"
     t.text "contactEquipment"

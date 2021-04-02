@@ -4,7 +4,7 @@ class CreateSatellites < ActiveRecord::Migration[6.1]
       t.text :_id
       t.text :contactId
       t.text :contactStatus
-      t.integer :contactName
+      t.bigint :contactName
       t.text :contactGround
       t.text :contactSatellite
       t.text :contactEquipment
