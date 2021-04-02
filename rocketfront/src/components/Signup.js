@@ -20,7 +20,7 @@ class Signup extends Component {
 		event.preventDefault();
 		if (!this.state.errors) {
 			this.props.signup(this.state);
-			this.props.history.push("/");
+			this.props.history.push("/login");
 		} else {
 		}
 	};

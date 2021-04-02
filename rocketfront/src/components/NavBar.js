@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { RuxClock } from "@astrouxds/rux-clock/rux-clock.js";
 import { RuxGlobalStatusBar } from "@astrouxds/rux-global-status-bar/rux-global-status-bar.js";
 import { connect } from "react-redux";
+import { logout } from "../redux/actions/UsersActions";
 
 class NavBar extends Component {
 	constructor(props) {
@@ -18,6 +19,8 @@ class NavBar extends Component {
 	componentWillUnmount() {
 		clearInterval(this.intervalID);
 	}
+
+	handleLogout() {}
 
 	tick() {
 		this.setState({
@@ -40,7 +43,9 @@ class NavBar extends Component {
 					<div>
 						{this.props.user.username ? this.props.user.username : "Human"}
 						<br />
-						<a href="/logout">Log Out</a>
+						<a href="/" onClick={this.handleLogout}>
+							Log Out
+						</a>
 					</div>
 				</rux-global-status-bar>
 			</div>
@@ -53,5 +58,5 @@ class NavBar extends Component {
 // 		user: state.users.currentUser,
 // 	};
 // };
-export default NavBar;
+export default connect(null, { logout })(NavBar);
 // export default connect(mSTP)(NavBar);
