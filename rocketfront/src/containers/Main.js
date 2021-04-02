@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import NavBar from "../components/NavBar.js";
 import AlertDisplay from "../components/AlertDisplay.js";
 import SatDisplay from "../components/SatDisplay.js";

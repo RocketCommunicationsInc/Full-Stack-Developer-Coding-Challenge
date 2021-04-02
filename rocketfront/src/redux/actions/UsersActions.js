@@ -1,7 +1,5 @@
 import { LOGOUT } from "../actionTypes";
 import { AUTH_SUCCESS, AUTH_FAILURE } from "../actionTypes";
-import { RuxModal } from "@astrouxds/rux-modal/rux-modal.js";
-import * as Cookies from "js-cookie";
 
 const URL =
 	process.env.NODE_ENV === "production"

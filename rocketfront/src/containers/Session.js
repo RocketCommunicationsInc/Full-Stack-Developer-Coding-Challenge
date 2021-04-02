@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
 import { RuxModal } from "@astrouxds/rux-modal/rux-modal.js";
 
 class Session extends Component {
 	render() {
-		console.log(this.props);
 		if (this.props.errors) {
 			this.props.errors.map((e) => {
 				return (
