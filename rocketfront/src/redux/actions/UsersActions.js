@@ -13,7 +13,7 @@ export const signup = (userData) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			// credentials: "include",
+			credentials: "include",
 			body: JSON.stringify({ user: userData }),
 		})
 			.then((res) => res.json())
@@ -47,7 +47,7 @@ export const login = (userData) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			// credentials: "include",
+			credentials: "include",
 			body: JSON.stringify(userData),
 		})
 			.then((resp) => resp.json())
