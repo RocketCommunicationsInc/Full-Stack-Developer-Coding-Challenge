@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
     
+    def index
+        @users_data = User.all
+        render_users
+     end
 
     def create
         @users_data = User.new(user_params)
