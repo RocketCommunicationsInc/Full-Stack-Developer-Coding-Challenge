@@ -42,7 +42,7 @@ export const signup = (userData) => {
 
 export const login = (userData) => {
 	return (dispatch) => {
-		fetch("https://randirocket.herokuapp.com/" + "user", {
+		fetch("https://randirocket.herokuapp.com/" + "sessions", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
