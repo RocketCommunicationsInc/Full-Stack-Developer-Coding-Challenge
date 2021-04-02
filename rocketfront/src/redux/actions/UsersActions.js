@@ -3,9 +3,14 @@ import { AUTH_SUCCESS, AUTH_FAILURE } from "../actionTypes";
 import { RuxModal } from "@astrouxds/rux-modal/rux-modal.js";
 import * as Cookies from "js-cookie";
 
+const URL =
+	process.env.NODE_ENV === "production"
+		? "https://randirocket.herokuapp.com/"
+		: "http://localhost:3001/";
+
 export const signup = (userData) => {
 	return (dispatch) => {
-		fetch("http://localhost:3001/users", {
+		fetch(URL + "users", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -39,7 +44,7 @@ export const signup = (userData) => {
 
 export const login = (userData) => {
 	return (dispatch) => {
-		fetch("http://localhost:3001/user", {
+		fetch(URL + "user", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -72,7 +77,7 @@ export const login = (userData) => {
 
 export const checkLoggedIn = () => {
 	return (dispatch) => {
-		fetch(`http://localhost:3001/logged_in`, {
+		fetch(URL + "logged_in", {
 			credentials: "include",
 		})
 			.then((res) => res.json())
