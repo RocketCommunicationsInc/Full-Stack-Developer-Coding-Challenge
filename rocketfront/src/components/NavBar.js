@@ -36,8 +36,9 @@ class NavBar extends Component {
 					<rux-clock class="dark-theme" small>
 						{this.state.time}
 					</rux-clock>
+
 					<div>
-						{this.props.user.username}
+						{this.props.user.username ? this.props.user.username : "Human"}
 						<br />
 						<a href="/logout">Log Out</a>
 					</div>
@@ -47,10 +48,10 @@ class NavBar extends Component {
 	}
 }
 
-const mSTP = (state) => {
-	return {
-		user: state.users.currentUser,
-	};
-};
-
-export default connect(mSTP)(NavBar);
+// const mSTP = (state) => {
+// 	return {
+// 		user: state.users.currentUser,
+// 	};
+// };
+export default NavBar;
+// export default connect(mSTP)(NavBar);

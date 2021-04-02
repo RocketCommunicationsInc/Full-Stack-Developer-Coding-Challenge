@@ -11,9 +11,9 @@ class Main extends Component {
 			loggedIn: false,
 		};
 	}
-	componentDidMount = () => {
-		console.log(this.props.errors);
-	};
+	// componentDidMount = () => {
+	// 	console.log(this.props.errors);
+	// };
 
 	render() {
 		if (this.props.errors) {
@@ -48,7 +48,7 @@ class Main extends Component {
 		}
 		return (
 			<div className="app-grid">
-				<NavBar />
+				<NavBar user={this.props.user} />
 				<AlertDisplay />
 				<SatDisplay />
 			</div>
@@ -58,6 +58,7 @@ class Main extends Component {
 
 const mSTP = (state) => {
 	return {
+		user: state.users.currentUser,
 		loggedIn: state.users.loggedIn,
 		errors: state.users.errors,
 	};
