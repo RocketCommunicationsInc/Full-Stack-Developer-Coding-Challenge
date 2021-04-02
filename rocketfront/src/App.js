@@ -21,10 +21,9 @@ class App extends Component {
 
 	render() {
 		return (
-			// 	<div className="app">
 			<Router>
 				<Switch>
-					<Route exact path="/" component={Main} />
+					<Route exact path="/" component={Session} />
 					<Route exact path="/Session" component={Session} />
 					<Route exact path="/main" component={Main} />
 					<Route exact path="/Signup" component={Signup} />
@@ -36,7 +35,6 @@ class App extends Component {
 					<Redirect to="/Session" />
 				)}
 			</Router>
-			// 	</div>
 		);
 	}
 }

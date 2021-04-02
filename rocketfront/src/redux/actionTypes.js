@@ -5,3 +5,4 @@ export const START_ADDING_SATELLITES = "START_ADDING_SATELLITES";
 export const CREATE_USER = "CREATE_USER";
 export const LOGOUT = "LOGOUT";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAILURE = "AUTH_FAILURE";

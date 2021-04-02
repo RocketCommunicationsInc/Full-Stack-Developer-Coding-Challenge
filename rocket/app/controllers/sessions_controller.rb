@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         else
             render json: { 
                 status: 401,
-                error: ['no such user', 'verify credentials and try again or signup']
+                errors: ['no such user', 'verify credentials and try again or signup']
             }
         end
     end
@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
         else
             render json: {
                 logged_in: false,
-                error: 'no such user'
+                errors: 'no such user'
             }
         end
     end
@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
 
     private
         def session_params
-            params.require(:user).permit(:email, :username, :password, :error)
+            params.require(:user).permit(:email, :username, :password, :errors)
         end
 
 end

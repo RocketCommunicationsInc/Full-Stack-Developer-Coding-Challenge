@@ -8,7 +8,6 @@ class Signup extends Component {
 		username: "",
 		email: "",
 		password: "",
-		errors: "",
 	};
 
 	handleChange = (e) => {
@@ -19,8 +18,11 @@ class Signup extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		this.props.signup(this.state);
-		this.props.history.push("/");
+		if (!this.state.errors) {
+			this.props.signup(this.state);
+			this.props.history.push("/");
+		} else {
+		}
 	};
 
 	handleErrors = () => {
@@ -36,6 +38,36 @@ class Signup extends Component {
 	};
 
 	render() {
+		if (this.props.errors) {
+			this.props.errors.map((e) => {
+				return (
+					<div className="rux-modal-container">
+						<rux-modal
+							title="error"
+							message={e}
+							confirmText="Ok"
+							denyText="Cancel"
+							customEvent="listen-for-me"
+						>
+							<div className="rux-modal__titlebar">
+								<h1>Error</h1>
+							</div>
+							<div className="rux-modal__content">
+								<div className="rux-modal__message">{e}</div>
+								<div className="rux-button-group">
+									<rux-button data-value="false" tabindex="-1">
+										Cancel
+									</rux-button>
+									<rux-button data-value="true" tabindex="0">
+										OK
+									</rux-button>
+								</div>
+							</div>
+						</rux-modal>
+					</div>
+				);
+			});
+		}
 		return (
 			<div className="home">
 				<div className="inForm">

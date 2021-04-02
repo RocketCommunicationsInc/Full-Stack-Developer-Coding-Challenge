@@ -1,6 +1,7 @@
 import { LOGOUT } from "../actionTypes";
-import { AUTH_SUCCESS } from "../actionTypes";
+import { AUTH_SUCCESS, AUTH_FAILURE } from "../actionTypes";
 import { RuxModal } from "@astrouxds/rux-modal/rux-modal.js";
+import * as Cookies from "js-cookie";
 
 export const signup = (userData) => {
 	return (dispatch) => {
@@ -14,17 +15,15 @@ export const signup = (userData) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.error && data.error !== "") {
-					return (
-						<div>
-							<rux-modal
-								title="error"
-								message={data.error}
-								confirmText="Ok"
-								denyText="Cancel"
-							></rux-modal>
-						</div>
-					);
+				console.log(data);
+				if (data.errors && data.errors !== "") {
+					dispatch({
+						type: AUTH_FAILURE,
+						payload: {
+							loggedIn: false,
+							errors: [data.errors],
+						},
+					});
 				} else {
 					dispatch({
 						type: AUTH_SUCCESS,
@@ -50,18 +49,14 @@ export const login = (userData) => {
 		})
 			.then((resp) => resp.json())
 			.then((data) => {
-				console.log(data);
-				if (data.error && data.error !== "") {
-					return (
-						<div>
-							<rux-modal
-								title="error"
-								message={data.error}
-								confirmText="Ok"
-								denyText="Cancel"
-							></rux-modal>
-						</div>
-					);
+				if (data.errors && data.errors !== "") {
+					dispatch({
+						type: AUTH_FAILURE,
+						payload: {
+							loggedIn: false,
+							errors: data.errors,
+						},
+					});
 				} else {
 					dispatch({
 						type: AUTH_SUCCESS,
@@ -84,16 +79,13 @@ export const checkLoggedIn = () => {
 
 			.then((data) => {
 				if (data.error && data.error !== "") {
-					return (
-						<div>
-							<rux-modal
-								title="error"
-								message={data.error}
-								confirmText="Ok"
-								denyText="Cancel"
-							></rux-modal>
-						</div>
-					);
+					dispatch({
+						type: AUTH_FAILURE,
+						payload: {
+							loggedIn: true,
+							currentUser: data.user,
+						},
+					});
 				} else {
 					dispatch({
 						type: AUTH_SUCCESS,

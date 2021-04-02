@@ -1,11 +1,21 @@
-import { AUTH_SUCCESS } from "../actionTypes";
+import { AUTH_SUCCESS, AUTH_FAILURE } from "../actionTypes";
 import { LOGOUT } from "../actionTypes";
 
 export default function UsersReducer(
-	state = { loggedIn: false, currentUser: {} },
+	state = {
+		loggedIn: false,
+		currentUser: {},
+		errors: [],
+	},
 	action
 ) {
 	switch (action.type) {
+		case AUTH_FAILURE:
+			return {
+				...state,
+				loggedIn: false,
+				errors: action.payload.errors,
+			};
 		case AUTH_SUCCESS:
 			return {
 				...state,

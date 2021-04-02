@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         else 
             render json: {
                 status: 500,
-                error: @user.errors.full_messages
+                errors: @user.errors.full_messages
             }
         end
     end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
         else
             render json: {
                 status: 500,
-                error: ['user not found']
+                errors: ['user not found']
             }
         end
     end
@@ -35,6 +35,6 @@ class UsersController < ApplicationController
 
         # verify params
         def user_params
-            params.require(:user).permit(:id, :email, :username, :password, :error)
+            params.require(:user).permit(:id, :email, :username, :password, :errors)
         end
 end
