@@ -6,8 +6,16 @@ class AlertsController < ApplicationController
 
     def index
         @alerts_data = Alert.all
-        render_alerts
+        if @alerts_data
+            render_alerts
+        else
+            render json: {
+                status: 500,
+                errors: ['user not found']
+            }
+        end
     end
+    
 
     private
 

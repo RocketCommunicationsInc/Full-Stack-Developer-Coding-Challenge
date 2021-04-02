@@ -2,13 +2,9 @@ class UsersController < ApplicationController
     
 
     def create
-        @user = User.new(user_params)
-        if @user.save
-            login!
-            render json: {
-                status: :created,
-                user: @user
-            }
+        @users_data = User.new(user_params)
+        if @users_data.save
+            render_users
         else 
             render json: {
                 status: 500,
@@ -18,11 +14,9 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find_by(email: user_params[:email])
-        if @user
-            render json: {
-                user: @user
-            }
+        @users_data = User.find_by(email: user_params[:email])
+        if @users_data
+            render_users
         else
             render json: {
                 status: 500,
@@ -36,5 +30,10 @@ class UsersController < ApplicationController
         # verify params
         def user_params
             params.require(:user).permit(:id, :email, :username, :password, :errors)
+        end
+
+        # format data before rendering via serializer
+        def render_users
+            render json: UsersSerializer.new(@users_data).to_serialized_json
         end
 end

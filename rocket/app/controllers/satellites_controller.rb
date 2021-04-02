@@ -2,11 +2,23 @@ class SatellitesController < ApplicationController
 
     def create
         satellite = Satellite.create(satellite_params(:satellite))
+    else 
+        render json: {
+            status: 500,
+            errors: ['alerts not created']
+        }
     end
 
     def index
         @satellites_data = Satellite.all
-        render_satellites
+        if @satellites_data
+            render_satellites
+        else
+            render json: {
+                status: 500,
+                errors: ['user not found']
+            }
+        end
     end
 
     private
