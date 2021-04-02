@@ -13,6 +13,7 @@ module Rocket
     config.api_only = false
     config.middleware.use ActionDispatch::Cookies    
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.x.cors_allowed_origins = ENV['CORS_ALLOWED_ORIGINS']
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -25,7 +26,6 @@ module Rocket
         origins '*'
         resource '*', headers: :any, methods: :any
       end
-      config.x.cors_allowed_origins = ENV['CORS_ALLOWED_ORIGINS']
     end
   end
 end
