@@ -73,34 +73,34 @@ export const login = (userData) => {
 	};
 };
 
-export const checkLoggedIn = () => {
-	return (dispatch) => {
-		fetch("https://randirocket.herokuapp.com/" + "logged_in")
-			// credentials: "include",
-			// })
-			.then((res) => res.json())
+// export const checkLoggedIn = () => {
+// 	return (dispatch) => {
+// 		fetch("https://randirocket.herokuapp.com/" + "sessions")
+// 			// credentials: "include",
+// 			// })
+// 			.then((res) => res.json())
 
-			.then((data) => {
-				if (data.error && data.error !== "") {
-					dispatch({
-						type: AUTH_FAILURE,
-						payload: {
-							loggedIn: true,
-							currentUser: data.user,
-						},
-					});
-				} else {
-					dispatch({
-						type: AUTH_SUCCESS,
-						payload: {
-							loggedIn: data.logged_in,
-							currentUser: data.user,
-						},
-					});
-				}
-			});
-	};
-};
+// 			.then((data) => {
+// 				if (data.error && data.error !== "") {
+// 					dispatch({
+// 						type: AUTH_FAILURE,
+// 						payload: {
+// 							loggedIn: true,
+// 							currentUser: data.user,
+// 						},
+// 					});
+// 				} else {
+// 					dispatch({
+// 						type: AUTH_SUCCESS,
+// 						payload: {
+// 							loggedIn: data.logged_in,
+// 							currentUser: data.user,
+// 						},
+// 					});
+// 				}
+// 			});
+// 	};
+// };
 
 export const logout = () => {
 	return (dispatch) => {
