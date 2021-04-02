@@ -25,6 +25,7 @@ module Rocket
         origins '*'
         resource '*', headers: :any, methods: :any
       end
+      config.x.cors_allowed_origins = ENV['CORS_ALLOWED_ORIGINS']
     end
   end
 end
