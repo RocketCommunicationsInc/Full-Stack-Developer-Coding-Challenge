@@ -63,5 +63,8 @@
 	},
 	"devDependencies": {
 		"style-loader": "^2.0.0"
+	},
+	"engines": {
+		"node": "10.19.0"
 	}
 }
