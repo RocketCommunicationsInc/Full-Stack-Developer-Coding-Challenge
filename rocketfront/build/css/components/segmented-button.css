@@ -1,0 +1,88 @@
+/*
+**
+** 	ASTRO SEGMENTED BUTTON
+** 	==========================================================================
+**  3.0 Notes
+**  Don‘t forget to update Sketch with outline border color
+
+*/
+
+.rux-segmented-button {
+  display: inline-flex;
+  height: 1.6875rem;
+
+  overflow: hidden;
+
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+
+  border-radius: var(--controlBorderRadius);
+  border: 1px solid var(--segmentedButtonBorderColor);
+}
+
+.rux-segmented-button:hover{
+	border-color: var(--segmentedButtonHoverBorderColor);
+}
+
+.rux-segmented-button__segment {
+  height: 1.6875rem;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.rux-segmented-button__segment label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: auto;
+  height: 1.5625rem;
+
+  margin: 0;
+  padding: 0 0.75rem;
+
+  border: none;
+  border-right: 1px solid var(--segmentedButtonBorderColor);
+
+  color: var(--segmentedButtonTextColor);
+  background-color: var(--segmentedButtonBackgroundColor);
+
+  font-size: 1rem;
+
+  user-select: none;
+}
+
+.rux-segmented-button__segment:nth-child(2):not(:last-child) label {
+  border-right: none !important;
+}
+
+.rux-segmented-button__segment input {
+  display: none !important;
+}
+
+.rux-segmented-button__segment label:hover {
+	background-color: var(--segmentedButtonHoverBackgroundColor);
+	border-color: var( --segmentedButtonHoverBorderColor);
+  color: var(--segmentedButtonHoverTextColor);
+  outline: none;
+}
+
+.rux-segmented-button__segment input:checked + label {
+  background-color: var(--segmentedButtonSelectedBackgroundColor);
+  color: var(--segmentedButtonSelectedTextColor);
+}
+
+.rux-segmented-button:nth-child(2):not(:last-child) label {
+	border-right: none;
+	border-left: none;
+}
+.rux-segmented-button:first-child label{
+	border-radius: var(--controlBorderRadius) 0 0 var(--controlBorderRadius);
+
+}
+.rux-segmented-button:last-child label{
+	border-radius: 0 var(--controlBorderRadius) var(--controlBorderRadius) 0;
+}

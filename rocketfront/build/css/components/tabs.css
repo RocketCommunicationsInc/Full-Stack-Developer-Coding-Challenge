@@ -1,0 +1,102 @@
+/*
+**
+** 	ASTRO TABS
+** 	==========================================================================
+**	1.4 Notes
+**	- Added rux_ and BEM compatible classes to all satcom_ NOTE: satcom_ will be removed in a future version
+**  - Removed prefixed transitions
+**  - Removed prefixed gradients
+**  - Updated colors for WCAG compliance
+**  - Swapped condensed font for standard
+**  2.0 Ideas
+**  - Replace use a radio-button based structure for tabs? (http://alistapart.com/article/radio-controlled-web-design)
+*/
+
+/* 	REQUIRED CLASSES */
+
+.rux-tabs {
+  font-size: 1.5rem;
+
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 5.625rem;
+
+	user-select: none;
+	border-bottom: 5px solid var(--tabBorderColor);
+}
+
+.rux-tabs--small {
+  height: 3.125rem;
+	font-size: var(--fontSizeXL);
+	border-bottom: 3px solid var(--tabBorderColor);
+}
+
+.rux-tabs ul {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+
+  display: flex;
+  list-style: none;
+}
+
+.rux-tabs li {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  /* outline: 1px solid green; */
+}
+
+/* .rux-tabs li:not(:last-child),
+.satcom-tabs li:not(:last-child) {
+   border-right: 1px solid var(--tabBorderColor, rgb(20, 32, 44)); 
+} */
+
+.rux-tabs li::before {
+  display: none !important;
+}
+
+.rux-tabs a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 3px 2rem 0;
+
+  text-decoration: none;
+  color: var(--tabTextColor);
+
+  /* background-color: var(--tabBackgroundColor, rgb(30, 47, 66)); */
+  /* overflow: auto; */
+}
+
+.rux-tabs a[disabled] {
+  opacity: var(--disabledOpacity);
+  cursor: var(--disabledCursor);
+}
+
+.rux-tabs .selected a {
+  color: var(--tabSelectedTextColor);
+}
+
+.rux-tabs--small .selected a,
+.rux-tabs--small .selected a:hover {
+  color: var(--tabSelectedTextColor);
+}
+
+.rux-tabs .selected a:hover {
+  color: var(--tabSelectedTextColor);
+}
+
+.rux-tabs a:hover:not([disabled]) {
+  color: var(--tabHoverTextColor);
+}
+
+.rux-tabs .rux-tab {
+	border-bottom: 5px solid var(--tabBorderColor);
+}
+.rux-tabs .rux-tab {
+	border-bottom: 5px solid var(--tabBorderColor);
+}
+
