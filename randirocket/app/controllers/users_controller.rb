@@ -8,7 +8,7 @@ class UsersController < ApplicationController
         else 
             render json: {
                 status: 500,
-                errors: @user.errors.full_messages
+                errors: @users_data.errors.full_messages
             }
         end
     end
