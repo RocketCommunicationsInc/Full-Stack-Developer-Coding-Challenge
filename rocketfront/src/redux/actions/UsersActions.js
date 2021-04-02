@@ -1,14 +1,14 @@
 import { LOGOUT } from "../actionTypes";
 import { AUTH_SUCCESS, AUTH_FAILURE } from "../actionTypes";
 
-const URL =
-	process.env.NODE_ENV === "production"
-		? "https://randirocket.herokuapp.com/"
-		: "http://localhost:3001/";
+// const URL =
+// 	process.env.NODE_ENV === "production"
+// 		? "https://randirocket.herokuapp.com/"
+// 		: "http://localhost:3001/";
 
 export const signup = (userData) => {
 	return (dispatch) => {
-		fetch(URL + "users", {
+		fetch("https://randirocket.herokuapp.com/" + "users", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const signup = (userData) => {
 
 export const login = (userData) => {
 	return (dispatch) => {
-		fetch(URL + "user", {
+		fetch("https://randirocket.herokuapp.com/" + "user", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -75,7 +75,7 @@ export const login = (userData) => {
 
 export const checkLoggedIn = () => {
 	return (dispatch) => {
-		fetch(URL + "logged_in", {
+		fetch("https://randirocket.herokuapp.com/" + "logged_in", {
 			credentials: "include",
 		})
 			.then((res) => res.json())
