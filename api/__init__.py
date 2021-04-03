@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
 
@@ -9,16 +10,21 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'temporarysecretkey'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:<password>@localhost/Rocket-Comms-Challenge-DB'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:train1142@localhost/Rocket-Comms-Challenge-DB'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
 
     login_manager = LoginManager()
+    # TODO: Update login view for react frontend
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
+    migrate = Migrate(app, db)
+
     from .models.user import User
+    from .models.alert import Alert
+    from .models.contact import Contact
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -35,5 +41,6 @@ def create_app():
     return app
 
 
-# only include to create the database
-db.create_all(app=create_app())
+if __name__ == '__main__':
+    create_app()
+    manager.run()

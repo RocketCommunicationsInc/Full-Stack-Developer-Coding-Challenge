@@ -1,7 +1,8 @@
-from . import db
+from .. import db
 
 
 class Alert(db.Model):
+    __tablename__ = 'alert'
     id = db.Column(db.Integer, primary_key=True)
     errorId = db.Column(db.String(200), unique=True)
     errorSeverity = db.Column(db.String(200))
@@ -12,3 +13,14 @@ class Alert(db.Model):
     selected = db.Column(db.Boolean)
     new = db.Column(db.Boolean)
     expanded = db.Column(db.Boolean)
+
+    def __init__(self, errorId, errorSeverity, errorCategory, longMessage, errorTime, selected, new, expanded):
+        self.errorId = errorId
+        self.errorSeverity = errorSeverity
+        self.errorCategory = errorCategory
+        self.errorMessage = errorMessage
+        self.longMessage = longMessage
+        self.errorTime = errorTime
+        self.selected = selected
+        self.new = new
+        self.expanded = expanded
