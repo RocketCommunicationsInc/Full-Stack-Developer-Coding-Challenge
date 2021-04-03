@@ -1,6 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
+from .models.user import User
+from . import db
 
 auth = Blueprint('auth', __name__)
 
@@ -43,10 +45,12 @@ def signup():
     new_user = User(email=email, name=name,
                     password=generate_password_hash(password, method='sha256'))
 
-    # TODO: add new user to data base and committ changes
+    # adds new user to data base and committ changes
+    db.session.add(data)
+    db.session.commit()
 
-    # TODO: log in new user
-
+    # logs in new user
+    login_user(user)
     # TODO: return current user
     return "sign up route"
 
