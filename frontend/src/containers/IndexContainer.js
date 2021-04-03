@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import Contacts from '../components/Contacts'
-import Alerts from '../components/Alerts'
+import Contacts from '../components/contacts/Contacts'
+import Alerts from '../components/alerts/Alerts'
 import axios from 'axios'
 
 class IndexContainer extends Component {
+    // TODO: add spinner when fetching data
     state = {
         alerts: [],
         contacts: [],
         alertError: '',
-        contactError: ''
+        contactError: '',
+        statusHash: {}
     }
 
     componentDidMount(){
