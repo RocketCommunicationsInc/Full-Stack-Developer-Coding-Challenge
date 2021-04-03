@@ -1,3 +1,17 @@
+# Running the Application:
+
+## cd into backend
+
+- rake db:create
+- rake db:migrate
+- rake db:seed
+- rails s
+
+## cd into frontend
+
+- npm install
+- npm start
+
 # Full-Stack-Developer-Coding-Challenge
 
 As the next step in the interview process, we’d like you to complete a coding challenge.
@@ -61,5 +75,3 @@ Refer to the section _Astro Storybook and Sample Apps_ at this link to get more 
 ## Timeframe
 
 We would like the take home challenge to be completed within 3 days. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
-
-## Running the Application:
