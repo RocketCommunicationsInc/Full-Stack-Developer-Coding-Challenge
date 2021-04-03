@@ -33,3 +33,7 @@ def create_app():
     app.debug = True
 
     return app
+
+
+# only include to create the database
+db.create_all(app=create_app())
