@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2021_04_02_175437) do
     t.string "contactState"
     t.string "contactStep"
     t.text "contactDetail"
-    t.bigint "contactBeginTimestamp"
-    t.bigint "contactEndTimestamp"
+    t.integer "contactBeginTimestamp"
+    t.integer "contactEndTimestamp"
     t.decimal "contactLatitude"
     t.decimal "contactLongitude"
     t.decimal "contactAzimuth"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_175437) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
