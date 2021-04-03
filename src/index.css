@@ -1,0 +1,70 @@
+body {
+  /* margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  margin: 0;
+  padding: 0;
+
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+  font-family: var(--fontFamily);
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+  color: var(--fontColor, rgb(255, 255, 255));
+
+  background-color: var(--backgroundColor);
+  scrollbar-color: var(--scrollBarThumbBackgroundColor)
+    var(--scrollBarTrackCornerBackgroundColor);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.container {
+  display: grid;
+  /* grid-auto-rows: minmax(100px, 400px); */
+  height: 98vh;
+  width: 100vw;
+  grid-gap: 20px;
+  overflow: hidden;
+}
+
+.header {
+  grid-column: 1/3;
+  grid-row: 1;
+}
+
+.alerts-report {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.contacts-report {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.alerts-pane {
+  height: "6em";
+  display: "grid";
+  grid-auto-rows: "minmax(15px, auto)";
+  align-items: "flex-end";
+  background-color: "rgb(24, 38, 53)";
+}
+
+.alerts-pane-header {
+  font-size: "3rem";
+  grid-column: "1";
+  grid-row: "2";
+}
+
+.table-scroll-bar {
+  overflow-y: "scroll";
+  height: "22em";
+}
