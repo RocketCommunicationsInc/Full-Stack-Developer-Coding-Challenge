@@ -12,7 +12,7 @@ class IndexContainer extends Component {
     }
 
     componentDidMount(){
-        axios.get('http://localhost:3001/alerts')
+        axios.get('http://localhost:3001/api/alerts')
             .then(response => {
                 this.setState({ alerts: response.data })
             })
@@ -20,7 +20,7 @@ class IndexContainer extends Component {
                 this.setState({ alertError: error.message })
             })
 
-        axios.get('http://localhost:3001/contacts')
+        axios.get('http://localhost:3001/api/contacts')
             .then(response => {
                 this.setState({ contacts: response.data })
             })

@@ -68,8 +68,8 @@ class Authentication extends Component {
                                 onChange={this.handleFormChange}/>
                         </label>
                     </p>
-                    <button type="submit">{this.state.toSignIn ? "LOG IN" : "SIGN UP"}</button>
-                    <button onClick={this.handleLogInButton}>SWITCH TO {this.state.toSignIn ? "SIGN UP" : "LOG IN"}</button>
+                    <button type="submit">{this.state.toSignIn ? "Log In" : "Sign Up"}</button>
+                    <button onClick={this.handleLogInButton}>Switch To {this.state.toSignIn ? "Sign Up" : "Log In"}</button>
                 </form>
             </div>
         );
