@@ -1,6 +1,7 @@
 import React from 'react';
 import ContactRowItem from './ContactRowItem';
 import ContactStateTable from './ContactStateTable'
+import './Contacts.css'
 
 const Contacts = (props) => {
     const numberOfContacts = props.contacts.length

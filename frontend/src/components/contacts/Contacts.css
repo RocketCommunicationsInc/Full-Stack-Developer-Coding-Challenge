@@ -1,0 +1,7 @@
+.contacts-table {
+  display: inline-block;
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
+/* TODO: sticky headers on table */

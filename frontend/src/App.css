@@ -2,7 +2,7 @@
   padding: 2em;
   background-color: rgb(18, 25, 34);
   width: auto;
-  height: 2000px;
+  min-height: 2000px;
   font-family: "Roboto", sans-serif;
   color: white;
   font-size: 18px;
@@ -37,4 +37,20 @@ input {
   border-radius: 4px;
   outline: none;
   font-family: "Roboto", sans-serif;
+}
+
+table {
+  border: 3px solid rgb(89, 153, 220);
+  border-collapse: collapse;
+}
+
+th {
+  padding: 0.5em;
+  text-align: left;
+  background-color: rgb(89, 153, 220);
+  color: white;
+}
+
+tr {
+  border: 1px solid rgb(89, 153, 220);
 }
