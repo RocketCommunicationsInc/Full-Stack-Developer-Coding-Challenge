@@ -46,11 +46,11 @@ def signup():
                     password=generate_password_hash(password, method='sha256'))
 
     # adds new user to data base and committ changes
-    db.session.add(data)
+    db.session.add(new_user)
     db.session.commit()
 
     # logs in new user
-    login_user(user)
+    login_user(new_user)
     # TODO: return current user
     return "sign up route"
 
