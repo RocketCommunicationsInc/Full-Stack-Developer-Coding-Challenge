@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://rocket-comms-code-challenge.web.app/'
+    origins 'https://rocket-comms-code-challenge.web.app'
 
     resource '*',
       headers: :any,
