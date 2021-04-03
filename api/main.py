@@ -1,22 +1,23 @@
 from flask import Blueprint
+from flask_login import login_required, current_user
 
 main = Blueprint('main', __name__)
 
 
 @main.route('/')
-def hello_world():
+def index():
     return 'Hello, World!'
 
 
 @main.route('/contacts')
-# TODO: make protected route
-def index():
+@login_required
+def contacts():
     # TODO: return contacts data from database
     return "contacts data route"
 
 
 @main.route('/alerts')
-# TODO: make protected route
-def profile():
+@login_required
+def alerts():
     # TODO: return alerts data from database
     return "alerts data route"
