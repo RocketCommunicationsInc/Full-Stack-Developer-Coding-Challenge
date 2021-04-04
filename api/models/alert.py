@@ -9,7 +9,7 @@ class Alert(db.Model):
     errorCategory = db.Column(db.String(200))
     errorMessage = db.Column(db.String(200))
     longMessage = db.Column(db.Text())
-    errorTime = db.Column(db.Integer)
+    errorTime = db.Column(db.BigInteger)
     selected = db.Column(db.Boolean)
     new = db.Column(db.Boolean)
     expanded = db.Column(db.Boolean)
