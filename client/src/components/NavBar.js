@@ -1,6 +1,8 @@
 import React from "react";
+/* eslint-disable no-unused-vars */
 import { RuxGlobalStatusBar } from "@astrouxds/rux-global-status-bar/rux-global-status-bar.js";
 import { RuxClock } from "@astrouxds/rux-clock/rux-clock.js";
+/* eslint-enable no-unused-vars */
 
 function NavBar() {
   return (

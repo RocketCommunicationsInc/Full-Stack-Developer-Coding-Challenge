@@ -1,16 +1,26 @@
 import React from "react";
-import AlertsTable from "./components/AlertsTable";
-import ContactsTable from "./components/ContactsTable";
-import Modal from "./components/Modal";
-import NavBar from "./components/NavBar";
+import { ProvideAuth } from "./hooks/useAuthContext"
+import Dashboard from "./components/Dashboard";
+import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SignUpForm"
+import LoggedOut from "./components/LoggedOut"
+import PrivateRoute from "./PrivateRoute";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <NavBar />
-      <AlertsTable />
-      <ContactsTable />
-      <Modal />
+    <Router>
+      <ProvideAuth>
+          <Switch>
+            <PrivateRoute exact path="/" component={Dashboard} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <Route path="/signup" component={SignUpForm} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/logout" component={LoggedOut} />
+          </Switch>
+      </ProvideAuth>
+    </Router>
     </div>
   );
 }

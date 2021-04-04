@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from .models.user import User
 from . import db
+import json
 
 
 auth = Blueprint('auth', __name__)
@@ -26,7 +27,7 @@ def login():
     login_user(user, remember=remember)
     # returns current user
     user_name = current_user.__getattr__("name")
-    return {"name": user_name}
+    return json.dumps({"name": user_name})
 
 
 @ auth.route('/api/signup', methods=['POST'])
@@ -55,7 +56,7 @@ def signup():
     login_user(new_user)
 
     user_name = current_user.__getattr__("name")
-    return {"name": user_name}
+    return json.dumps({"name": user_name})
 
 
 @ auth.route('/api/logout')
@@ -64,4 +65,4 @@ def logout():
     # logs out user
     logout_user()
 
-    return "logout route"
+    return "user logged out"
