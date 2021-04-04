@@ -8,6 +8,7 @@ class Signup extends Component {
 		username: "",
 		// email: "",
 		password: "",
+		passwordConfirmation: "",
 	};
 
 	handleChange = (e) => {
@@ -18,24 +19,35 @@ class Signup extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		if (!this.state.errors) {
-			this.props.signup(this.state);
-			this.props.history.push("/login");
-		} else {
-		}
+		const { username, password, passwordConfirmation } = this.state;
+		const user = {
+			username,
+			password,
+			passwordConfirmation,
+		};
+		this.props.signup(user, this.handleSuccess);
 	};
 
-	handleErrors = () => {
-		return (
-			<div className="home">
-				<ul>
-					{this.state.errors.map((error) => {
-						return <li key={error}>{error}</li>;
-					})}
-				</ul>
-			</div>
-		);
+	handleSuccess = () => {
+		this.setState({
+			username: "",
+			password: "",
+			passwordConfirmation: "",
+		});
+		this.props.history.push("/main");
 	};
+
+	// handleErrors = () => {
+	// 	return (
+	// 		<div className="home">
+	// 			<ul>
+	// 				{this.state.errors.map((error) => {
+	// 					return <li key={error}>{error}</li>;
+	// 				})}
+	// 			</ul>
+	// 		</div>
+	// 	);
+	// };
 
 	render() {
 		if (this.props.errors) {
@@ -109,6 +121,19 @@ class Signup extends Component {
 								type="password"
 								name="password"
 								value={this.state.password}
+								onChange={this.handleChange}
+							/>
+						</div>
+						<div className="rux-form-field">
+							<label for="input__text">Password Confirmation</label>
+							<input
+								id="input__text"
+								class="rux-input"
+								required
+								placeholder="passwordConfirmation"
+								type="password"
+								name="passwordConfirmation"
+								value={this.state.passwordConfirmation}
 								onChange={this.handleChange}
 							/>
 						</div>

@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :alerts
   resources :sessions
 
-  # post '/Login', to: 'sessions#create'
-  # delete '/logout', to: 'sessions#destroy'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
   # post '/logout', to: 
-  # get '/logged_in', to: 'sessions#is_logged_in?'
+  get '/logged_in', to: 'sessions#is_logged_in?'
   # get '/main', to: 'users#show'
   # post 'user', to: 'users#show'
 

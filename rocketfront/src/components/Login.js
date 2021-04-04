@@ -10,7 +10,7 @@ class Login extends Component {
 			username: "",
 			// email: "",
 			password: "",
-			error: "",
+			// error: "",
 		};
 	}
 
@@ -23,52 +23,43 @@ class Login extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		this.props.login({ user: this.state });
+		const { username, password, passwordConfirmation } = this.state;
+		const user = {
+			username,
+			password,
+			passwordConfirmation,
+		};
+		this.props.login({ user }, this.handleSuccess);
+	};
+
+	// handleErrors = () => {
+	// 	return (
+	// 		<div>
+	// 			<ul>
+	// 				{this.state.error.map((error) => {
+	// 					return <li key={error}>{error}</li>;
+	// 				})}
+	// 			</ul>
+	// 		</div>
+	// 	);
+	// };
+
+	handleSuccess = () => {
+		this.setState({
+			username: "",
+			password: "",
+		});
 		this.props.history.push("/main");
 	};
 
-	handleErrors = () => {
-		return (
-			<div>
-				<ul>
-					{this.state.error.map((error) => {
-						return <li key={error}>{error}</li>;
-					})}
-				</ul>
-			</div>
-		);
-	};
-
 	render() {
-		if (this.props.errors) {
-			this.props.errors.map((e) => {
-				return (
-					<div className="rux-modal-container">
-						<rux-modal
-							title="error"
-							message={e}
-							confirmText="Ok"
-							denyText="Cancel"
-							customEvent="listen-for-me"
-						>
-							<div className="rux-modal__titlebar">
-								<h1>Error</h1>
-							</div>
-							<div className="rux-modal__content">
-								<div className="rux-modal__message">{e}</div>
-								<div className="rux-button-group">
-									<rux-button data-value="false" tabindex="-1">
-										Cancel
-									</rux-button>
-									<rux-button data-value="true" tabindex="0">
-										OK
-									</rux-button>
-								</div>
-							</div>
-						</rux-modal>
-					</div>
-				);
-			});
+		if (this.props.errors.length !== 0) {
+			return (
+				<div>
+					<p>Errors:</p>
+					<h3>{this.props.errors[0]}</h3>
+				</div>
+			);
 		}
 		return (
 			<div className="home">
@@ -140,7 +131,7 @@ class Login extends Component {
 
 const mSTP = (state) => {
 	return {
-		loggedIn: state.users.loggedIn,
+		// loggedIn: state.users.loggedIn,
 		errors: state.users.errors,
 	};
 };

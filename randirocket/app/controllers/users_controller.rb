@@ -8,11 +8,12 @@ class UsersController < ApplicationController
     def create
         @users_data = User.new(user_params)
         if @users_data.save
+            session[:user_id] = @users_data.id
             render_users
         else 
             render json: {
                 status: 500,
-                errors: @users_data.errors.full_messages
+                errors: 'failed attempt, please try again'
             }
         end
     end
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
         else
             render json: {
                 status: 500,
-                errors: ['user not found']
+                errors: 'user not found'
             }
         end
     end

@@ -12,7 +12,7 @@ class SatellitesController < ApplicationController
         else
             render json: {
                 status: 500,
-                errors: ['user not found']
+                errors: 'user not found'
             }
         end
     end

@@ -6,3 +6,5 @@ export const CREATE_USER = "CREATE_USER";
 export const LOGOUT = "LOGOUT";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAILURE = "AUTH_FAILURE";
+export const ADD_ERROR = "ADD_ERROR";
+export const CLEAR_ERROR = "CLEAR_ERROR";

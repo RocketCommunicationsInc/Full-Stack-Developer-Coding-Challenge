@@ -3,6 +3,8 @@ import NavBar from "../components/NavBar.js";
 import AlertDisplay from "../components/AlertDisplay.js";
 import SatDisplay from "../components/SatDisplay.js";
 import { connect } from "react-redux";
+import { fetchLoginStatus } from "../redux/actions/UsersActions";
+import { RuxPopUpMenu } from "@astrouxds/rux-pop-up-menu/rux-pop-up-menu.js";
 
 class Main extends Component {
 	constructor(props) {
@@ -12,39 +14,44 @@ class Main extends Component {
 		};
 	}
 	// componentDidMount = () => {
-	// 	console.log(this.props.errors);
+	// 	this.props.fetchLoginStatus();
 	// };
 
 	render() {
 		if (this.props.errors) {
-			this.props.errors.map((e) => {
-				return (
-					<div className="rux-modal-container">
-						<rux-modal
-							title="error"
-							message={e}
-							confirmText="Ok"
-							denyText="Cancel"
-							customEvent="listen-for-me"
-						>
-							<div className="rux-modal__titlebar">
-								<h1>Error</h1>
-							</div>
-							<div className="rux-modal__content">
-								<div className="rux-modal__message">{e}</div>
-								<div className="rux-button-group">
-									<rux-button data-value="false" tabindex="-1">
-										Cancel
-									</rux-button>
-									<rux-button data-value="true" tabindex="0">
-										OK
-									</rux-button>
-								</div>
-							</div>
-						</rux-modal>
-					</div>
-				);
-			});
+			// this.props.errors.map((e) => {
+			// return (
+			// 	<div className="rux-modal-container">
+			// 		<rux-modal
+			// 			title="error"
+			// 			message={this.props.errors}
+			// 			confirmText="Ok"
+			// 			denyText="Cancel"
+			// 			customEvent="listen-for-me"
+			// 		>
+			// 			<div className="rux-modal__titlebar">
+			// 				<h1>Error</h1>
+			// 			</div>
+			// 			<div className="rux-modal__content">
+			// 				<div className="rux-modal__message">{this.props.errors}</div>
+			// 				<div className="rux-button-group">
+			// 					<rux-button data-value="false" tabindex="-1">
+			// 						Cancel
+			// 					</rux-button>
+			// 					<rux-button data-value="true" tabindex="0">
+			// 						OK
+			// 					</rux-button>
+			// 				</div>
+			// 			</div>
+			// 		</rux-modal>
+			// 	</div>
+			// );
+			// });
+			return (
+				<rux-modal title="Error" message={this.props.errors} confirmText="Ok">
+					// denyText="Cancel" // customEvent="listen-for-me">
+				</rux-modal>
+			);
 		}
 		return (
 			<div className="app-grid">
@@ -63,4 +70,13 @@ const mSTP = (state) => {
 		errors: state.users.errors,
 	};
 };
-export default connect(mSTP)(Main);
+
+const mDTP = (dispatch) => {
+	return {
+		fetchLoginStatus: () => {
+			dispatch(fetchLoginStatus());
+		},
+	};
+};
+
+export default connect(mSTP, mDTP)(Main);

@@ -4,11 +4,13 @@ import logger from "redux-logger";
 import AlertsReducer from "./reducers/AlertsReducer";
 import SatellitesReducer from "./reducers/SatellitesReducer";
 import UsersReducer from "./reducers/UsersReducer";
+import ErrorsReducer from "./reducers/ErrorsReducer";
 
 const rootReducer = combineReducers({
 	alerts: AlertsReducer,
 	satellites: SatellitesReducer,
 	users: UsersReducer,
+	errors: ErrorsReducer,
 });
 
 const store = createStore(

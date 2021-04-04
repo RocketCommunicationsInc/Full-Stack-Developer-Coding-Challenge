@@ -10,22 +10,14 @@ export default function UsersReducer(
 	action
 ) {
 	switch (action.type) {
-		case AUTH_FAILURE:
-			return {
-				...state,
-				loggedIn: false,
-				errors: action.payload.errors,
-			};
 		case AUTH_SUCCESS:
 			return {
-				...state,
 				loggedIn: true,
 				currentUser: action.payload.currentUser,
 			};
 
 		case LOGOUT:
 			return {
-				...state,
 				loggedIn: false,
 				currentUser: {},
 			};
