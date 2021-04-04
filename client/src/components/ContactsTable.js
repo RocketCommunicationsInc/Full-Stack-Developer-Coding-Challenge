@@ -1,5 +1,5 @@
-import React from "react";
-import { contactsTestData } from "../contactsTestData";
+import React, { useEffect } from "react";
+import { useData } from "../hooks/useData";
 /* eslint-disable no-unused-vars */
 import { RuxAccordion } from "@astrouxds/rux-accordion/rux-accordion.js";
 import { RuxStatus } from "@astrouxds/rux-status/rux-status.js";
@@ -7,6 +7,16 @@ import { RuxTabs } from "@astrouxds/rux-tabs/rux-tabs.js";
 /* eslint-enable no-unused-vars */
 
 function ContactsTable() {
+  const { data, getContactsData } = useData();
+
+  const getData = async () => {
+    await getContactsData();
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div>
       <rux-tabs id="tab-set-id-1">
@@ -23,25 +33,29 @@ function ContactsTable() {
             <span slot="label">Status</span>
             <span slot="label">AOS – LOS</span>
           </rux-accordion>
-          {contactsTestData.map((contact) => {
-            return (
-              <div key={contact.contactId}>
-                <rux-accordion>
-                  <span slot="label">
-                    <rux-status status={contact.contactStatus}></rux-status>
-                  </span>
-                  <span slot="label">{contact.contactName}</span>
-                  <span slot="label">{contact.contactGround}</span>
-                  <span slot="label">{contact.contactEquipment}</span>
-                  <span slot="label">{`${contact.contactState} (Step: ${contact.contactStep})`}</span>
-                  <span slot="label">{`${new Date(
-                    contact.contactBeginTimestamp
-                  )}-${new Date(contact.contactEndTimestamp)}`}</span>
-                  <span slot="content">{contact.contactDetail}</span>
-                </rux-accordion>
-              </div>
-            );
-          })}
+          {data ? (
+            data.map((contact) => {
+              return (
+                <div key={contact.contactId}>
+                  <rux-accordion>
+                    <span slot="label">
+                      <rux-status status={contact.contactStatus}></rux-status>
+                    </span>
+                    <span slot="label">{contact.contactName}</span>
+                    <span slot="label">{contact.contactGround}</span>
+                    <span slot="label">{contact.contactEquipment}</span>
+                    <span slot="label">{`${contact.contactState} (Step: ${contact.contactStep})`}</span>
+                    <span slot="label">{`${new Date(
+                      contact.contactBeginTimestamp
+                    )}-${new Date(contact.contactEndTimestamp)}`}</span>
+                    <span slot="content">{contact.contactDetail}</span>
+                  </rux-accordion>
+                </div>
+              );
+            })
+          ) : (
+            <p>Loading data...</p>
+          )}
         </rux-tab-panel>
         <rux-tab-panel aria-labelledby="tab-id-2">
           Equipment panel coming soon...

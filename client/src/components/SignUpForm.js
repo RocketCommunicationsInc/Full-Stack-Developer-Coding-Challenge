@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import {useAuth} from "../hooks/useAuthContext"
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../hooks/useAuthContext";
+import { useHistory } from "react-router-dom";
 
 const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("")
-  const {signup} = useAuth()
+  const [name, setName] = useState("");
+  const { user, error, signup } = useAuth();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,8 +15,16 @@ const SignUpForm = () => {
   };
 
   const submit = async () => {
-    await signup(email, name, password)
-  }
+    await signup(email, name, password);
+  };
+
+  useEffect(() => {
+    if (user) {
+      history.push("/dashboard");
+    } else {
+      console.log(error);
+    }
+  }, [user, error, history]);
 
   return (
     <div>

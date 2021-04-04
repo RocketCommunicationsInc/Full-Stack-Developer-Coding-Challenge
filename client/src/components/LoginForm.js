@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import {useAuth} from "../hooks/useAuthContext"
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 
-const LoginForm = ({ setIsLoggedIn}) => {
+const LoginForm = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false)
+  const [remember, setRemember] = useState(false);
+  const { user, error, login } = useAuth();
   const history = useHistory();
-  const {login} = useAuth()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,9 +15,17 @@ const LoginForm = ({ setIsLoggedIn}) => {
   };
 
   const submit = async () => {
-    await login(email, password, remember)
-    history.push("/");
-  }
+    await login(email, password, remember);
+    console.log(user);
+  };
+
+  useEffect(() => {
+    if (user) {
+      history.push("/dashboard");
+    } else {
+      console.log(error);
+    }
+  }, [user, error, history]);
 
   return (
     <div>
@@ -49,12 +57,12 @@ const LoginForm = ({ setIsLoggedIn}) => {
           </div>
           <div>
             <label>
-              <input 
-                type="checkbox"                 
+              <input
+                type="checkbox"
                 value={remember}
-                onChange={(e) => setRemember(e.target.value)} 
+                onChange={(e) => setRemember(e.target.value)}
               />
-                Remember me
+              Remember me
             </label>
           </div>
           <button type="submit" onClick={handleSubmit}>
