@@ -6,7 +6,7 @@ import { signup } from "../redux/actions/UsersActions";
 class Signup extends Component {
 	state = {
 		username: "",
-		email: "",
+		// email: "",
 		password: "",
 	};
 
@@ -86,7 +86,7 @@ class Signup extends Component {
 								onChange={this.handleChange}
 							/>
 						</div>
-						<div className="rux-form-field">
+						{/* <div className="rux-form-field">
 							<label for="input__text">Email</label>
 							<input
 								id="input__text"
@@ -98,7 +98,7 @@ class Signup extends Component {
 								value={this.state.email}
 								onChange={this.handleChange}
 							/>
-						</div>
+						</div> */}
 						<div className="rux-form-field">
 							<label for="input__text">Password</label>
 							<input

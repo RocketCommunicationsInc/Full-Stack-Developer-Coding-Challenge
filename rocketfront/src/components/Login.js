@@ -8,7 +8,7 @@ class Login extends Component {
 		super(props);
 		this.state = {
 			username: "",
-			email: "",
+			// email: "",
 			password: "",
 			error: "",
 		};
@@ -88,7 +88,7 @@ class Login extends Component {
 								onChange={this.handleChange}
 							/>
 						</div>
-						<div className="rux-form-field">
+						{/* <div className="rux-form-field">
 							<label for="input__text">Email</label>
 							<input
 								id="input__text"
@@ -100,7 +100,7 @@ class Login extends Component {
 								value={this.state.email}
 								onChange={this.handleChange}
 							/>
-						</div>
+						</div> */}
 						<div className="rux-form-field">
 							<label for="input__text">Password</label>
 							<input

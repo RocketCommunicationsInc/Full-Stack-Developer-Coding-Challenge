@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
     # skip_before_action :authorized, [:new, :create]
 
     def create
-        @user = User.find_by(email: session_params[:email])
+        @user = User.find_by(username: session_params[:username])
     
         if @user && @user.authenticate(session_params[:password])
             login!
@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
 
     private
         def session_params
-            params.require(:user).permit(:email, :username, :password, :errors)
+            params.require(:user).permit(:username, :password, :errors)
         end
 
 end

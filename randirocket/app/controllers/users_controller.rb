@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @users_data = User.find_by(email: user_params[:email])
+        @users_data = User.find_by(username: user_params[:username])
         if @users_data
             render_users
         else
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
         # verify params
         def user_params
-            params.require(:user).permit(:id, :email, :username, :password, :errors)
+            params.require(:user).permit(:id, :username, :password, :errors)
         end
 
         # format data before rendering via serializer
