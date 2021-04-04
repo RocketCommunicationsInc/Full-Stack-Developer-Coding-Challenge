@@ -9,14 +9,14 @@ def index():
     return 'Hello, World!'
 
 
-@main.route('/contacts')
+@main.route('/api/contacts')
 @login_required
 def contacts():
     # TODO: return contacts data from database
     return "contacts data route"
 
 
-@main.route('/alerts')
+@main.route('/api/alerts')
 @login_required
 def alerts():
     # TODO: return alerts data from database

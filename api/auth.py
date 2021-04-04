@@ -7,7 +7,7 @@ from . import db
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/login', methods=['POST'])
+@auth.route('/api/login', methods=['POST'])
 def login():
     # gets form input request data
     email = request.form.get('email')
@@ -27,7 +27,7 @@ def login():
     return "log in route"
 
 
-@auth.route('/signup', methods=['POST'])
+@auth.route('/api/signup', methods=['POST'])
 def signup():
     # gets form input request data
     email = request.form.get('email')
@@ -55,7 +55,7 @@ def signup():
     return "sign up route"
 
 
-@auth.route('/logout')
+@auth.route('/api/logout')
 @login_required
 def logout():
     # logs out user
