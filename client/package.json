@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "@astrouxds/rux-accordion": "^4.0.3",
+    "@astrouxds/rux-button": "^5.0.1",
     "@astrouxds/rux-clock": "^5.0.2",
     "@astrouxds/rux-global-status-bar": "^5.0.0",
+    "@astrouxds/rux-modal": "^5.0.0",
     "@astrouxds/rux-status": "^4.0.3",
     "@astrouxds/rux-tabs": "^5.0.1",
     "@testing-library/jest-dom": "^5.11.4",

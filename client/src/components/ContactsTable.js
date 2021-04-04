@@ -1,8 +1,10 @@
 import React from "react";
 import { contactsTestData } from "../contactsTestData";
+/* eslint-disable no-unused-vars */
 import { RuxAccordion } from "@astrouxds/rux-accordion/rux-accordion.js";
 import { RuxStatus } from "@astrouxds/rux-status/rux-status.js";
 import { RuxTabs } from "@astrouxds/rux-tabs/rux-tabs.js";
+/* eslint-enable no-unused-vars */
 
 function ContactsTable() {
   return (
