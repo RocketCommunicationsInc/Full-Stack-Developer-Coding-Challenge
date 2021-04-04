@@ -1,7 +1,8 @@
 from .. import db
+from flask_serialize import FlaskSerializeMixin
 
 
-class Alert(db.Model):
+class Alert(FlaskSerializeMixin, db.Model):
     __tablename__ = 'alert'
     id = db.Column(db.Integer, primary_key=True)
     errorId = db.Column(db.String(200), unique=True)

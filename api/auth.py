@@ -1,8 +1,9 @@
 from flask import Blueprint, request
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from .models.user import User
 from . import db
+
 
 auth = Blueprint('auth', __name__)
 
@@ -23,11 +24,12 @@ def login():
 
     # logs in user
     login_user(user, remember=remember)
-    # TODO: return current user
-    return "log in route"
+    # returns current user
+    user_name = current_user.__getattr__("name")
+    return {"name": user_name}
 
 
-@auth.route('/api/signup', methods=['POST'])
+@ auth.route('/api/signup', methods=['POST'])
 def signup():
     # gets form input request data
     email = request.form.get('email')
@@ -51,14 +53,15 @@ def signup():
 
     # logs in new user
     login_user(new_user)
-    # TODO: return current user
-    return "sign up route"
+
+    user_name = current_user.__getattr__("name")
+    return {"name": user_name}
 
 
-@auth.route('/api/logout')
-@login_required
+@ auth.route('/api/logout')
+@ login_required
 def logout():
     # logs out user
     logout_user()
-    # TODO: return null user
+
     return "logout route"

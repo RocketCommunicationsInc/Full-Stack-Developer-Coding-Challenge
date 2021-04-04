@@ -1,7 +1,12 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
+from .models.contact import Contact
+from .models.alert import Alert
+
 
 main = Blueprint('main', __name__)
+
+# temporary route until front end established
 
 
 @main.route('/')
@@ -12,12 +17,14 @@ def index():
 @main.route('/api/contacts')
 @login_required
 def contacts():
-    # TODO: return contacts data from database
-    return "contacts data route"
+    # returns contacts data from database
+    response = Contact.get_delete_put_post()
+    return response
 
 
 @main.route('/api/alerts')
 @login_required
 def alerts():
-    # TODO: return alerts data from database
-    return "alerts data route"
+    # returns alerts data from database
+    response = Alert.get_delete_put_post()
+    return response

@@ -1,7 +1,8 @@
 from .. import db
+from flask_serialize import FlaskSerializeMixin
 
 
-class Contact(db.Model):
+class Contact(FlaskSerializeMixin, db.Model):
     __tablename__ = 'contact'
     id = db.Column(db.Integer, primary_key=True)
     _id = db.Column(db.String(200), unique=True)
