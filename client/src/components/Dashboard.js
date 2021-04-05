@@ -1,15 +1,19 @@
 import React from "react";
 import AlertsTable from "./AlertsTable";
 import ContactsTable from "./ContactsTable";
-import { useAuth } from "../hooks/useAuthContext";
 
-const Dashboard = ({ user }) => {
-  const auth = useAuth();
+const Dashboard = () => {
   return (
-    <div>
-      <p>{auth.user.name}</p>
-      <AlertsTable />
-      <ContactsTable />
+    <div className="dashboard-wrapper">
+      <div className="table-wrapper">
+        <h2 className="table-title">Alerts</h2>
+        <AlertsTable />
+      </div>
+
+      <div className="table-wrapper">
+        <h2 className="table-title">Contacts</h2>
+        <ContactsTable />
+      </div>
     </div>
   );
 };

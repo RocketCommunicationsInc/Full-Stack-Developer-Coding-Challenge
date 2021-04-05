@@ -21,6 +21,7 @@ function useProvideAuth() {
     await fetch("http://localhost:5000/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      credentials: 'include',
       body: new URLSearchParams(userLoggingIn),
     })
       .then((response) => response.json())
@@ -35,6 +36,7 @@ function useProvideAuth() {
     await fetch("http://localhost:5000/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      credentials: 'include',
       body: new URLSearchParams(newUser),
     })
       .then((response) => response.json())

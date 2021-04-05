@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
 import LoggedOut from "./components/LoggedOut";
+import NavBar from "./components/NavBar";
 import PrivateRoute from "./components/PrivateRoute";
 import {
   BrowserRouter as Router,
@@ -12,11 +13,14 @@ import {
   Redirect,
 } from "react-router-dom";
 
+document.body.classList.add("dark-theme");
+
 function App() {
   return (
     <div>
       <Router>
         <ProvideAuth>
+          <NavBar />
           <Switch>
             <PrivateRoute exact path="/">
               <Redirect to="/dashboard" />

@@ -1,0 +1,38 @@
+th span {
+  position: relative;
+  left: 10px;
+  top: 2px;
+  cursor: pointer;
+}
+
+th span svg path {
+  fill: white;
+}
+
+.table-title {
+  margin-left: 20px;
+  padding-top: 10px;
+}
+
+.dashboard-wrapper {
+  margin: 0px auto;
+  width: 95%;
+}
+
+.table-wrapper {
+  height: 40vh;
+  overflow: scroll;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.stats-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.auth-button {
+  margin-left: 20px;
+}

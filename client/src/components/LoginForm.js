@@ -28,48 +28,55 @@ const LoginForm = ({ setIsLoggedIn }) => {
   }, [user, error, history]);
 
   return (
-    <div>
-      <h3>Login</h3>
-      <div>
-        <form>
-          <div>
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-          </div>
+    <div className="rux-card">
+      <h3 className="rux-card__header">Login</h3>
+      {error ? (
+        <div
+          className="rux-form-field__validation-message"
+          style={{ display: "block", position: "inherit" }}
+        >
+          {error.message}
+        </div>
+      ) : null}
+      <form className="rux-form-element">
+        <div className="rux-card__content">
+          <label className="rux-form-field_label">Email</label>
+          <input
+            className="rux-form-field"
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-          <div>
-            <div>
-              <input
-                type="password"
-                name="password"
-                placeholder="Your Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                value={remember}
-                onChange={(e) => setRemember(e.target.value)}
-              />
-              Remember me
-            </label>
-          </div>
-          <button type="submit" onClick={handleSubmit}>
+        <div className="rux-card__content">
+          <label className="rux-form-field__label">Password</label>
+          <input
+            className="rux-form-field"
+            type="password"
+            name="password"
+            placeholder="Your Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="rux-card__content">
+          <label className="rux-form-field__label"> Remember me</label>
+          <input
+            className="rux-checkbox"
+            type="checkbox"
+            value={remember}
+            onChange={(e) => setRemember(e.target.value)}
+          />
+        </div>
+        <div className="rux-card__content">
+          <button className="rux-button" type="submit" onClick={handleSubmit}>
             Login
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };

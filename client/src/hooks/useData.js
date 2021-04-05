@@ -4,19 +4,19 @@ export function useData() {
   const [data, setData] = useState(null);
 
   const getAlertsData = () => {
-    fetch("http://localhost:5000/api/alerts")
+    fetch("http://localhost:5000/api/alerts", {
+      credentials: "include",
+    })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setData(data);
       });
   };
 
   const getContactsData = () => {
-    fetch("http://localhost:5000/api/contacts")
+    fetch("http://localhost:5000/api/contacts", { credentials: "include" })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setData(data);
       });
   };

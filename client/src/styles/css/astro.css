@@ -1888,6 +1888,7 @@ label {
 .rux-form-element {
   display: flex;
   align-items: baseline;
+  flex-direction: column;
 }
 
 .rux-form-element label {
@@ -1932,7 +1933,8 @@ label {
   font-family: var(--fontFamily);
   font-size: 1rem;
   font-size: var(--fontSize);
-  color: var(--fontColor);
+  /* TODO: should not include because it overwrites dark theme and makes text invisible */
+  /* color: var(--fontColor); */
 }
 
 .rux-form-field input:required + label::after {

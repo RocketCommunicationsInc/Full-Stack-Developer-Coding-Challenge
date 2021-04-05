@@ -27,49 +27,50 @@ const SignUpForm = () => {
   }, [user, error, history]);
 
   return (
-    <div>
-      <h3>Sign Up</h3>
-      <div>
-        <form>
-          <div>
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-          </div>
+    <div className="rux-card">
+      <h3 className="rux-card__header">Sign Up</h3>
+      <form className="rux-form-element">
+        <div className="rux-card__content">
+          <label className="rux-form-field_label">Email</label>
+          <input
+            className="rux-form-field"
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-          <div>
-            <div>
-              <input
-                type="password"
-                name="password"
-                placeholder="Your Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-          <div>
-            <div>
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-          </div>
-          <button type="submit" onClick={handleSubmit}>
+        <div className="rux-card__content">
+          <label className="rux-form-field_label">Password</label>
+          <input
+            className="rux-form-field"
+            type="password"
+            name="password"
+            placeholder="Your Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <div className="rux-card__content">
+          <label className="rux-form-field_label">Name</label>
+          <input
+            className="rux-form-field"
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="rux-card__content">
+          <button rux-button type="submit" onClick={handleSubmit}>
             Login
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
