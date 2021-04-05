@@ -9,7 +9,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return "api home route"
 
 
 @main.errorhandler(404)
