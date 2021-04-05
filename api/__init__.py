@@ -8,7 +8,7 @@ import os
 db = SQLAlchemy()
 migrate = Migrate()
 
-ENV = 'dev'
+ENV = 'prod'
 
 
 def create_app():
