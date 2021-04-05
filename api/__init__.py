@@ -6,6 +6,7 @@ from flask_cors import CORS
 import os
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 ENV = 'prod'
 
@@ -23,35 +24,33 @@ def create_app():
             "DEV_DATABASE_URL")
     if ENV == 'prod':
         app.debug = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-            "PROD_DATABASE_URL")
+        app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://nqtvkupxwempgm:b60df2651ca3e636ed1607e4a0e9ce37ecd05d7da70b938255b33f4952fbb7c3@ec2-18-206-20-102.compute-1.amazonaws.com:5432/d7jdta9k0o0vec"
 
     db.init_app(app)
-
-    migrate = Migrate(app, db)
+    migrate.init_app(app, db)
 
     login_manager = LoginManager()
 
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    from .models.user import User
-    from .models.alert import Alert
-    from .models.contact import Contact
+    from models.user import User
+    from models.alert import Alert
+    from models.contact import Contact
 
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    from .auth import auth as auth_blueprint
+    from auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    from .main import main as main_blueprint
+    from main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     return app
 
 
 if __name__ == '__main__':
-    create_app()
-    manager.run()
+    app = create_app()
+    app.run()

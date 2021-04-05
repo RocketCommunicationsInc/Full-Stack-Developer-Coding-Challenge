@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
-from .models.user import User
-from . import db
+from models.user import User
+from __init__ import db
 import json
 
 
