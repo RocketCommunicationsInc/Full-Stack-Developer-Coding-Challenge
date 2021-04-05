@@ -21,12 +21,17 @@ function useProvideAuth() {
     await fetch("http://localhost:5000/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      credentials: 'include',
+      credentials: "include",
       body: new URLSearchParams(userLoggingIn),
     })
       .then((response) => response.json())
       .then((data) => {
-        setUser(data);
+        if (data.user) {
+          setUser(data);
+        }
+        if (data.error) {
+          setError(data);
+        }
       })
       .catch((error) => setError(error));
   };
@@ -36,13 +41,17 @@ function useProvideAuth() {
     await fetch("http://localhost:5000/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      credentials: 'include',
+      credentials: "include",
       body: new URLSearchParams(newUser),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setUser(data);
+        if (data.user) {
+          setUser(data);
+        }
+        if (data.error) {
+          setError(data);
+        }
       })
       .catch((error) => setError(error));
   };

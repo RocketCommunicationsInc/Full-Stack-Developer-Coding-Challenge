@@ -29,6 +29,14 @@ const SignUpForm = () => {
   return (
     <div className="rux-card">
       <h3 className="rux-card__header">Sign Up</h3>
+      {error ? (
+        <div
+          className="rux-form-field__validation-message"
+          style={{ display: "block", position: "inherit" }}
+        >
+          {error}
+        </div>
+      ) : null}
       <form className="rux-form-element">
         <div className="rux-card__content">
           <label className="rux-form-field_label">Email</label>
