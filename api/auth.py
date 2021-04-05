@@ -29,8 +29,7 @@ def login():
 
     user_name = current_user.__getattr__("name")
     response = jsonify({'name': user_name})
-    # response.headers.add('Access-Control-Allow-Orgin', '*')
-    # Set-Cookie: promo_shown=1; SameSite=Lax
+    response.headers.add('Access-Control-Allow-Orgin', '*')
     return response
 
 

@@ -17,8 +17,9 @@ def create_app():
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get(
         "SQLALCHEMY_TRACK_MODIFICATIONS")
-    app.config['REMEMBER_COOKIE_SECURE'] = 'Secure'
-    app.config['SESSION_COOKIE_SECURE'] = True
+    # Uncomment config lines below if brower giving SameSite Cookie warning
+    # app.config['REMEMBER_COOKIE_SECURE'] = 'Secure'
+    # app.config['SESSION_COOKIE_SECURE'] = True
 
     if ENV == 'dev':
         app.secret_key = os.urandom(24)
