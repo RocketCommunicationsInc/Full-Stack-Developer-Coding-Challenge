@@ -37,9 +37,9 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    from .models.user import User
-    from .models.alert import Alert
-    from .models.contact import Contact
+    from models.user import User
+    from models.alert import Alert
+    from models.contact import Contact
 
     @login_manager.user_loader
     def load_user(user_id):
