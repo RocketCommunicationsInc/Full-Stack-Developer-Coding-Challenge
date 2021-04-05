@@ -9,12 +9,12 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return "Home route of Rocket Comms Challenge API, please use client to make requests"
 
 
 @main.errorhandler(404)
 def not_found(e):
-    return app.send_static_file('index.html')
+    return "route not found"
 
 
 @main.route('/api/contacts')
