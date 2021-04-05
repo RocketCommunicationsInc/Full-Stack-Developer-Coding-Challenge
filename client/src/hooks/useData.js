@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-const ENV = "dev";
+const ENV = "prod";
+
 let apiEndpoint = "http://localhost:5000";
 
 if (ENV === "prod") {

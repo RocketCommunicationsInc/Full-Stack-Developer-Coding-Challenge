@@ -13,7 +13,8 @@ export const useAuth = () => {
 };
 
 // sets api endpoint TODO: change to true environement variable
-const ENV = "dev";
+const ENV = "prod";
+
 let apiEndpoint = "http://localhost:5000";
 
 if (ENV === "prod") {
