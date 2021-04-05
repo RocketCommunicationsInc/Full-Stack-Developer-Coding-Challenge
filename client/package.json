@@ -26,10 +26,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build",
     "publishToHeroku": "cd ../ && git subtree push --prefix=client heroku-rocket-comms-challenge-client main || true"
@@ -53,6 +52,4 @@
     ]
   },
   "proxy": "http://localhost:5000",
-  "type": "module",
-  "homepage": "https://rocket-comms-challenge-client.herokuapp.com/"
 }
