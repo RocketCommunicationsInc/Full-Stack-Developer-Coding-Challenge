@@ -12,7 +12,6 @@
     "@astrouxds/rux-status": "^4.0.3",
     "@astrouxds/rux-tabs": "^5.0.1",
     "@astrouxds/rux-utils": "^4.0.3",
-    "@babel/preset-env": "^7.13.12",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -22,7 +21,6 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "serve": "^11.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -49,6 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:5000"
+  }
 }
