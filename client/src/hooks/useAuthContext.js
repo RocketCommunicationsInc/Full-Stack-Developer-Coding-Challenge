@@ -12,13 +12,20 @@ export const useAuth = () => {
   return useContext(authContext);
 };
 
+const ENV = "prod";
+let apiEndpoint = "http://localhost:5000/";
+
+if (ENV === "prod") {
+  apiEndpoint = "https://rocket-comms-challenge-api.herokuapp.com";
+}
+
 function useProvideAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
   const login = async (email, password, remember) => {
     const userLoggingIn = { email, password, remember };
-    await fetch("http://localhost:5000/api/login", {
+    await fetch(`${apiEndpoint}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       credentials: "include",
@@ -38,7 +45,7 @@ function useProvideAuth() {
 
   const signup = async (email, name, password) => {
     const newUser = { email, name, password };
-    await fetch("http://localhost:5000/api/signup", {
+    await fetch(`${apiEndpoint}/api/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       credentials: "include",
@@ -57,7 +64,7 @@ function useProvideAuth() {
   };
 
   const logout = async () => {
-    await fetch("http://localhost:5000/api/logout")
+    await fetch(`${apiEndpoint}/api/logout`)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => setError(error));
