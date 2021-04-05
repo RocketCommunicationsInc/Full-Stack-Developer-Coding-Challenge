@@ -24,11 +24,12 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postinstall": "npm run build",
+    "heroku-postbuild": "npm run build",
     "publishToHeroku": "cd ../ && git subtree push --prefix=client heroku-rocket-comms-challenge-client main || true"
   },
   "eslintConfig": {
