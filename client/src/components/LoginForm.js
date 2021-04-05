@@ -35,7 +35,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
           className="rux-form-field__validation-message"
           style={{ display: "block", position: "inherit" }}
         >
-          {error}
+          {error.error}
         </div>
       ) : null}
       <form className="rux-form-element">

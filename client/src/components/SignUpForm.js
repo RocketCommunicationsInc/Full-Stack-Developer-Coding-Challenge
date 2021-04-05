@@ -34,7 +34,7 @@ const SignUpForm = () => {
           className="rux-form-field__validation-message"
           style={{ display: "block", position: "inherit" }}
         >
-          {error}
+          {error.error}
         </div>
       ) : null}
       <form className="rux-form-element">
@@ -74,8 +74,8 @@ const SignUpForm = () => {
           />
         </div>
         <div className="rux-card__content">
-          <button rux-button type="submit" onClick={handleSubmit}>
-            Login
+          <button className="rux-button" type="submit" onClick={handleSubmit}>
+            Register
           </button>
         </div>
       </form>

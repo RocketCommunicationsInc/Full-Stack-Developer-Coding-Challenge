@@ -21,7 +21,7 @@ def login():
     # if user does not exist or if password is wrong, return error message
     if not user or not check_password_hash(user.password, password):
         # returns error message for wrong email or password
-        return json.dumps({"error": "wrong password or email, please try again"})
+        return json.dumps({"error": "Wrong password or email, please try again"})
 
     # logs in user
     login_user(user, remember=remember)
@@ -37,12 +37,17 @@ def signup():
     name = request.form.get('name')
     password = request.form.get('password')
 
+    # if user or email, name or password was not provided, return error message
+    if not email or not name or not password:
+        # returns error message for wrong email or password
+        return json.dumps({"error": "Please provide an email, password and name"})
+
     # checks if user exists in database
     user = User.query.filter_by(email=email).first()
     # if user exists then return error message
     if user:
         # returns error message for email already existing
-        return json.dumps({"error": "email already registered in data base"})
+        return json.dumps({"error": "Email already registered in data base"})
 
     # creates new user object from request data
     new_user = User(email=email, name=name,
