@@ -1,4 +1,4 @@
-from .. import db
+from api import db
 from flask_serialize import FlaskSerializeMixin
 
 

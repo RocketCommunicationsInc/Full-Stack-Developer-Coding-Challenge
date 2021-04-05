@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from .models.contact import Contact
-from .models.alert import Alert
+from api.models.contact import Contact
+from api.models.alert import Alert
 
 
 main = Blueprint('main', __name__)
