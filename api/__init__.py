@@ -15,7 +15,7 @@ def create_app():
     app = Flask(__name__, static_folder='./build', static_url_path='/')
     CORS(app, supports_credentials=True)
 
-    app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+    app.secret_key = os.urandom(24)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get(
         "SQLALCHEMY_TRACK_MODIFICATIONS")
 
