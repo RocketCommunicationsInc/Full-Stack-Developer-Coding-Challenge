@@ -1,8 +1,8 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
-from models.user import User
-from __init__ import db
+from .models.user import User
+from . import db
 import json
 
 
@@ -18,6 +18,7 @@ def login():
 
     # checks if user exists in database
     user = User.query.filter_by(email=email).first()
+
     # if user does not exist or if password is wrong, return error message
     if not user or not check_password_hash(user.password, password):
         # returns error message for wrong email or password
@@ -26,8 +27,12 @@ def login():
     # logs in user
     login_user(user, remember=remember)
     # returns current user
+
     user_name = current_user.__getattr__("name")
-    return json.dumps({"name": user_name})
+    response = jsonify({'name': user_name})
+    # response.headers.add('Access-Control-Allow-Orgin', '*')
+    # Set-Cookie: promo_shown=1; SameSite=Lax
+    return response
 
 
 @ auth.route('/api/signup', methods=['POST'])
@@ -61,7 +66,9 @@ def signup():
     login_user(new_user)
 
     user_name = current_user.__getattr__("name")
-    return json.dumps({"name": user_name})
+    response = jsonify({'name': user_name})
+    response.headers.add('Access-Control-Allow-Orgin', '*')
+    return response
 
 
 @ auth.route('/api/logout')

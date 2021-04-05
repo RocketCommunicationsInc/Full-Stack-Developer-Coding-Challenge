@@ -25,6 +25,7 @@ function ContactsTable() {
   useEffect(() => {
     getData();
     setDisplayedData(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getDataStats = (data) => {
@@ -47,6 +48,7 @@ function ContactsTable() {
       setDisplayedData(sortedData);
       getDataStats(data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortCategory, data]);
 
   return (

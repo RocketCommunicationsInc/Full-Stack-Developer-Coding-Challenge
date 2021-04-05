@@ -7,8 +7,7 @@ import { RuxClock } from "@astrouxds/rux-clock/rux-clock.js";
 /* eslint-enable no-unused-vars */
 
 function NavBar() {
-  const auth = useAuth();
-  const name = auth.user?.name;
+  const { user } = useAuth();
 
   return (
     <div>
@@ -17,7 +16,7 @@ function NavBar() {
         appname="Sample GRM Dashboard"
         version="3.0"
       >
-        {name ? <h3>{`Welcome ${name}`}</h3> : null}
+        {user ? <h3>{`Welcome ${user.name}`}</h3> : null}
         <rux-clock></rux-clock>
         <AuthButtons />
       </rux-global-status-bar>

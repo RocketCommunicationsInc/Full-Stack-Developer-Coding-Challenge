@@ -5,10 +5,11 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 import os
 
+
 db = SQLAlchemy()
 migrate = Migrate()
 
-ENV = 'prod'
+ENV = 'dev'
 
 
 def create_app():
@@ -17,8 +18,11 @@ def create_app():
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get(
         "SQLALCHEMY_TRACK_MODIFICATIONS")
+    app.config['REMEMBER_COOKIE_SECURE'] = 'Secure'
+    app.config['SESSION_COOKIE_SECURE'] = True
 
     if ENV == 'dev':
+        app.secret_key = os.urandom(24)
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
             "DEV_DATABASE_URL")
     if ENV == 'prod':
@@ -34,18 +38,18 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    from models.user import User
-    from models.alert import Alert
-    from models.contact import Contact
+    from .models.user import User
+    from .models.alert import Alert
+    from .models.contact import Contact
 
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    from auth import auth as auth_blueprint
+    from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    from main import main as main_blueprint
+    from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     return app

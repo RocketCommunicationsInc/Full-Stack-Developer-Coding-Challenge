@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const ENV = "prod";
-let apiEndpoint = "http://localhost:5000/";
+const ENV = "dev";
+let apiEndpoint = "http://localhost:5000";
 
 if (ENV === "prod") {
   apiEndpoint = "https://rocket-comms-challenge-api.herokuapp.com";

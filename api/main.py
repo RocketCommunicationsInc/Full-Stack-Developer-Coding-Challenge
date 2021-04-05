@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from models.contact import Contact
-from models.alert import Alert
+from .models.contact import Contact
+from .models.alert import Alert
 
 
 main = Blueprint('main', __name__)
@@ -22,6 +22,7 @@ def not_found(e):
 def contacts():
     # returns contacts data from database
     response = Contact.get_delete_put_post()
+    response.headers.add('Access-Control-Allow-Orgin', '*')
     return response
 
 
@@ -30,4 +31,5 @@ def contacts():
 def alerts():
     # returns alerts data from database
     response = Alert.get_delete_put_post()
+    response.headers.add('Access-Control-Allow-Orgin', '*')
     return response

@@ -16,16 +16,13 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
   const submit = async () => {
     await login(email, password, remember);
-    console.log(user);
   };
 
   useEffect(() => {
     if (user) {
       history.push("/dashboard");
-    } else {
-      console.log(error);
     }
-  }, [user, error, history]);
+  }, [user, history]);
 
   return (
     <div className="rux-card">

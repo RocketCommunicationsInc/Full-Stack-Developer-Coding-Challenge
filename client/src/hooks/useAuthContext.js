@@ -13,8 +13,8 @@ export const useAuth = () => {
 };
 
 // sets api endpoint TODO: change to true environement variable
-const ENV = "prod";
-let apiEndpoint = "http://localhost:5000/";
+const ENV = "dev";
+let apiEndpoint = "http://localhost:5000";
 
 if (ENV === "prod") {
   apiEndpoint = "https://rocket-comms-challenge-api.herokuapp.com";
@@ -28,20 +28,21 @@ function useProvideAuth() {
     const userLoggingIn = { email, password, remember };
     await fetch(`${apiEndpoint}/api/login`, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
       credentials: "include",
       body: new URLSearchParams(userLoggingIn),
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.user) {
-          setUser(data);
-        }
-        if (data.error) {
-          setError(data);
-        }
+        data.name && setUser(data);
+        data.error && setError(data);
       })
-      .catch((error) => setError(error));
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
   };
 
   const signup = async (email, name, password) => {
@@ -54,14 +55,13 @@ function useProvideAuth() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.user) {
-          setUser(data);
-        }
-        if (data.error) {
-          setError(data);
-        }
+        data.name && setUser(data);
+        data.error && setError(data);
       })
-      .catch((error) => setError(error));
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
   };
 
   const logout = async () => {
