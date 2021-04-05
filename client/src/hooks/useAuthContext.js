@@ -41,8 +41,8 @@ function useProvideAuth() {
         data.error && setError(data);
       })
       .catch((error) => {
-        console.log(error);
-        setError(error);
+        error && console.log(error);
+        error && setError(error);
       });
   };
 
@@ -60,8 +60,8 @@ function useProvideAuth() {
         data.error && setError(data);
       })
       .catch((error) => {
-        console.log(error);
-        setError(error);
+        error && console.log(error);
+        error && setError(error);
       });
   };
 
