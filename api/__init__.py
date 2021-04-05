@@ -7,15 +7,24 @@ import os
 
 db = SQLAlchemy()
 
+ENV = 'prod'
+
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='./build', static_url_path='/')
     CORS(app, supports_credentials=True)
 
     app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get(
         "SQLALCHEMY_TRACK_MODIFICATIONS")
+
+    if ENV == 'dev':
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+            "DEV_DATABASE_URL")
+    if ENV == 'prod':
+        app.debug = False
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+            "PROD_DATABASE_URL")
 
     db.init_app(app)
 
@@ -45,4 +54,5 @@ def create_app():
 
 if __name__ == '__main__':
     create_app()
+    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
     manager.run()
