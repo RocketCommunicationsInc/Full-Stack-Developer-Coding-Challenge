@@ -27,3 +27,5 @@ Formating of table data for more relavence and readabilty
 Implement Remember Me functionality
 Styling of tables and forms needs more work
 Writting of unit tests
+Write documentation for the use of the api using templates returned by python
+Incorporate Sign Up form and Log In form to same route
