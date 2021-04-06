@@ -1,5 +1,7 @@
 For whatever reason I had a harder time importing the Astro components, so the design is a bit lacking. Thanks for the opportunity.
 
+Data may take a few seconds to load because of heroku.
+
 Website is deployed at https://grm-front.herokuapp.com/
 
 Back-end is deployed at https://grm-back.herokuapp.com/contacts
@@ -7,6 +9,8 @@ Back-end is deployed at https://grm-back.herokuapp.com/contacts
 Front-end is here - https://github.com/bphillips95/GRM-front
 
 Back-end is here https://github.com/bphillips95/GRM-back
+
+UPDATE: I know it's a couple days later, so I didn't change anything, but for whatever reason relative import doesn't work for the astro files, absolute import did, also there is some importing errors in the file itself. For future reference, all the best, Thanks.
 
 
 # Full-Stack-Developer-Coding-Challenge
