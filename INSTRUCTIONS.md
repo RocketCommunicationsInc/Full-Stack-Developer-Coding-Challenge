@@ -22,6 +22,7 @@ Run the following terminal commands
 ### Client
 
 http://localhose:3000
+
 Make the following code changes
 
 - change EVN declarations in useAuthContext.js and useData.js to 'dev'
