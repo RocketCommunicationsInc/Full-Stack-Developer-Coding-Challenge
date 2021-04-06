@@ -28,7 +28,7 @@ def create_app():
     if ENV == 'prod':
         app.debug = False
         app.secret_key = os.urandom(24)
-        app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://zlhvevdtrsflbl:8baef261e3ebb0882a58755dec7aeadb821430781391f36c0d05cba08b80ae89@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d7j3mhl4rgivco"
+        app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://zlhvevdtrsflbl:8baef261e3ebb0882a58755dec7aeadb821430781391f36c0d05cba08b80ae89@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d7j3mhl4rgivco"
 
     db.init_app(app)
     migrate.init_app(app, db)
