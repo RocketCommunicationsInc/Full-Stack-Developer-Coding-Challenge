@@ -9,11 +9,14 @@ const Contacts = (props) => {
   //   const [gridColumnApi, setGridColumnApi] = useState(null);
   //   const [contactLength, setContactLength] = useState(0);
 
+
+  //* Getting the total unique contact states
   let contact_states = [];
 
   props.contacts.map((el) => {
     contact_states.push(el.contactState);
   });
+  //* Define an obj, loop through contact_states and then add unique contact states to obj.
   let my_obj = {};
   for (let i = 0; i < contact_states.length; i++) {
     if (my_obj[contact_states[i]]) {
@@ -22,6 +25,7 @@ const Contacts = (props) => {
       my_obj[contact_states[i]] = 1;
     }
   }
+  //Total unique states.
   let size = Object.keys(my_obj).length;
 
   let contact_columns = [
