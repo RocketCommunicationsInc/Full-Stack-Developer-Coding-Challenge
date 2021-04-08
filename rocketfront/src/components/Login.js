@@ -53,7 +53,7 @@ class Login extends Component {
 	};
 
 	render() {
-		if (this.props.errors.length !== 0) {
+		if (this.props.errors && this.props.errors.length !== 0) {
 			return (
 				<div>
 					<p>Errors:</p>
