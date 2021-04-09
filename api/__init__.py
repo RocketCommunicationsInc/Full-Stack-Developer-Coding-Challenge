@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -45,13 +45,6 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
-
-    # FROM: https://stackoverflow.com/questions/45742972/forcing-use-of-https-with-flasks-before-request
-    @app.before_request
-    def force_https():
-        if request.endpoint in app.view_functions and not request.is_secure:
-            print("force_https running")
-            return redirect(request.url.replace('http://', 'https://'))
 
     from auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
