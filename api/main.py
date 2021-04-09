@@ -17,7 +17,7 @@ def not_found(e):
     return "route not found"
 
 
-@main.route('/api/contacts')
+@main.route('/api/contacts', methods=['GET'])
 @login_required
 def contacts():
     # returns contacts data from database
@@ -26,7 +26,7 @@ def contacts():
     return response
 
 
-@main.route('/api/alerts')
+@main.route('/api/alerts', methods=['GET'])
 @login_required
 def alerts():
     # returns alerts data from database

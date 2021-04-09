@@ -69,7 +69,7 @@ def signup():
     return response
 
 
-@ auth.route('/api/logout')
+@ auth.route('/api/logout', methods=['GET'])
 @ login_required
 def logout():
     # logs out user
