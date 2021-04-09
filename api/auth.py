@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, redirect, current_app as app
+from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from models.user import User
@@ -6,15 +6,6 @@ from __init__ import db
 import json
 
 auth = Blueprint('auth', __name__)
-
-# FROM: https://stackoverflow.com/questions/45742972/forcing-use-of-https-with-flasks-before-request
-
-
-@app.before_request
-def force_https():
-    if request.endpoint in app.view_functions and not request.is_secure:
-        print("force_https running")
-        return redirect(request.url.replace('http://', 'https://'))
 
 
 @auth.route('/api/login', methods=['POST'])
