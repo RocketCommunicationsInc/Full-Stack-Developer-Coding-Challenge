@@ -14,8 +14,6 @@ ENV = 'prod'
 
 def create_app():
     app = Flask(__name__, static_folder='./build', static_url_path='/')
-    sslify = SSLify(app)
-    CORS(app, supports_credentials=True)
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get(
         "SQLALCHEMY_TRACK_MODIFICATIONS")
@@ -27,10 +25,12 @@ def create_app():
         app.secret_key = os.urandom(24)
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
             "DEV_DATABASE_URL")
+        CORS(app, supports_credentials=True)
     if ENV == 'prod':
         app.debug = False
         app.secret_key = os.urandom(24)
         app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://zlhvevdtrsflbl:8baef261e3ebb0882a58755dec7aeadb821430781391f36c0d05cba08b80ae89@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d7j3mhl4rgivco"
+        sslify = SSLify(app)
 
     db.init_app(app)
     migrate.init_app(app, db)
