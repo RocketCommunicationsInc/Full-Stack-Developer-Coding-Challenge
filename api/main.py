@@ -1,18 +1,10 @@
-from flask import Blueprint, jsonify, current_app as app
+from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
 from models.contact import Contact
 from models.alert import Alert
 
 
 main = Blueprint('main', __name__)
-
-
-@app.before_request
-def before_request():
-    if request.url.startswith('http://'):
-        url = request.url.replace('http://', 'https://', 1)
-
-        return redirect(url)
 
 
 @main.route('/')
