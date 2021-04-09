@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// sets api endpoint TODO: change to true environement variable
 const ENV = "prod";
 
 let apiEndpoint = "http://localhost:5000";
