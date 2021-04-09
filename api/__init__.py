@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_cors import CORS
+from flask_sslify import SSLify
 import os
 
 db = SQLAlchemy()
@@ -14,6 +15,7 @@ ENV = 'prod'
 def create_app():
     app = Flask(__name__, static_folder='./build', static_url_path='/')
     CORS(app, supports_credentials=True)
+    sslify = SSLify(app)
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get(
         "SQLALCHEMY_TRACK_MODIFICATIONS")
