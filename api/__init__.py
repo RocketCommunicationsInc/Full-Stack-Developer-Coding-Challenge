@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_cors import CORS
+from flask_talisman import Talisman
 import os
 
 db = SQLAlchemy()
@@ -13,13 +14,13 @@ ENV = 'prod'
 
 def create_app():
     app = Flask(__name__, static_folder='./build', static_url_path='/')
+    Talisman(app)
     CORS(app, supports_credentials=True)
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get(
         "SQLALCHEMY_TRACK_MODIFICATIONS")
     # Uncomment config lines below if brower giving SameSite Cookie warning
     app.config['REMEMBER_COOKIE_SECURE'] = 'Secure'
-    app.config['SESSION_COOKIE_SECURE'] = True
 
     if ENV == 'dev':
         app.secret_key = os.urandom(24)
