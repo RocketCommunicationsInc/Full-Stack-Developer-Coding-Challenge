@@ -57,12 +57,6 @@ def create_app():
     return app
 
 
-csp = {
-    'default-src': '\'self\''
-}
-
-
 if __name__ == '__main__':
     app = create_app()
-    Talisman(app, content_security_policy=csp)
     app.run()
