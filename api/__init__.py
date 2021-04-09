@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_cors import CORS
+from flask_talisman import Talisman
 import os
 
 db = SQLAlchemy()
@@ -56,6 +57,12 @@ def create_app():
     return app
 
 
+csp = {
+    'default-src': '\'self\''
+}
+
+
 if __name__ == '__main__':
     app = create_app()
+    Talisman(app, content_security_policy=csp)
     app.run()
