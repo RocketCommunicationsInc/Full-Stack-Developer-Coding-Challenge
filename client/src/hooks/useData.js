@@ -10,6 +10,7 @@ if (ENV === "prod") {
 
 export function useData() {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   const getAlertsData = () => {
     fetch(`${apiEndpoint}/api/alerts`, {
@@ -18,6 +19,10 @@ export function useData() {
       .then((response) => response.json())
       .then((data) => {
         setData(data);
+      })
+      .catch((error) => {
+        error && console.log(error);
+        error && setError(error);
       });
   };
 
@@ -26,7 +31,11 @@ export function useData() {
       .then((response) => response.json())
       .then((data) => {
         setData(data);
+      })
+      .catch((error) => {
+        error && console.log(error);
+        error && setError(error);
       });
   };
-  return { data, getAlertsData, getContactsData };
+  return { data, error, getAlertsData, getContactsData };
 }
