@@ -15,7 +15,7 @@ ENV = 'prod'
 def create_app():
     app = Flask(__name__, static_folder='./build', static_url_path='/')
     Talisman(app)
-    CORS(app, supports_credentials=True)
+    # CORS(app, supports_credentials=True)
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get(
         "SQLALCHEMY_TRACK_MODIFICATIONS")
