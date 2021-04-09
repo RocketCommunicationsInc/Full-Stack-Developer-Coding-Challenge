@@ -50,6 +50,7 @@ def create_app():
     @app.before_request
     def force_https():
         if request.endpoint in app.view_functions and not request.is_secure:
+            print("force_https running")
             return redirect(request.url.replace('http://', 'https://'))
 
     from auth import auth as auth_blueprint
