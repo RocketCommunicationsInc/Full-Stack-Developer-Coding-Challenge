@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_cors import CORS
-from flask_talisman import Talisman
 import os
 
 db = SQLAlchemy()
@@ -26,7 +25,6 @@ def create_app():
         app.secret_key = os.urandom(24)
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
             "DEV_DATABASE_URL")
-
     if ENV == 'prod':
         app.debug = False
         app.secret_key = os.urandom(24)
