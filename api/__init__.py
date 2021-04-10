@@ -55,6 +55,18 @@ def create_app():
     return app
 
 
+class ForceHttpsRedirects:
+    def __init__(self, app):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        environ["wsgi.url_scheme"] = "https"
+        return self.app(environ, start_response)
+
+
 if __name__ == '__main__':
     app = create_app()
+    # Add middleware to force all redirects to https
+    # https: // stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http
+    app.wsgi_app = ForceHttpsRedirects(app.wsgi_app)
     app.run()
