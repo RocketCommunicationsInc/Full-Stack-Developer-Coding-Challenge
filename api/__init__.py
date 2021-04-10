@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_cors import CORS
-from flask_sslify import SSLify
 import os
 
 db = SQLAlchemy()
@@ -53,10 +52,6 @@ def create_app():
 
     from main import main as main_blueprint
     app.register_blueprint(main_blueprint)
-
-    if 'DYNO' in os.environ:  # only trigger SSLify if the app is running on Heroku
-        print("sslify running")
-        app = SSLify(app)
 
     return app
 
