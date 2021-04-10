@@ -22,9 +22,11 @@ function App() {
         <ProvideAuth>
           <NavBar />
           <Switch>
-            <PrivateRoute exact path="/">
-              <Redirect to="/dashboard" />
-            </PrivateRoute>
+            <PrivateRoute
+              exact
+              path="/"
+              component={() => <Redirect to="/dashboard" />}
+            />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <Route path="/signup" component={SignUpForm} />
             <Route path="/login" component={LoginForm} />
