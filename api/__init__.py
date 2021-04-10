@@ -1,8 +1,10 @@
+from flask_sslify import SSLify
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_cors import CORS
+from flask_sslify import SSLify
 import os
 
 db = SQLAlchemy()
@@ -52,21 +54,12 @@ def create_app():
     from main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    if 'DYNO' in os.environ:  # only trigger SSLify if the app is running on Heroku
+        app = SSLify(app)
+
     return app
-
-
-class ForceHttpsRedirects:
-    def __init__(self, app):
-        self.app = app
-
-    def __call__(self, environ, start_response):
-        environ["wsgi.url_scheme"] = "https"
-        return self.app(environ, start_response)
 
 
 if __name__ == '__main__':
     app = create_app()
-    # Add middleware to force all redirects to https
-    # https: // stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http
-    app.wsgi_app = ForceHttpsRedirects(app.wsgi_app)
     app.run()
