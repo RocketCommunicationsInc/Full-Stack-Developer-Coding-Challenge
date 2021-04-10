@@ -55,6 +55,7 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     if 'DYNO' in os.environ:  # only trigger SSLify if the app is running on Heroku
+        print("sslify running")
         app = SSLify(app)
 
     return app
