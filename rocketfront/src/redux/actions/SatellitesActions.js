@@ -1,6 +1,6 @@
 const URL =
 	process.env.NODE_ENV === "production"
-		? "https://randirocket.herokuapp.com/"
+		? "https://lit-springs-86031.herokuapp.com/"
 		: "http://localhost:3001/";
 
 export const getSatellites = () => {
