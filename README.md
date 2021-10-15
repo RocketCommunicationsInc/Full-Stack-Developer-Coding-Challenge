@@ -45,13 +45,13 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 ## Additional Information
 * You are free to use any third-party libraries.
 * Have fun and be as creative as you like!
-* Please feel free to reach out to ask any questions (chris.kerbo@rocketcom.com).
+* Please feel free to reach out to ask any questions (duncan@rocketcom).
 
 ## How to submit this challenge:
 1. Fork this repository
 2. Work on your solution
 3. Deploy the frontend and backend of your application using free services (Netlify, Heroku, etc).
-4. Create a pull request with @github/cskerbo as the reviewer.
+4. Create a pull request with @github/markacianfrani as the reviewer.
 
 ## Timeframe
 
