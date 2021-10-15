@@ -10,9 +10,9 @@ The result should be a dashboard with two pages (the application can be single-p
 * A registration/login page
 * A main page that displays contact and alert information in a clean, user-friendly format
 
-Because this position requires familiarity with web components, we would like you to refer to our Astro UX Design site (https://astrouxds.com/) for this project. You may work with the web components directly, or build your own. We also encourage you to utilize our CSS-only library to better match Astro styling.
+Because this position requires familiarity with web components, we would like you to use a web component library either of your own choice or Astro’s own web component library (https://github.com/RocketCommunicationsInc/astro/blob/main/packages/web-components/README.md). We recommend reviewing the Astro UX Design site (https://astrouxds.com/) for this project particularly if you opt to use another web component library.
 
-Refer to the section *Astro Storybook and Sample Apps* at this link to get more details about Astro components, and to see several sample apps that may provide you with inspiration (https://astrouxds.com/getting-started/developers/).
+Refer to the section *Astro Storybook and Sample Apps* at this link to get more details about Astro components, and to see several sample apps that may provide you with inspiration (https://astro-stencil.netlify.app/?path=/story/astro-uxds-welcome-start-here--page).
 
 ## Requirements
 
@@ -24,7 +24,7 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 * API provides frontend with *contacts.json*, *alerts.json*, and *verified user credentials*.
 
 **Frontend**
-* The frontend of this project can be done in React, Vue, or Angular. You are permitted to use any of these frameworks CLI generators to quickly start a project (npx create-react-app, ng new my-app, etc.)
+* The frontend of this project can be done in React, Vue, Svelte, Angular or native JavaScript. You are permitted to use any of these frameworks CLI generators to quickly start a project (npx create-react-app, ng new my-app, etc.)
 * The application utilizes either Astro UXDS components, or Astro UXDS styling
 * Login Page Reuirements
   * Authentication is required to access the application
@@ -45,7 +45,7 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 ## Additional Information
 * You are free to use any third-party libraries.
 * Have fun and be as creative as you like!
-* Please feel free to reach out to ask any questions (duncan@rocketcom).
+* Please feel free to reach out to ask any questions (duncan@rocketcom.com).
 
 ## How to submit this challenge:
 1. Fork this repository
@@ -55,4 +55,4 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 
 ## Timeframe
 
-We would like the take home challenge to be completed within 3 days. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
+We would like the take home challenge to be completed within 5 days. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
