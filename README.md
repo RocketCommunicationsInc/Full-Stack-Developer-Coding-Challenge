@@ -17,7 +17,7 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 ## Requirements
 
 **Backend**
-* The backend of this project can be done in Ruby or Python. You are permitted to use generators such as Ruby on Rails, Flask, etc.
+* The backend of this project can be done in the language of your choice. You are permitted to use generators such as Ruby on Rails, Flask, Express, etc …
 * *contacts.json*, *alerts.json*, and *user credentials* data is persisted in a database. 
   * Each data point should have a corresponding column in the database.
   * You may use any databse tool of your choice, such as PostgresQL, MongoDB, SQLite, etc.
