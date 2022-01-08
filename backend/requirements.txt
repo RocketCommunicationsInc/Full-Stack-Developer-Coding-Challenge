@@ -18,7 +18,6 @@ jsonschema==4.3.3
 jwt==1.3.1
 MarkupSafe==2.0.1
 mysql-connector-python==8.0.27
-pkg_resources==0.0.0
 protobuf==3.19.1
 pycparser==2.21
 PyJWT==2.3.0
