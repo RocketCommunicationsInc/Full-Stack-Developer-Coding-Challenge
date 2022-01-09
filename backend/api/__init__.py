@@ -24,6 +24,11 @@ def create_app(test_config=None):
     jwt = JWTManager(app)
     cors = CORS(app)
 
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def catch_all(path):
+        return '404 %s' % path
+
     # Setup database
     @app.before_first_request
     def initialize_database():
