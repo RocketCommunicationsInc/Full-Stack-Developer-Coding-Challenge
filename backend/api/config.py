@@ -14,7 +14,7 @@ class BaseConfig():
   JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
   JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
   JWT_TOKEN_LOCATION=["cookies"]
-  JWT_COOKIE_DOMAIN="127.0.0.1"
+  JWT_COOKIE_DOMAIN="rocket.nfshost.com"
   # SESSION_COOKIE_HTTPONLY = True
   # REMEMBER_COOKIE_HTTPONLY = True
   SESSION_COOKIE_SECURE = False

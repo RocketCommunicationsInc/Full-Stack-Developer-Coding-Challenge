@@ -1,1 +1,1 @@
-export const API_SERVER = "http://rocket.nfshost.com/api/";
+export const API_SERVER = "https://rocket.nfshost.com/api/";
