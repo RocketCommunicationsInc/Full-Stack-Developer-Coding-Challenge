@@ -6,22 +6,18 @@ import axios from "axios";
 
 const authContext = createContext();
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+// function getCookie(name) {
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(";").shift();
+// }
 const options = {
-  // credentials: 'same-origin',
-  credentials: true,
-  // headers: {
-  //   'X-CSRF-TOKEN': getCookie('csrf_access_token'),
-  // },
+  withCredentials: true,
 };
 
 export const useAuth = () => {
   return useContext(authContext);
-}
+};
 
 function useProvideAuth() {
   const [authed, setAuthed] = useState("");
@@ -31,20 +27,23 @@ function useProvideAuth() {
     if (authed !== "") {
       return;
     }
-    axios.get(`/api/auth`, options).then(() => {
-      if (mounted) {
-        setAuthed(" ");
-      }
-    }).catch(() => {});
+    axios
+      .get(`${API_SERVER}auth`, options)
+      .then(({ data }) => {
+        if (mounted) {
+          setAuthed(data.logged_in_as);
+        }
+      })
+      .catch(() => {});
     return function cleanup() {
       mounted = false;
-    }
-  }, []);
+    };
+  });
 
   return {
     authed,
     checkAuth() {
-      axios.get(`${API_SERVER}auth`, {withCredentials: true}).then(() => {
+      axios.get(`${API_SERVER}auth`, options).then(() => {
         setAuthed(" ");
       });
     },
@@ -56,9 +55,10 @@ function useProvideAuth() {
             if (data.success) {
               setAuthed(data.user.username);
               res();
-            } else {
-              rej();
             }
+          })
+          .catch(({ response }) => {
+            rej(response.data.msg);
           });
       });
     },
@@ -79,8 +79,11 @@ function useProvideAuth() {
               setAuthed(data.username);
               res();
             } else {
-              rej();
+              rej(data.msg);
             }
+          })
+          .catch(({ response }) => {
+            rej(response.data.msg);
           });
       });
     },
@@ -97,7 +100,7 @@ export function RequireAuth({ children }) {
   const { authed } = useAuth();
   const location = useLocation();
 
-  return authed !== '' ? (
+  return authed !== "" ? (
     children
   ) : (
     <Navigate to="/login" replace state={{ path: location.pathname }} />

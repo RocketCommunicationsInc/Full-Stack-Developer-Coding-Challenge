@@ -8,7 +8,7 @@ db = SQLAlchemy()
 
 class Users(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    username = db.Column(db.String(64), unique=True, index=True, nullable=False)
+    username = db.Column(db.String(15), unique=True, index=True, nullable=False)
     password = db.Column(db.Text())
     date_joined = db.Column(db.DateTime(), default=datetime.utcnow)
 
