@@ -29,7 +29,10 @@ rux-input {
   margin: 1em 0
 }
 .container {
-    /* text-align: center; */
     width: 60%;
     margin: auto;
+}
+
+.login-input {
+    margin: 1em 0;
 }

@@ -3,6 +3,7 @@
 # from functools import wraps
 
 from flask import request, jsonify
+from flask_jwt_extended.utils import get_jwt_identity
 from flask_restx import Api, Resource, fields
 from flask_jwt_extended import create_access_token, create_refresh_token, set_access_cookies, set_refresh_cookies, jwt_required, unset_jwt_cookies
 
@@ -16,20 +17,20 @@ rest_api = Api(version="1.0", title="Rocket API", doc=False)
 """
 
 signup_model = rest_api.model('SignUpModel', {
-  "username": fields.String(required=True, min_length=4, max_length=64),
-  "password": fields.String(required=True, min_length=4, max_length=16)
+  "username": fields.String(required=True, min_length=4, max_length=15),
+  "password": fields.String(required=True, min_length=4, max_length=128)
   })
 
 login_model = rest_api.model('LoginModel', {
-  "username": fields.String(required=True, min_length=4, max_length=64),
-  "password": fields.String(required=True, min_length=4, max_length=16)
+  "username": fields.String(required=True,),
+  "password": fields.String(required=True,)
   })
 
 
 """
   Flask-Restx routes
 """
-@rest_api.route('/api/users/register')
+@rest_api.route('/users/register')
 class Register(Resource):
   """
      Creates a new user by taking 'signup_model' input
@@ -44,7 +45,7 @@ class Register(Resource):
     user_exists = Users.get_by_username(_username)
     if user_exists:
       return {"success": False,
-          "msg": "username already taken"}, 400
+          "msg": "Username is already taken"}, 400
 
     new_user = Users(username=_username)
 
@@ -66,7 +67,7 @@ class Register(Resource):
     return response
 
 
-@rest_api.route('/api/users/login')
+@rest_api.route('/users/login')
 class Login(Resource):
   """
      Login user by taking 'login_model' input and return JWT token
@@ -83,11 +84,11 @@ class Login(Resource):
 
     if not user_exists:
       return {"success": False,
-          "msg": "This username does not exist."}, 400
+          "msg": "Invalid credentials"}, 400
 
     if not user_exists.check_password(_password):
       return {"success": False,
-          "msg": "Wrong credentials."}, 400
+          "msg": "Invalid credentials"}, 400
 
     response = jsonify(
       {
@@ -102,7 +103,7 @@ class Login(Resource):
 
     return response
 
-@rest_api.route('/api/users/logout')
+@rest_api.route('/users/logout')
 class LogoutUser(Resource):
   """
      Logs out User
@@ -115,7 +116,7 @@ class LogoutUser(Resource):
     unset_jwt_cookies(response)
     return response
 
-@rest_api.route('/api/items/contacts')
+@rest_api.route('/items/contacts')
 class ContactRoutes(Resource):
   """
   Gets all contacts
@@ -124,17 +125,18 @@ class ContactRoutes(Resource):
   def get(self):
     return jsonify(Contacts.select_all())
 
-@rest_api.route('/api/auth')
+@rest_api.route('/auth')
 class IsAuth(Resource):
   """
   Tells if user is authorized or not
   """
   @jwt_required()
   def get(self):
-    response = jsonify()
+    current_user = get_jwt_identity()
+    response = jsonify(logged_in_as=current_user)
     return response
 
-@rest_api.route('/api/items/alerts')
+@rest_api.route('/items/alerts')
 class AlertRoutes(Resource):
   """
   Gets all alerts
