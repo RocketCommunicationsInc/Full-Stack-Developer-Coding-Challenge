@@ -1,4 +1,4 @@
-# (https://rocket.nfshost.com)
+# Live demo: https://rocket.nfshost.com
 
 # Full-Stack-Developer-Coding-Challenge
 As the next step in the interview process, we’d like you to complete a coding challenge.
