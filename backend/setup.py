@@ -1,0 +1,34 @@
+from setuptools import setup
+
+setup(
+  name="rocketapi",
+  packages=["api"],
+  include_package_data=True,
+  install_requires=[
+    "aniso8601==9.0.1",
+    "attrs==21.4.0",
+    "click==8.0.3",
+    "Flask==2.0.2",
+    "Flask-Cors==3.0.10",
+    "Flask-JWT-Extended==4.3.1",
+    "flask-restx==0.5.1",
+    "Flask-SQLAlchemy==2.5.1",
+    "greenlet==1.1.2",
+    "importlib-metadata==4.10.0",
+    "importlib-resources==5.4.0",
+    "itsdangerous==2.0.1",
+    "Jinja2==3.0.3",
+    "jsonschema==4.3.3",
+    "MarkupSafe==2.0.1",
+    "mysql-connector-python==8.0.27",
+    "PyJWT==2.3.0",
+    "pyrsistent==0.18.0",
+    "python-dotenv==0.19.2",
+    "pytz==2021.3",
+    "six==1.16.0",
+    "SQLAlchemy==1.4.29",
+    "typing_extensions==4.0.1",
+    "Werkzeug==2.0.2",
+    "zipp==3.7.0"
+  ]
+)

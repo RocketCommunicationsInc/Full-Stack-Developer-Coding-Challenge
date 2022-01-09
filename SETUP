@@ -4,3 +4,4 @@ python3 -m venv venv
 pip install -r requirements.txt
 export FLASK_APP=run.py
 export FLASK_ENV=development
+flask run
