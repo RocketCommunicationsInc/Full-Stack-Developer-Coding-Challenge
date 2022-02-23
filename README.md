@@ -53,6 +53,16 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 3. Deploy the frontend and backend of your application using free services (Netlify, Heroku, etc).
 4. Create a pull request with @github/rocket-bensonism as the reviewer.
 
-## Timeframe
+## Running this project:
 
-We would like the take home challenge to be completed within 3 days. If you need more time, please reach out to us. You will not be judged on how quickly you complete the challenge.
+* backend
+  1. Installing pip env
+  2. Installing requirements.txt
+  3. source ./bin/activate
+  4. python manage.py makemigrations
+  5. python manage.py migrate --run-syncdb
+  6. python manage.py runserver
+
+* frontend
+  1. npm install
+  2. npm run start

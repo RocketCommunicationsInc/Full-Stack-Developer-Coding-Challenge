@@ -1,0 +1,18 @@
+.pane-holder {
+  display: flex;
+  height: 80vh;
+}
+
+.alert-pane {
+  flex:5;
+  height: 100%;
+}
+
+.contact-pane {
+  flex:7;
+  height: 100%;
+}
+
+.pane {
+  margin: 12px;
+}
