@@ -1,0 +1,7 @@
+version: '2'
+services:
+  web-backend:
+    container_name: rocket_backend
+    build: ./backend
+    ports:
+      - 8000:80

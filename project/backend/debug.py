@@ -1,15 +1,18 @@
 from unicodedata import category
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import *
 import json
 from datetime import datetime
+from api.models import *
 
-# Create a database engine. 
+# Create an engine that stores data in the local directory's rocket.db file.
 engine = create_engine('sqlite:///rocket.db')
-Base.metadata.bind = engine
- 
+
+# Create all tables in the engine. 
+Base.metadata.create_all(engine)
+
 # Create a new database session.
+Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
@@ -105,7 +108,9 @@ def try_get_contact_resolution_status(value):
     
     
 # Read in the alerts file.
-with open('..\..\\alerts.json', 'rb') as file:
+root_dir = os.path.abspath(os.path.join(__file__ ,"../../.."))
+alert_json_filename = os.path.join(root_dir, "alerts.json")
+with open(alert_json_filename, 'rb') as file:
     alerts_raw = json.load(file)
     for alert in alerts_raw:
         row = Alert()
@@ -124,7 +129,9 @@ with open('..\..\\alerts.json', 'rb') as file:
 
 
 # Read in the contacts file.
-with open('..\\..\\contacts.json', 'rb') as file:
+root_dir = os.path.abspath(os.path.join(__file__ ,"../../.."))
+contacts_json_filename = os.path.join(root_dir, "contacts.json")
+with open(contacts_json_filename, 'rb') as file:
     contacts_raw = json.load(file)
     for contact in contacts_raw:
         temp = Contact()

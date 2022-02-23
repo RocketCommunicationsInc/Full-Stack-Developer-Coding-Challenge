@@ -1,11 +1,8 @@
 from typing import Optional
 from fastapi import FastAPI
-import uvicorn
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import *
-
 
 app = FastAPI()
 

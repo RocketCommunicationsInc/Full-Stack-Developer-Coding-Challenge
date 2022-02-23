@@ -10,6 +10,7 @@ from sqlalchemy import create_engine
  
 Base = declarative_base()
 
+    
 class AlertSeverity(Base):
     __tablename__ = 'alert_severity'
     id = Column(Integer, primary_key=True)
@@ -33,7 +34,8 @@ class Alert(Base):
     selected = Column(Boolean)
     new = Column(Boolean)
     expanded = Column(Boolean)
-    
+
+
 class ContactStatus(Base):
     __tablename__ = 'contact_status'
     id = Column(Integer, primary_key=True)
@@ -94,7 +96,6 @@ class Contact(Base):
     step = relationship(ContactStep)
     resolution = relationship(ContactResolution)
     resolution_status = relationship(ContactResolutionStatus)
-
 
 if __name__ == "__main__":
     # Create an engine that stores data in the local directory's rocket.db file.
