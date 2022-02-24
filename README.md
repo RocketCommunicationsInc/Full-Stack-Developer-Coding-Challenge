@@ -70,3 +70,6 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 * user login info
   1. username: admin
   2. password: 123qwe!@#QWE
+
+* online url
+  https://crmdashboard.herokuapp.com/
