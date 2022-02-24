@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 from models import *
 
 app = FastAPI()
@@ -15,7 +16,7 @@ app.add_middleware(
 )
 
 # Create a database engine. 
-engine = create_engine('sqlite:///rocket.db')
+engine = create_engine('sqlite:///rocket.db', connect_args={'check_same_thread': False}, poolclass=StaticPool)
 Base.metadata.bind = engine
  
 # Create a new database session.
@@ -25,8 +26,16 @@ session = DBSession()
 
 @app.get("/alerts")
 def read_alerts():
+    # Get all alerts.
     rows = session.query(Alert).all()
-    return rows
+    
+    # Prepare return data.
+    data = []
+    for row in rows:
+        data.append(row.to_json())
+        
+    # Return data.
+    return data
 
 @app.get("/alerts/category")
 def read_alert_categories():
@@ -40,8 +49,16 @@ def read_alert_severity():
 
 @app.get("/contacts")
 def read_contact():
+    # Get all contacts.
     rows = session.query(Contact).all()
-    return rows
+    
+    # Prepare return data.
+    data = []
+    for row in rows:
+        data.append(row.to_json())
+        
+    # Return data.
+    return data
 
 @app.get("/contacts/status")
 def read_contact_status():

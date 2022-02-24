@@ -15,25 +15,50 @@ class AlertSeverity(Base):
     __tablename__ = 'alert_severity'
     id = Column(Integer, primary_key=True)
     severity = Column(String(50), nullable=False)
+    alerts = relationship("Alert", back_populates="severity")
 
 class AlertCategory(Base):
     __tablename__ = 'alert_category'
     id = Column(Integer, primary_key=True)
     category = Column(String(50), nullable=False)
+    alerts = relationship("Alert", back_populates="category")
 
 class Alert(Base):
     __tablename__ = 'alert'
+    # Fields
     id = Column(Integer, primary_key=True)
     cateogry_id = Column(Integer, ForeignKey('alert_category.id'))
-    category = relationship(AlertCategory)
     severity_id = Column(Integer, ForeignKey('alert_severity.id'))
-    severity = relationship(AlertSeverity)
     message = Column(String(250), nullable=False) 
     long_message = Column(String(500), nullable=False)
     time = Column(DateTime, default=datetime.datetime.utcnow)
     selected = Column(Boolean)
     new = Column(Boolean)
     expanded = Column(Boolean)
+    
+    # Relationships
+    category = relationship("AlertCategory", back_populates="alerts")
+    severity = relationship("AlertSeverity", back_populates="alerts")
+    
+    # Methods
+    def to_json(self):
+        data = {
+            "message": self.message,
+            "long_message": self.long_message,
+            "time": self.time,
+            "expanded": self.expanded,
+            "selected": self.selected,
+            "new": self.new,
+            "category": {
+                "id": self.category.id,
+                "category": self.category.category
+            },
+            "severity": {
+                "id": self.severity.id,
+                "severity": self.severity.severity
+            }
+        }
+        return data
 
 
 class ContactStatus(Base):
@@ -96,6 +121,51 @@ class Contact(Base):
     step = relationship(ContactStep)
     resolution = relationship(ContactResolution)
     resolution_status = relationship(ContactResolutionStatus)
+    
+    # Methods
+    def to_json(self):
+        data = {
+            "id": self.id,
+            "_id": self._ID,
+            "contactId": self.contact_id,
+            "status": {
+                "id": self.status,
+                "status": self.status.status
+            },
+            "name": self.name,
+            "ground": {
+                "id": self.ground.id,
+                "ground": self.ground.ground
+            },
+            "satellite": self.satellite,
+            "equipment": self.equipment,
+            "state": {
+                "id": self.state.id,
+                "state": self.state.state
+            },
+            "step": {
+                "id": self.step.id,
+                "step": self.step.step
+            },
+            "detail": self.detail,
+            "begin_timestamp": self.begin_timestamp,
+            "end_timestamp": self.end_timestamp,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "azimuth": self.azimuth,
+            "elevation": self.elevation,
+            "resultion": {
+                "id": self.resolution.id,
+                "resolution": self.resolution.resolution
+            },
+            "resolution_status": {
+                "id": self.resolution_status.id,
+                "resolution_status": self.resolution_status.resolutionStatus
+            }
+        }
+        
+        return data
+        
 
 if __name__ == "__main__":
     # Create an engine that stores data in the local directory's rocket.db file.
@@ -103,3 +173,4 @@ if __name__ == "__main__":
     
     # Create all tables in the engine. 
     Base.metadata.create_all(engine)
+    

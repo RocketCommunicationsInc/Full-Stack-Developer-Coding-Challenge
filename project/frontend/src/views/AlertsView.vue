@@ -1,7 +1,9 @@
 <template>
     <div v-if="error">{{ error }}</div>
     <div v-for="alert in alerts" :key="alert.id">
-      <li>{{ alert.message }}</li>
+      <li>
+          {{ alert.message }} - {{ alert.category.category }} - {{ alert.time }}
+      </li>
     </div>
 </template>
 

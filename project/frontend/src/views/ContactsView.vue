@@ -1,7 +1,9 @@
 <template>
     <div v-if="error">{{ error }}</div>
     <div v-for="contact in contacts" :key="contact.id">
-      <li>{{ contact.name }}</li>
+      <li>
+        {{ contact.name }} - {{ contact.status.status }} - {{ contact.begin_timestamp }} - {{ contact.end_timestamp }}
+        </li>
     </div>
 </template>
 
