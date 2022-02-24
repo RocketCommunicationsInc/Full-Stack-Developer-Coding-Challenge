@@ -66,3 +66,7 @@ Refer to the section *Astro Storybook and Sample Apps* at this link to get more 
 * frontend
   1. npm install
   2. npm run start
+
+* user login info
+  1. username: admin
+  2. password: 123qwe!@#QWE
