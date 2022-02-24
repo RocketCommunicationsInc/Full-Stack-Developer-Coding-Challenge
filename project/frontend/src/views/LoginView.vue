@@ -41,6 +41,7 @@ export default {
 <style>
 form {
     margin: 0 auto;
+    margin-top: 20px;
     max-width: 330px;
     display: block;
 }
