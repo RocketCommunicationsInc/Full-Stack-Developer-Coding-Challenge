@@ -4,4 +4,4 @@ services:
     container_name: rocket_backend
     build: ./backend
     ports:
-      - 8000:80
+      - 8000:8000
