@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-prebuild": "NODE_ENV=production yarn install && yarn build"
+    "heroku-prebuild": "NODE_ENV=production npm install && npm build"
   },
   "eslintConfig": {
     "extends": [
