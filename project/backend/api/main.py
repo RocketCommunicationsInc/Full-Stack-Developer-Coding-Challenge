@@ -37,16 +37,6 @@ def read_alerts():
     # Return data.
     return data
 
-@app.get("/alerts/category")
-def read_alert_categories():
-    rows = session.query(AlertCategory).all()
-    return rows
-
-@app.get("/alerts/severity")
-def read_alert_severity():
-    rows = session.query(AlertSeverity).all()
-    return rows
-
 @app.get("/contacts")
 def read_contact():
     # Get all contacts.
@@ -65,32 +55,16 @@ def read_contact_status():
     rows = session.query(ContactStatus).all()
     return rows
 
-@app.get("/contacts/ground")
-def read_contact_ground():
-    rows = session.query(ContactGround).all()
-    return rows
-
-@app.get("/contacts/state")
-def read_contact_state():
-    rows = session.query(ContactState).all()
-    return rows
-
-@app.get("/contacts/step")
-def read_contact_step():
-    rows = session.query(ContactStep).all()
-    return rows
-
-@app.get("/contacts/resolution")
-def read_contact_resolution():
-    rows = session.query(ContactResolution).all()
-    return rows
-
-@app.get("/contacts/resolution/status")
-def read_contact_resolution_status():
-    rows = session.query(ContactResolutionStatus).all()
-    return rows
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
-
+@app.get("/contacts/status/{id}")
+def read_contacts_by_status(id):
+    # Query database for Contact by their status.
+    rows = session.query(Contact).filter(Contact.status_id == id)
+    
+    # Prepare the data for return.
+    data = []
+    for row in rows:
+        data.append(row.to_json())
+        
+    # Return data.
+    return data
+    

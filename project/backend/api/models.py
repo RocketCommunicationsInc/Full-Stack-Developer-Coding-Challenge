@@ -51,11 +51,13 @@ class Alert(Base):
             "new": self.new,
             "category": {
                 "id": self.category.id,
-                "category": self.category.category
+                "category": self.category.category,
+                "display": self.category.category.title()
             },
             "severity": {
                 "id": self.severity.id,
-                "severity": self.severity.severity
+                "severity": self.severity.severity,
+                "display": self.severity.severity.title()
             }
         }
         return data
@@ -130,7 +132,8 @@ class Contact(Base):
             "contactId": self.contact_id,
             "status": {
                 "id": self.status,
-                "status": self.status.status
+                "status": self.status.status,
+                "display": self.status.status.title()
             },
             "name": self.name,
             "ground": {

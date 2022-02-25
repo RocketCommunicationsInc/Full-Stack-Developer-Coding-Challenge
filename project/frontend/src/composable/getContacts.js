@@ -18,7 +18,8 @@ const getContacts = () => {
     }
   }
 
-  return { contacts, error, load }
+  return { contacts, error, load  }
 }
+
 
 export default getContacts

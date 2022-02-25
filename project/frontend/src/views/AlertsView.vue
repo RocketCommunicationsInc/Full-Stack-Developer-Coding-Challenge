@@ -1,10 +1,27 @@
 <template>
+    <table class="table table-striped">
+        <colgroup>
+            <col span="1" style="width: 65%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 25%;">
+        </colgroup>
+        <thead class="thead-dark">
+            <tr>
+                <th>Message</th>
+                <th>Category</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody v-for="alert in alerts" :key="alert.id">
+            <tr>
+                <td>{{alert.message}}</td>
+                <td>{{alert.category.display}}</td>
+                <td class="text-right">{{ formatAlertTime(alert) }}</td>
+            </tr>
+
+        </tbody>
+    </table>
     <div v-if="error">{{ error }}</div>
-    <div v-for="alert in alerts" :key="alert.id">
-      <li>
-          {{ alert.message }} - {{ alert.category.category }} - {{ alert.time }}
-      </li>
-    </div>
 </template>
 
 <script>
@@ -18,12 +35,20 @@ export default {
     const { alerts, error, load } = getAlerts()
     
     load()
+    
+    const formatAlertTime = (alert) => {
+        let current_date = new Date(alert.time)
+        return current_date.getHours() + ':' + current_date.getMinutes() + ':' + current_date.getSeconds()
+    }
 
-    return { alerts, error }
+    return { alerts, error, formatAlertTime }
   }
 }
 </script>
 
-<style>
+<style scoped>
+td, th {
+    text-align: left;
+}
 
 </style>
