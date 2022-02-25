@@ -6,10 +6,16 @@
         <tr>State</tr>
         <tr>Total</tr>
       </thead>
-      <tbody v-for="contact in groupedContacts" :key="contact.id">
-
+      <tbody v-for="state in states" :key="state.id">
+        <tr>
+          <td>{{ state.state}}</td>
+          <td>{{ state.count }}</td>
+        </tr>
       </tbody>
     </table>
+    <div class="col-md-4">
+    Contacts: {{ contacts.length }}
+    </div>
   </div>
 <!-- Contacts total
 contactState / totals -->
@@ -37,14 +43,15 @@ contactState / totals -->
             </tr>
         </tbody>
     </table>
-    <div v-if="error">{{ error }}</div>
+    <div v-if="contactsError">{{ error }}</div>
 
   </div>
 </div>
 </template>
 
 <script>
-import getContacts  from "../composable/getContacts.js"
+import getContacts from "../composable/getContacts.js"
+import getContactStates from "../composable/getContactStates.js"
 import { ref } from 'vue'
 
 export default {
@@ -52,11 +59,13 @@ export default {
   components: {
   },
   setup() {
-    // Init contact objects.
-    const { contacts, error, load, groupedContacts} = getContacts()
+    // Init objects.
+    const { contacts, contactsError, load} = getContacts()
+    const { states, stateError, loadStates} = getContactStates()
     
     // Load the contacts data.
     load()
+    loadStates()
     
     const formatContactStartEndTimestamps = (contact) => {
         let start = new Date(contact.begin_timestamp)
@@ -67,8 +76,8 @@ export default {
         
         return startTime + " - " + endTime
     }
-
-    return { contacts, error, formatContactStartEndTimestamps }
+    
+    return { contacts, contactsError, stateError, formatContactStartEndTimestamps, states}
   },
 }
 </script>

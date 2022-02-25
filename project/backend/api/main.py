@@ -50,21 +50,17 @@ def read_contact():
     # Return data.
     return data
 
-@app.get("/contacts/status")
+@app.get("/contacts/states/count")
 def read_contact_status():
-    rows = session.query(ContactStatus).all()
-    return rows
-
-@app.get("/contacts/status/{id}")
-def read_contacts_by_status(id):
-    # Query database for Contact by their status.
-    rows = session.query(Contact).filter(Contact.status_id == id)
-    
-    # Prepare the data for return.
-    data = []
+    results = []
+    rows = session.query(ContactState).all()
     for row in rows:
-        data.append(row.to_json())
-        
-    # Return data.
-    return data
+        contacts = session.query(Contact).filter(Contact.state_id == row.id).all()
+        results.append({
+            "state_id": row.id,
+            "state": row.state.title(),
+            "count": len(contacts)
+        })
+
+    return results
     
