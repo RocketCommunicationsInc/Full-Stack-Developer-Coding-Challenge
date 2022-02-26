@@ -1,5 +1,6 @@
 from typing import Optional
 from fastapi import FastAPI
+from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -64,3 +65,10 @@ def read_contact_status():
 
     return results
     
+@app.post("/users/register")
+def register_user():
+    pass
+
+@app.post("users/validate")
+def validate_user():
+    pass
