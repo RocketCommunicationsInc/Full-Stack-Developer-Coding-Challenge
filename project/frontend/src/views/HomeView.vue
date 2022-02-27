@@ -15,11 +15,12 @@
     <rux-clock class="right"></rux-clock>
     <rux-icon icon="settings" label="Settings" color="#fff" @click="displayPopupMenu" aria-controls="popup-menu-1" aria-haspopup="true"></rux-icon>
   </rux-global-status-bar>
-  <Dashboard >
-    
-  </Dashboard>
-  <!-- <RegisterView></RegisterView> -->
-<!-- <LoginView v-if="!isAuthenticated" class='content'></LoginView> -->
+  
+  <div class="row">
+    <div class="col-md-12">
+      <Dashboard />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -75,4 +76,7 @@ export default {
   margin-right: 0px;
 }
 
+div{
+  margin: 10px;
+}
 </style>

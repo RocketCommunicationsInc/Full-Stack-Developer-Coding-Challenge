@@ -1,32 +1,21 @@
 <template>
 <div class="row">
-  <div class="col-md-4">
-    <table>
-      <thead>
-        <tr>State</tr>
-        <tr>Total</tr>
-      </thead>
-      <tbody v-for="state in states" :key="state.id">
-        <tr>
-          <td>{{ state.state}}</td>
-          <td>{{ state.count }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="col-md-4">
-    Contacts: {{ contacts.length }}
+  <div class="col-3" v-for="state in states" :key="state.id">
+    <h1>{{ state.count }}</h1>
+    <strong>{{ state.state }}</strong>
     </div>
+  <div class="col-3">
+    <h1>{{ contacts.length }} </h1>
+    <strong>Total</strong>
   </div>
-<!-- Contacts total
-contactState / totals -->
-</div>
+</div> <!-- end row div -->
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped">
         <colgroup>
+            <col span="1" style="width: 15%;">
             <col span="1" style="width: 50%;">
-            <col span="1" style="width: 25%;">
-            <col span="1" style="width: 25%;">
+            <col span="1" style="width: 35%;">
         </colgroup>
         <thead class="thead-dark">
             <tr>
@@ -67,12 +56,23 @@ export default {
     load()
     loadStates()
     
+    const addZero = (value) =>{
+      if(value < 10)
+        return "0" + value
+      else 
+        return value
+    }
+    
     const formatContactStartEndTimestamps = (contact) => {
         let start = new Date(contact.begin_timestamp)
-        let startTime = start.getHours() + ':' + start.getMinutes() + ':' + start.getSeconds()
+        let startTime = start.getHours() + ':' + 
+            addZero(start.getMinutes()) + ':' + 
+            addZero(start.getSeconds())
 
         let end = new Date(contact.end_timestamp)
-        let endTime = end.getHours() + ':' + end.getMinutes() + ':' + end.getSeconds()
+        let endTime = end.getHours() + ':' + 
+            addZero(end.getMinutes()) + ':' + 
+            addZero(end.getSeconds())
         
         return startTime + " - " + endTime
     }
@@ -85,5 +85,8 @@ export default {
 <style>
 td,th{
   text-align: left;
+}
+div{
+  margin: 5px;
 }
 </style>
