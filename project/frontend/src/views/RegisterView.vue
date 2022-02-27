@@ -74,8 +74,6 @@
 import { ref } from 'vue'
 import { RuxButton } from '@astrouxds/astro-web-components/dist/components/rux-button'
 import { RuxInput } from '@astrouxds/astro-web-components/dist/components/rux-input'
-import userRegister from "../composable/userRegister.js"
-    
 
 export default {
     name: "LoginView",
@@ -89,11 +87,35 @@ export default {
 
         })
         
-        const registerUser = (e) => {
-            console.log(new_user.value.firstname)
-            console.log(new_user.value.lastname)
-            console.log(new_user.value.email)
-            console.log(new_user.value.password)
+        const registerUser = (e) =>{
+           fetch("http://localhost:8000/users/register", {
+                method: "POST",
+                body: JSON.stringify({
+                    firstname: new_user.value.firstname,
+                    lastname: new_user.value.lastname,
+                    email: new_user.value.email,
+                    password: new_user.value.password
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }}).then(response =>{
+                    if(response.ok){
+                        let json = response.json()
+                        return json
+                    }
+                    else{
+                        error.value = "Failed to regsiter user."
+                    }
+                }).then(json => {
+                    if(json.token){
+                        localStorage.setItem('token', json.token)
+                        window.location.href = '/'
+                    }
+                })
+
+        }
+        
+        const old_registerUser = (e) => {
             let result = register(new_user.value.firstname, 
                     new_user.value.lastname,
                     new_user.value.email,
