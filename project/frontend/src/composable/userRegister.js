@@ -3,12 +3,11 @@ import { ref } from 'vue'
 
 const userRegister = () => {
 
-  const alerts = ref([])
   const error = ref(null)
 
   const register = async (firstname, lastname, email, password) => {
     try {
-      let data = fetch("http://localhost:8000/users/register", {
+      let data = await fetch("http://localhost:8000/users/register", {
             // Adding method type.
             method: "POST",
             
@@ -27,7 +26,13 @@ const userRegister = () => {
         })
 
       if(!data.ok) {
-        throw Error('Failed to register user.')
+        if(data.status != 200){
+          let errorData = await data.json()
+
+          throw Error(errorData.detail)
+        }
+        else
+          throw Error('Failed to register user.')
       }
     }
     catch(err) {
@@ -35,7 +40,7 @@ const userRegister = () => {
     }
   }
 
-  return { alerts, error, register }
+  return { error, register }
 }
 
 export default userRegister

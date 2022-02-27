@@ -5,9 +5,10 @@
   menu-icons="apps">
     <rux-clock class="right"></rux-clock>
   </rux-global-status-bar>
-  <Dashboard >
+  <!-- <Dashboard >
     
-  </Dashboard>
+  </Dashboard> -->
+  <RegisterView></RegisterView>
 <!-- <LoginView v-if="!isAuthenticated" class='content'></LoginView> -->
 </template>
 
@@ -16,13 +17,14 @@
 import AlertsView from "./AlertsView.vue"
 import ContactsView from "./ContactsView.vue"
 import LoginView from "./LoginView.vue"
+import Dashboard from "./Dashboard.vue"
+import RegisterView from "./RegisterView.vue"
 
 // Import Astro controls.
 import { RuxButton } from '@astrouxds/astro-web-components/dist/components/rux-button'
 import { RuxInput } from '@astrouxds/astro-web-components/dist/components/rux-input'
 import { RuxGlobalStatusBar } from '@astrouxds/astro-web-components/dist/components/rux-global-status-bar'
 import { RuxClock } from '@astrouxds/astro-web-components/dist/components/rux-global-status-bar'
-import Dashboard from "./Dashboard.vue"
 
 export default {
   name: 'HomeView',
@@ -30,7 +32,8 @@ export default {
     AlertsView,
     ContactsView,
     LoginView,
-    Dashboard
+    Dashboard,
+    RegisterView
 },
   setup() {
     let isAuthenticated = false

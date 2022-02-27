@@ -7,6 +7,9 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, DateTime, F
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
+from pydantic import BaseModel
+import string    
+import random # define the random module  
  
 Base = declarative_base()
 
@@ -168,7 +171,28 @@ class Contact(Base):
         }
         
         return data
-        
+    
+class Agent(Base):
+    __tablename__ = "Agent"
+    id = Column(Integer, primary_key=True)
+    # Fields
+    email = Column(String(250), nullable=False)
+    firstname = Column(String(50), nullable=False)
+    lastname = Column(String(50), nullable=False)
+    passwordhash = Column(String(150), nullable=False)
+    passwordsalt = Column(String(12), nullable=False)
+
+    @staticmethod
+    def create_salt(count):
+        ran = ''.join(random.choices(string.ascii_letters + string.digits, k = count))    
+        return str(ran)
+    
+class UserRegistration(BaseModel):
+    firstname: str
+    lastname: str
+    email: str
+    password: str
+    
 
 if __name__ == "__main__":
     # Create an engine that stores data in the local directory's rocket.db file.
