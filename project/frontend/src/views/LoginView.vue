@@ -72,7 +72,7 @@ export default {
                     "Content-type": "application/json; charset=UTF-8"
                 }}).then(response =>{
                     if(response.ok){
-                        json = response.json()
+                        let json = response.json()
                         localStorage.setItem('token', json.token)
                         window.location.href = '/'
                     }
