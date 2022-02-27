@@ -9,7 +9,7 @@
     
   </Dashboard> -->
   <RegisterView></RegisterView>
-<!-- <LoginView v-if="!isAuthenticated" class='content'></LoginView> -->
+<LoginView v-if="!isAuthenticated" class='content'></LoginView>
 </template>
 
 <script>

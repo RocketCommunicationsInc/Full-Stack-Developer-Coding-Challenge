@@ -9,10 +9,9 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from pydantic import BaseModel
 import string    
-import random # define the random module  
+import random 
  
 Base = declarative_base()
-
     
 class AlertSeverity(Base):
     __tablename__ = 'alert_severity'
@@ -181,11 +180,6 @@ class Agent(Base):
     lastname = Column(String(50), nullable=False)
     passwordhash = Column(String(150), nullable=False)
     passwordsalt = Column(String(12), nullable=False)
-
-    @staticmethod
-    def create_salt(count):
-        ran = ''.join(random.choices(string.ascii_letters + string.digits, k = count))    
-        return str(ran)
     
 class UserRegistration(BaseModel):
     firstname: str
@@ -193,6 +187,9 @@ class UserRegistration(BaseModel):
     email: str
     password: str
     
+class UserLogin(BaseModel):
+    email: str
+    password: str
 
 if __name__ == "__main__":
     # Create an engine that stores data in the local directory's rocket.db file.

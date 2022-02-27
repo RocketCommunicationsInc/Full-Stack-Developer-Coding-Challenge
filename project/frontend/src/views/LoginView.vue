@@ -1,13 +1,15 @@
 <template>
-  <form id="rux-form">
+  <form id="rux-form" @submit.prevent="validateUser">
             <div class="group">
                 <div class="field">
                     <rux-input
                         id="email"
-                        placeholder="Email@astro.com"
+                        placeholder="enderwiggin@ifcomm.com"
                         label="Email"
                         type="email"
                         ruxblur="{handleValidation()}"
+                        :modelValue="user.email"
+                        @ruxinput="user.email = $event.target.value"
                     ></rux-input>
                 </div>
             </div>
@@ -17,6 +19,8 @@
                         id="pw"
                         label="Password"
                         type="password"
+                        :modelValue="user.password"
+                        @ruxinput="user.password = $event.target.value"
                     ></rux-input>
                 </div>
             </div>
@@ -31,9 +35,27 @@
 <script>
 import { RuxButton } from '@astrouxds/astro-web-components/dist/components/rux-button'
 import { RuxInput } from '@astrouxds/astro-web-components/dist/components/rux-input'
+import userLogin from "../composable/userLogin.js"
+import { ref } from 'vue'
 
 export default {
-    name: "LoginView"
+    name: "LoginView",
+    setup() {
+        const { error, login} = userLogin()
+        const user = ref({
+            email: '',
+            password: ''
+        })
+        
+        const validateUser = (e) => {
+            console.log(user.value.email)
+            console.log(user.value.password)
+            let result = login(user.value.email, user.value.password)
+            console.log(result)
+        }
+        
+        return { user, validateUser, error }
+    }
 
 }
 </script>

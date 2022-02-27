@@ -8,6 +8,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 from models import *
+from auth import *
 
 app = FastAPI()
 app.add_middleware(
@@ -69,8 +70,8 @@ def read_contact_status():
     
 @app.post("/users/register")
 def register_user(new_user: UserRegistration, status_code=201):
-    results = session.query(Agent).filter(Agent.email == new_user.email).all()
-    if len(results) > 0:
+    agent = session.query(Agent).filter(Agent.email == new_user.email).first()
+    if agent is not None:
         # An account for this email has already been registered.
         raise HTTPException(status_code=409, detail="An account for this email already exists.")
     else:
@@ -79,23 +80,31 @@ def register_user(new_user: UserRegistration, status_code=201):
         temp.email = new_user.email
         temp.firstname = new_user.firstname
         temp.lastname = new_user.lastname
-        # Create Salt
-        salt = Agent.create_salt(12)
-        temp.passwordsalt = salt
 
-        # Hash Password
-        t_sha = hashlib.sha512()
-        salted_password = str(new_user.password + salt).encode("utf-8")
-        t_sha.update(salted_password)
-        hashed_password =  base64.urlsafe_b64encode(t_sha.digest())
-        temp.passwordhash = hashed_password
-        print(temp.passwordhash)
+        # Set password
+        salt = create_salt(12)
+        temp.passwordsalt = salt
+        temp.passwordhash = get_password_hash(new_user.password + salt)
         
         # Save to database.
         session.add(temp)
         session.commit()
         return
 
-@app.post("users/validate")
-def validate_user():
-    pass
+@app.post("/users/login")
+def validate_user(user: UserLogin, status_code=200):
+    agent = session.query(Agent).filter(Agent.email == user.email).first()
+    print(agent)
+    if agent is not None:
+        # Create new agent.
+        salted_password = user.password + agent.passwordsalt
+        if verify_password(salted_password, agent.passwordhash):
+            return {"result": "True"}
+
+    # If we get here, then a username/password pair wasn't matched.
+    raise HTTPException(status_code=402, detail="Invalid username or password.")
+
+@app.get("/users")
+def get_all_users():
+    results = session.query(Agent).all()
+    return results
