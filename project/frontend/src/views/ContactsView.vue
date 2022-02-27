@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div class="row justify-content-center">
   <div class="col-3" v-for="state in states" :key="state.id">
     <h1>{{ state.count }}</h1>
     <strong>{{ state.state }}</strong>

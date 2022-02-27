@@ -1,10 +1,10 @@
 <template>
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-4 text-white">
         <h3>Alerts</h3>
         <AlertsView></AlertsView>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
         <h3>Contacts</h3>
         <ContactsView></ContactsView>
     </div>
@@ -28,6 +28,7 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.center{
+}
 </style>
