@@ -7,6 +7,7 @@
                         placeholder="enderwiggin@ifcomm.com"
                         label="Email"
                         type="email"
+                        required
                         ruxblur="{handleValidation()}"
                         :modelValue="user.email"
                         @ruxinput="user.email = $event.target.value"
@@ -19,10 +20,18 @@
                         id="pw"
                         label="Password"
                         type="password"
+                        required
                         :modelValue="user.password"
                         @ruxinput="user.password = $event.target.value"
                     ></rux-input>
                 </div>
+            </div>
+            <div v-if="error">
+                <p>
+                <strong class="text-danger">
+                    {{ error}}
+                </strong>
+                </p>
             </div>
             <div class="field">
                 <rux-button id="sign-in-btn" class="sign-in-btn" type="submit">Sign in</rux-button>
@@ -34,7 +43,6 @@
 <script>
 import { RuxButton } from '@astrouxds/astro-web-components/dist/components/rux-button'
 import { RuxInput } from '@astrouxds/astro-web-components/dist/components/rux-input'
-import userLogin from "../composable/userLogin.js"
 import { ref } from 'vue'
 
 export default {
@@ -47,23 +55,32 @@ export default {
         }
     },
     setup() {
-        const { error, login} = userLogin()
+            const error = ref(null)
         const user = ref({
             email: '',
             password: ''
         })
         
         const validateUser = (e) => {
-            console.log(user.value.email)
-            console.log(user.value.password)
-            let result = login(user.value.email, user.value.password)
-            localStorage.setItem('user', {
-                firstname: result.firstname,
-                lastname: result.lastname,
-                email: result.email
-            })
-            window.location.href = '/'
-        }
+           fetch("http://localhost:8000/users/login", {
+                method: "POST",
+                body: JSON.stringify({
+                    email: user.value.email,
+                    password: user.value.password
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }}).then(response =>{
+                    if(response.ok){
+                        json = response.json()
+                        localStorage.setItem('token', json.token)
+                        window.location.href = '/'
+                    }
+                    else{
+                        error.value = "Invalid username or password."
+                    }
+                })
+}
         
         return { user, validateUser, error }
     }

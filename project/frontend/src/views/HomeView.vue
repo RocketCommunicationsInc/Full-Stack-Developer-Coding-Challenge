@@ -1,8 +1,19 @@
 <template>
+<rux-pop-up-menu id="popup-menu-1">
+    <rux-menu-item>
+      <router-link :to="{name: 'home'}">
+        Dashboard
+      </router-link>
+    </rux-menu-item>
+    <rux-menu-item-divider></rux-menu-item-divider>
+    <rux-menu-item @click="logout">Signout</rux-menu-item>
+</rux-pop-up-menu>
+
 <rux-global-status-bar app-domain="Full Stack Demo"
   include-icon="true"
   menu-icons="apps">
     <rux-clock class="right"></rux-clock>
+    <rux-icon icon="settings" label="Settings" color="#fff" @click="displayPopupMenu" aria-controls="popup-menu-1" aria-haspopup="true"></rux-icon>
   </rux-global-status-bar>
   <Dashboard >
     
@@ -48,7 +59,12 @@ export default {
      username = this.user.firstname.charAt(0) + ". " + this.user.lastname
      return username
     }
-    return { isAuthenticated, getDisplayName }
+    
+    const logout = () =>{
+      localStorage.clear()
+      window.location.href = '/login'
+    }
+    return { isAuthenticated, getDisplayName , logout}
   },
 }
 </script>

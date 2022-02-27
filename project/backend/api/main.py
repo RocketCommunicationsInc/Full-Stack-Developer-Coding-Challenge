@@ -2,6 +2,8 @@ import hashlib
 import base64
 from typing import Optional
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine
@@ -89,28 +91,53 @@ def register_user(new_user: UserRegistration, status_code=201):
         # Save to database.
         session.add(temp)
         session.commit()
+        token = create_token(agent)
         return {"result": "True",
                 "email": temp.email,
                 "firstname": temp.firstname,
-                "lastname": temp.lastname
+                "lastname": temp.lastname,
+                "token": token
         }
 
 @app.post("/users/login")
 def validate_user(user: UserLogin, status_code=200):
+    print("Validate user called")
     agent = session.query(Agent).filter(Agent.email == user.email).first()
-    print(agent)
+    print("Agent: ",agent)
     if agent is not None:
         # Create new agent.
         salted_password = user.password + agent.passwordsalt
         if verify_password(salted_password, agent.passwordhash):
-            return {"result": "True",
+            print("Password matches")
+            token = create_token(agent.email)
+            payload = jsonable_encoder({"result": "True",
                     "email": agent.email,
                     "firstname": agent.firstname,
-                    "lastname": agent.lastname
+                    "lastname": agent.lastname,
+                    "token": token
+            })
+            print("Payload:", payload)
+            payload = {"result": "True",
+                    "email": agent.email,
+                    "firstname": agent.firstname,
+                    "lastname": agent.lastname,
+                    "token": token
             }
+            return JSONResponse(content=payload)
+            # return payload
+            # return {"token": token}
 
     # If we get here, then a username/password pair wasn't matched.
-    raise HTTPException(status_code=402, detail="Invalid username or password.")
+    raise HTTPException(status_code=401, detail="Invalid username or password.")
+
+@app.post("/token/validate")
+def validate_user_token(token: UserToken, status_code=200):
+    if verify_token(token.token):
+        return
+    else:
+        raise HTTPException(status_code=401, detail="Invalid token.")
+        
+
 
 @app.get("/users")
 def get_all_users():

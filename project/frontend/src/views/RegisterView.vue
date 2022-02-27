@@ -100,11 +100,7 @@ export default {
                     new_user.value.password)
             
             if(!error){
-                localStorage.setItem('user', {
-                    firstname: result.firstname,
-                    lastname: result.lastname,
-                    email: result.email,
-                })
+                localStorage.setItem('token', result.token)
                 
                 window.location.href = '/'
             }

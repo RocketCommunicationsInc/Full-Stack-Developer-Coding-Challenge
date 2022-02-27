@@ -28,7 +28,6 @@ const userRegister = () => {
       if(!data.ok) {
         if(data.status != 200){
           let errorData = await data.json()
-
           throw Error(errorData.detail)
         }
         else
