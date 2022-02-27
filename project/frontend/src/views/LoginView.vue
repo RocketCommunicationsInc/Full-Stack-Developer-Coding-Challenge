@@ -73,11 +73,15 @@ export default {
                 }}).then(response =>{
                     if(response.ok){
                         let json = response.json()
-                        localStorage.setItem('token', json.token)
-                        window.location.href = '/'
+                        return json
                     }
                     else{
                         error.value = "Invalid username or password."
+                    }
+                }).then(json => {
+                    if(json.token){
+                        localStorage.setItem('token', json.token)
+                        window.location.href = '/'
                     }
                 })
 }
