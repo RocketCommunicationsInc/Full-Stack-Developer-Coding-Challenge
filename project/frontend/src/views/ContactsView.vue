@@ -41,6 +41,7 @@
 <script>
 import getContacts from "../composable/getContacts.js"
 import getContactStates from "../composable/getContactStates.js"
+import formatTimeString from "../composable/timeUtils.js"
 import { ref } from 'vue'
 
 export default {
@@ -56,24 +57,9 @@ export default {
     load()
     loadStates()
     
-    const addZero = (value) =>{
-      if(value < 10)
-        return "0" + value
-      else 
-        return value
-    }
-    
     const formatContactStartEndTimestamps = (contact) => {
-        let start = new Date(contact.begin_timestamp)
-        let startTime = start.getHours() + ':' + 
-            addZero(start.getMinutes()) + ':' + 
-            addZero(start.getSeconds())
-
-        let end = new Date(contact.end_timestamp)
-        let endTime = end.getHours() + ':' + 
-            addZero(end.getMinutes()) + ':' + 
-            addZero(end.getSeconds())
-        
+        let startTime = formatTimeString(contact.begin_timestamp)
+        let endTime = formatTimeString(contact.end_timestamp)
         return startTime + " - " + endTime
     }
     

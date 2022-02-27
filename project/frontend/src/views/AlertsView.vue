@@ -26,6 +26,7 @@
 
 <script>
 import getAlerts from "../composable/getAlerts.js"
+import formatTimeString from "../composable/timeUtils.js"
 
 export default {
   name: 'AlertsView',
@@ -37,8 +38,7 @@ export default {
     load()
     
     const formatAlertTime = (alert) => {
-        let current_date = new Date(alert.time)
-        return current_date.getHours() + ':' + current_date.getMinutes() + ':' + current_date.getSeconds()
+        return formatTimeString(alert.time)
     }
 
     return { alerts, error, formatAlertTime }

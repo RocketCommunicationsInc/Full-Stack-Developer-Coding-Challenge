@@ -10,7 +10,11 @@
     <rux-menu-item @click="logout">Signout</rux-menu-item>
 </rux-pop-up-menu>
 
-<rux-global-status-bar app-domain="Coding Challenge" username="created by Darin Nickloy">
+<rux-global-status-bar app-domain="Coding Challenge" 
+          username="created by Darin Nickloy" 
+          include-icon="true"
+          menu-icon="developer-mode"
+          app-version="0.72-delta">
     <rux-clock class="right"></rux-clock>
     <rux-icon icon="settings" label="Settings" color="#fff" @click="displayPopupMenu" aria-controls="popup-menu-1" aria-haspopup="true"></rux-icon>
   </rux-global-status-bar>
