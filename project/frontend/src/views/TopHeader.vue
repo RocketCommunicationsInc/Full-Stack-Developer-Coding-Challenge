@@ -10,9 +10,7 @@
     <rux-menu-item @click="logout">Signout</rux-menu-item>
 </rux-pop-up-menu>
 
-<rux-global-status-bar app-domain="Full Stack Demo"
-  include-icon="true"
-  menu-icons="apps">
+<rux-global-status-bar app-domain="Coding Challenge" username="created by Darin Nickloy">
     <rux-clock class="right"></rux-clock>
     <rux-icon icon="settings" label="Settings" color="#fff" @click="displayPopupMenu" aria-controls="popup-menu-1" aria-haspopup="true"></rux-icon>
   </rux-global-status-bar>
@@ -20,8 +18,6 @@
 
 <script>
 // Import Astro controls.
-import { RuxButton } from '@astrouxds/astro-web-components/dist/components/rux-button'
-import { RuxInput } from '@astrouxds/astro-web-components/dist/components/rux-input'
 import { RuxGlobalStatusBar } from '@astrouxds/astro-web-components/dist/components/rux-global-status-bar'
 import { RuxClock } from '@astrouxds/astro-web-components/dist/components/rux-global-status-bar'
 
