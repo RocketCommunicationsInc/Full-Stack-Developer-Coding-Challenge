@@ -89,7 +89,11 @@ def register_user(new_user: UserRegistration, status_code=201):
         # Save to database.
         session.add(temp)
         session.commit()
-        return
+        return {"result": "True",
+                "email": temp.email,
+                "firstname": temp.firstname,
+                "lastname": temp.lastname
+        }
 
 @app.post("/users/login")
 def validate_user(user: UserLogin, status_code=200):

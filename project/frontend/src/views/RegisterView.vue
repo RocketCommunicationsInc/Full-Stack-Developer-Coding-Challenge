@@ -99,7 +99,15 @@ export default {
                     new_user.value.email,
                     new_user.value.password)
             
-            // Validate result.
+            if(!error){
+                localStorage.setItem('user', {
+                    firstname: result.firstname,
+                    lastname: result.lastname,
+                    email: result.email,
+                })
+                
+                window.location.href = '/'
+            }
         }
         
         return { new_user, registerUser, error }

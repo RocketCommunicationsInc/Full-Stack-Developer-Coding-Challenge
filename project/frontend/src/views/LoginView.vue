@@ -25,9 +25,8 @@
                 </div>
             </div>
             <div class="field">
-                <rux-button id="sign-in-btn" class="sign-in-btn" type="submit"
-                    >Sign in</rux-button
-                >
+                <rux-button id="sign-in-btn" class="sign-in-btn" type="submit">Sign in</rux-button>
+                <rux-button id="sign-in-btn" class="sign-in-btn" @click="this.$router.push('register')">Register</rux-button>
             </div>
         </form>
 </template>

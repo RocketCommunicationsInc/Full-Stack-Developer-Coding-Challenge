@@ -34,6 +34,8 @@ const userRegister = () => {
         else
           throw Error('Failed to register user.')
       }
+      
+      return data.json()
     }
     catch(err) {
       error.value = err.message
