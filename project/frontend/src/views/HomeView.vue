@@ -1,15 +1,14 @@
 <template>
 <rux-global-status-bar app-domain="Full Stack Demo"
-  username="D. Nickloy"
   include-icon="true"
   menu-icons="apps">
     <rux-clock class="right"></rux-clock>
   </rux-global-status-bar>
-  <!-- <Dashboard >
+  <Dashboard >
     
-  </Dashboard> -->
-  <RegisterView></RegisterView>
-<LoginView v-if="!isAuthenticated" class='content'></LoginView>
+  </Dashboard>
+  <!-- <RegisterView></RegisterView> -->
+<!-- <LoginView v-if="!isAuthenticated" class='content'></LoginView> -->
 </template>
 
 <script>
@@ -28,18 +27,29 @@ import { RuxClock } from '@astrouxds/astro-web-components/dist/components/rux-gl
 
 export default {
   name: 'HomeView',
+  props:{
+    user: {
+      firstname: "",
+      lastname: "",
+      email: ""
+    }
+  },
   components: {
     AlertsView,
     ContactsView,
     LoginView,
     Dashboard,
     RegisterView
-},
+  },
   setup() {
     let isAuthenticated = false
 
-    return { isAuthenticated }
-  }
+    const getDisplayName = () => {
+     username = this.user.firstname.charAt(0) + ". " + this.user.lastname
+     return username
+    }
+    return { isAuthenticated, getDisplayName }
+  },
 }
 </script>
 

@@ -40,6 +40,13 @@ import { ref } from 'vue'
 
 export default {
     name: "LoginView",
+    props: {
+        user: {
+            firstname: "",
+            lastname: "",
+            email: ""
+        }
+    },
     setup() {
         const { error, login} = userLogin()
         const user = ref({
@@ -51,7 +58,12 @@ export default {
             console.log(user.value.email)
             console.log(user.value.password)
             let result = login(user.value.email, user.value.password)
-            console.log(result)
+            localStorage.setItem('user', {
+                firstname: result.firstname,
+                lastname: result.lastname,
+                email: result.email
+            })
+            window.location.href = '/'
         }
         
         return { user, validateUser, error }

@@ -99,7 +99,11 @@ def validate_user(user: UserLogin, status_code=200):
         # Create new agent.
         salted_password = user.password + agent.passwordsalt
         if verify_password(salted_password, agent.passwordhash):
-            return {"result": "True"}
+            return {"result": "True",
+                    "email": agent.email,
+                    "firstname": agent.firstname,
+                    "lastname": agent.lastname
+            }
 
     # If we get here, then a username/password pair wasn't matched.
     raise HTTPException(status_code=402, detail="Invalid username or password.")
