@@ -16,7 +16,7 @@
           menu-icon="developer-mode"
           app-version="0.72-delta">
     <rux-clock class="right"></rux-clock>
-    <rux-icon icon="settings" label="Settings" color="#fff" @click="displayPopupMenu" aria-controls="popup-menu-1" aria-haspopup="true"></rux-icon>
+    <rux-icon icon="settings" label="Settings" color="#fff" @click="displayPopupMenu" aria-controls="popup-menu-1" aria-haspopup="true" class="icon"></rux-icon>
   </rux-global-status-bar>
 </template>
 
@@ -42,6 +42,10 @@ export default {
 .right{
   margin-left: auto;
   margin-right: 0px;
+}
+.icon{
+  margin-left: 15px;
+  margin-top: 5px;
 }
 
 </style>
