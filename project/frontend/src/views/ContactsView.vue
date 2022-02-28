@@ -1,5 +1,5 @@
 <template>
-<div class="row justify-content-center">
+<div class="row justify-content-center text-white">
   <div class="col-3" v-for="state in states" :key="state.id">
     <h1>{{ state.count }}</h1>
     <strong>{{ state.state }}</strong>
@@ -9,32 +9,25 @@
     <strong>Total</strong>
   </div>
 </div> <!-- end row div -->
+    <div v-if="contactsError">{{ error }}</div>
 <div class="row">
   <div class="col-md-12">
-    <table class="table text-white">
-        <colgroup>
-            <col span="1" style="width: 15%;">
-            <col span="1" style="width: 50%;">
-            <col span="1" style="width: 35%;">
-        </colgroup>
-        <thead class="thead-dark">
-            <tr>
-                <th @click="sortName">
-                    <span>Name <i class="fa-solid fa-sort"></i></span>
-                </th>
-                <th>Status</th>
-                <th>AOC-EOC</th>
-            </tr>
-        </thead>
-        <tbody v-for="contact in contacts" :key="contact.id">
-            <tr>
-                <td>{{ contact.name }}</td>
-                <td>{{ contact.status.display }} (Step: {{ contact.step.step }})</td>
-                <td class="text-right">{{ formatContactStartEndTimestamps(contact) }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div v-if="contactsError">{{ error }}</div>
+    <rux-table>
+      <rux-table-header>
+        <rux-table-header-row>
+          <rux-table-header-cell>Name</rux-table-header-cell>
+          <rux-table-header-cell>Status</rux-table-header-cell>
+          <rux-table-header-cell>AOC-EOC</rux-table-header-cell>
+        </rux-table-header-row>
+      </rux-table-header>
+        <rux-table-body v-for="contact in contacts" :key="contact.id">
+            <rux-table-row>
+                <rux-table-cell>{{ contact.name }}</rux-table-cell>
+                <rux-table-cell>{{ contact.status.display}}</rux-table-cell>
+                <rux-table-cell>{{ formatContactStartEndTimestamps(contact) }}</rux-table-cell>
+            </rux-table-row>
+        </rux-table-body>
+    </rux-table>
 
   </div>
 </div>
@@ -45,6 +38,13 @@ import getContacts from "../composable/getContacts.js"
 import getContactStates from "../composable/getContactStates.js"
 import formatTimeString from "../composable/timeUtils.js"
 import { ref } from 'vue'
+import RuxTable from '@astrouxds/astro-web-components/dist/components/rux-table'
+import RuxTableHeader from '@astrouxds/astro-web-components/dist/components/rux-table-header'
+import RuxTableHeaderRow from '@astrouxds/astro-web-components/dist/components/rux-table-header-row'
+import RuxTableHeaderCell from '@astrouxds/astro-web-components/dist/components/rux-table-header-cell'
+import RuxTableBody from '@astrouxds/astro-web-components/dist/components/rux-table-body'
+import RuxTableRow from '@astrouxds/astro-web-components/dist/components/rux-table-row'
+import RuxTableCell from '@astrouxds/astro-web-components/dist/components/rux-table-cell'
 
 export default {
   name: 'ContactsView',
