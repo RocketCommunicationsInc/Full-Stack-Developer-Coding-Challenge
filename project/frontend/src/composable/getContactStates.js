@@ -7,7 +7,7 @@ const getContactStates = () => {
 
   const loadStates = async () => {
     try {
-      let data = await fetch('http://localhost:8000/contacts/states/count')
+      let data = await fetch('http://localhost:8887/contacts/states/count')
       if(!data.ok) {
         throw Error('no available data')
       }

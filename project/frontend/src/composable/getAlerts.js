@@ -7,7 +7,7 @@ const getAlerts = () => {
 
   const load = async () => {
     try {
-      let data = await fetch('http://localhost:8000/alerts')
+      let data = await fetch('http://localhost:8887/alerts')
       if(!data.ok) {
         throw Error('no available data')
       }

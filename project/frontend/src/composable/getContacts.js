@@ -7,7 +7,7 @@ const getContacts = () => {
 
   const load = async () => {
     try {
-      let data = await fetch('http://localhost:8000/contacts')
+      let data = await fetch('http://localhost:8887/contacts')
       if(!data.ok) {
         throw Error('no available data')
       }
