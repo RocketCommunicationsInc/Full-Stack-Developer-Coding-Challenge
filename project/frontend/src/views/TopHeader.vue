@@ -7,7 +7,7 @@
       </router-link>
     </rux-menu-item>
     <rux-menu-item-divider></rux-menu-item-divider>
-    <rux-menu-item @click="logout">Signout</rux-menu-item>
+    <rux-menu-item @click="logout">Sign Out</rux-menu-item>
 </rux-pop-up-menu>
 
 <rux-global-status-bar app-domain="Coding Challenge" 
