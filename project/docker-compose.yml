@@ -5,3 +5,12 @@ services:
     build: ./backend
     ports:
       - 8000:8000
+  web-frontend:
+    container_name: rocker_frontend
+    build: ./frontend
+    ports:
+      - 80:8080
+    depends_on:
+      - web-backend
+    volumes:
+      - ./backend/api/rocket.db:/code/rocket.db

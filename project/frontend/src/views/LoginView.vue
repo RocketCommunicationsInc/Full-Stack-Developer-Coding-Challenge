@@ -88,7 +88,7 @@ export default {
       password: "",
     });
 
-    const validateUser = (e) => {
+    const validateUser = () => {
       if (user.value.email == "" || user.value.password == "") {
         error.value = "Enter email and password."   
         return error

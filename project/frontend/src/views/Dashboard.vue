@@ -1,10 +1,10 @@
 <template>
 <div class="row justify-content-center">
-    <div class="col-md-4">
+    <div class="col-lg-5">
         <h3>Alerts</h3>
         <AlertsView></AlertsView>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-5">
         <h3>Contacts</h3>
         <ContactsView></ContactsView>
     </div>

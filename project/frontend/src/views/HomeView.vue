@@ -1,10 +1,6 @@
 <template>
   <TopHeader class="header"/> 
-  <div class="row">
-    <div class="col-md-12">
-      <Dashboard />
-    </div>
-  </div>
+  <Dashboard />
 </template>
 
 <script>
