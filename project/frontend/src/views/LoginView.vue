@@ -11,7 +11,7 @@
                   Please enter your email and password!
                 </p>
 
-                <form id="rux-form" @submit.prevent="validateUser">
+                <form id="rux-form" @submit.prevent="validateUser" @keydown.enter="validateUser">
                   <div class="form-outline form-white mb-4">
                     <div class="group">
                       <div class="field">

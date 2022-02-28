@@ -11,7 +11,7 @@
                   Please enter your email and password!
                 </p>
 
-                <form id="new_user_form" @submit.prevent="registerUser">
+                <form id="new_user_form" @submit.prevent="registerUser" @keydown.enter="registerUser">
                   <div class="form-outline form-white mb-4">
                     <div class="group">
                       <div class="field">
