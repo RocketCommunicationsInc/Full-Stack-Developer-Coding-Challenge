@@ -30,7 +30,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-@app.get("/alerts")
+@app.get("/api/alerts")
 def read_alerts():
     # Get all alerts.
     rows = session.query(Alert).all()
@@ -43,7 +43,7 @@ def read_alerts():
     # Return data.
     return data
 
-@app.get("/contacts")
+@app.get("/api/contacts")
 def read_contact():
     # Get all contacts.
     rows = session.query(Contact).all()
@@ -56,7 +56,7 @@ def read_contact():
     # Return data.
     return data
 
-@app.get("/contacts/states/count")
+@app.get("/api/contacts/states/count")
 def read_contact_status():
     # Generate a list of contact states with their count.
     results = []
@@ -71,7 +71,7 @@ def read_contact_status():
 
     return results
     
-@app.post("/users/register")
+@app.post("/api/users/register")
 def register_user(new_user: UserRegistration, status_code=201):
     # Look up the user in the database.
     agent = session.query(Agent).filter(Agent.email == new_user.email).first()
@@ -104,7 +104,7 @@ def register_user(new_user: UserRegistration, status_code=201):
                 "token": token
         }
 
-@app.post("/users/login")
+@app.post("/api/users/login")
 def validate_user(user: UserLogin, status_code=200):
     # Look up the user in the database.
     agent = session.query(Agent).filter(Agent.email == user.email).first()
@@ -124,7 +124,7 @@ def validate_user(user: UserLogin, status_code=200):
     # If we get here, then a username/password pair wasn't matched.
     raise HTTPException(status_code=401, detail="Invalid username or password.")
 
-@app.post("/token/validate")
+@app.post("/api/token/validate")
 def validate_user_token(token: UserToken, status_code=200):
     if verify_token(token.token):
         return # return default status code
