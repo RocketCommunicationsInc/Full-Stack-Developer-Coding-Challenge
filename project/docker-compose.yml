@@ -1,0 +1,16 @@
+version: '2'
+services:
+  web-backend:
+    container_name: rocket_backend
+    build: ./backend
+    ports:
+      - 8887:8887
+  web-frontend:
+    container_name: rocker_frontend
+    build: ./frontend
+    ports:
+      - 8888:8080
+    depends_on:
+      - web-backend
+    volumes:
+      - ./backend/api/rocket.db:/code/rocket.db
