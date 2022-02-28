@@ -16,9 +16,12 @@ RUN npm clean-install --fix
 # copy project files and folders to the current working directory (i.e. 'app' folder)
 COPY . .
 
-# build app for production with minification
-# RUN npm run build --fix
-
+# Expose a port for incomming traffic.
 EXPOSE 8080
+
+# Development Build 
 CMD ["npm", "run", "serve"]
+
+# Production Build
+# RUN npm run build --fix
 # CMD [ "http-server", "dist" ]
