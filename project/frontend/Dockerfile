@@ -20,8 +20,8 @@ COPY . .
 EXPOSE 8080
 
 # Development Build 
-CMD ["npm", "run", "serve"]
+# CMD ["npm", "run", "serve"]
 
 # Production Build
-# RUN npm run build --fix
-# CMD [ "http-server", "dist" ]
+RUN npm run build --fix
+CMD [ "http-server", "dist" ]
