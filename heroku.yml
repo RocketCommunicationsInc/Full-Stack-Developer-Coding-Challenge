@@ -1,0 +1,4 @@
+build:
+  docker:
+    api: project/backend/api
+    web: projectd/frontend
