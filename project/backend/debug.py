@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 import json
 from datetime import datetime
 from api.models import *
+import pandas as pd
 
 # Create an engine that stores data in the local directory's rocket.db file.
 engine = create_engine('sqlite:///rocket.db')
@@ -17,6 +18,9 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # Define helper functions.
+
+def convert_epoch(value):
+    return datetime.datetime.fromtimestamp(int(value) / 1e3)
 
 def try_get_category(value: str):
     result = session.query(AlertCategory).filter(AlertCategory.category == value).first()
@@ -116,7 +120,9 @@ with open(alert_json_filename, 'rb') as file:
         row = Alert()
         row.message = alert['errorMessage']
         row.long_message = alert['longMessage']
-        # row.time = datetime.fromtimestamp(alert['errorTime'])
+        # row.time = pd.to_datetime(alert['errorTime'], unit='s')
+        # row.time = datetime.datetime.fromtimestamp(int(alert['errorTime']))
+        row.time = convert_epoch(alert['errorTime'])
         row.selected = alert['selected']
         row.new = alert['new']
         row.expanded = alert['expanded']
@@ -147,8 +153,10 @@ with open(contacts_json_filename, 'rb') as file:
         temp.satellite = contact['contactSatellite']
         temp.equipment = contact['contactEquipment']
         temp.detail = contact['contactDetail']
-        # temp.begin_timestamp = 
-        # temp.end_timestamp = 
+        # temp.begin_timestamp = pd.to_datetime(contact['contactBeginTimestamp'], unit='s')
+        temp.begin_timestamp = convert_epoch(contact['contactBeginTimestamp'])
+        # temp.end_timestamp = pd.to_datetime(contact['contactEndTimestamp'], unit='s')
+        temp.end_timestamp = convert_epoch(contact['contactEndTimestamp'])
         temp.latitude = contact['contactLatitude']
         temp.longitude = contact['contactLongitude']
         temp.azimuth = contact['contactAzimuth']

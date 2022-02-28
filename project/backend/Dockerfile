@@ -1,7 +1,7 @@
 # Inherit container from Python
 FROM python:3.8
 
-# Set the containers working director.
+# Set the containers working directory.
 WORKDIR /code
 
 # Update the PYTHONPATH variable to include the new working directory.

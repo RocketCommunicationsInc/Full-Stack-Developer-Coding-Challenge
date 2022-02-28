@@ -4,8 +4,8 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
@@ -58,6 +58,7 @@ def read_contact():
 
 @app.get("/contacts/states/count")
 def read_contact_status():
+    # Generate a list of contact states with their count.
     results = []
     rows = session.query(ContactState).all()
     for row in rows:
@@ -72,7 +73,9 @@ def read_contact_status():
     
 @app.post("/users/register")
 def register_user(new_user: UserRegistration, status_code=201):
+    # Look up the user in the database.
     agent = session.query(Agent).filter(Agent.email == new_user.email).first()
+
     if agent is not None:
         # An account for this email has already been registered.
         raise HTTPException(status_code=409, detail="An account for this email already exists.")
@@ -92,6 +95,8 @@ def register_user(new_user: UserRegistration, status_code=201):
         session.add(temp)
         session.commit()
         token = create_token(agent)
+
+        # Return the user and token.
         return {"result": "True",
                 "email": temp.email,
                 "firstname": temp.firstname,
@@ -101,22 +106,13 @@ def register_user(new_user: UserRegistration, status_code=201):
 
 @app.post("/users/login")
 def validate_user(user: UserLogin, status_code=200):
-    print("Validate user called")
+    # Look up the user in the database.
     agent = session.query(Agent).filter(Agent.email == user.email).first()
-    print("Agent: ",agent)
     if agent is not None:
         # Create new agent.
         salted_password = user.password + agent.passwordsalt
         if verify_password(salted_password, agent.passwordhash):
-            print("Password matches")
             token = create_token(agent.email)
-            payload = jsonable_encoder({"result": "True",
-                    "email": agent.email,
-                    "firstname": agent.firstname,
-                    "lastname": agent.lastname,
-                    "token": token
-            })
-            print("Payload:", payload)
             payload = {"result": "True",
                     "email": agent.email,
                     "firstname": agent.firstname,
@@ -124,8 +120,6 @@ def validate_user(user: UserLogin, status_code=200):
                     "token": token
             }
             return JSONResponse(content=payload)
-            # return payload
-            # return {"token": token}
 
     # If we get here, then a username/password pair wasn't matched.
     raise HTTPException(status_code=401, detail="Invalid username or password.")
@@ -133,13 +127,7 @@ def validate_user(user: UserLogin, status_code=200):
 @app.post("/token/validate")
 def validate_user_token(token: UserToken, status_code=200):
     if verify_token(token.token):
-        return
+        return # return default status code
     else:
         raise HTTPException(status_code=401, detail="Invalid token.")
         
-
-
-@app.get("/users")
-def get_all_users():
-    results = session.query(Agent).all()
-    return results
