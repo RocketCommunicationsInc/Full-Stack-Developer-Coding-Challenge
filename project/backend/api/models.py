@@ -195,10 +195,4 @@ class UserToken(BaseModel):
     email: str
     token: str
 
-if __name__ == "__main__":
-    # Create an engine that stores data in the local directory's rocket.db file.
-    engine = create_engine('sqlite:///rocket.db')
-    
-    # Create all tables in the engine. 
-    Base.metadata.create_all(engine)
     
