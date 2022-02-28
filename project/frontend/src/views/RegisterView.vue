@@ -25,6 +25,11 @@
                           :modelValue="new_user.firstname"
                           @ruxinput="new_user.firstname = $event.target.value"
                         ></rux-input>
+                        <label
+                          class="text-danger"
+                          v-if="!new_user.firstname && new_user.submitted"
+                          >* Enter first name</label
+                        >
                       </div>
                     </div>
                     <div class="group">
@@ -39,6 +44,11 @@
                           :modelValue="new_user.lastname"
                           @ruxinput="new_user.lastname = $event.target.value"
                         ></rux-input>
+                        <label
+                          class="text-danger"
+                          v-if="!new_user.lastname && new_user.submitted"
+                          >* Enter last name</label
+                        >
                       </div>
                     </div>
                     <div class="group">
@@ -53,6 +63,11 @@
                           :modelValue="new_user.email"
                           @ruxinput="new_user.email = $event.target.value"
                         ></rux-input>
+                        <label
+                          class="text-danger"
+                          v-if="!new_user.email && new_user.submitted"
+                          >* Enter an email address</label
+                        >
                       </div>
                     </div>
                     <div class="group">
@@ -65,6 +80,10 @@
                           :modelValue="new_user.password"
                           @ruxinput="new_user.password = $event.target.value"
                         ></rux-input>
+                        <label
+                          class="text-danger"
+                          v-if="!new_user.password && new_user.submitted"
+                          >* Enter password</label>
                       </div>
                     </div>
                     <div v-if="error">
@@ -75,12 +94,12 @@
                       </p>
                     </div>
                     <div class="field">
-                  <rux-button
-                    id="sign-in-btn"
-                    class="sign-in-btn btn-lg "
-                    type="submit"
-                    >Register</rux-button
-                  >
+                      <rux-button
+                        id="sign-in-btn"
+                        class="sign-in-btn btn-lg"
+                        type="submit"
+                        >Register</rux-button
+                      >
                     </div>
                   </div>
                 </form>
@@ -116,35 +135,47 @@ export default {
       lastname: "",
       email: "",
       password: "",
+      submitted: false,
     });
 
     const registerUser = (e) => {
-      fetch("http://localhost:8000/users/register", {
-        method: "POST",
-        body: JSON.stringify({
-          firstname: new_user.value.firstname,
-          lastname: new_user.value.lastname,
-          email: new_user.value.email,
-          password: new_user.value.password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            let json = response.json();
-            return json;
-          } else {
-            error.value = "Failed to regsiter user.";
-          }
+      if (
+        new_user.value.firstname == "" ||
+        new_user.value.lastname == "" ||
+        new_user.value.email == "" ||
+        new_user.value.password == ""
+      ) {
+        new_user.value.submitted = true
+        return new_user
+      }
+      else {
+        fetch("http://localhost:8000/users/register", {
+          method: "POST",
+          body: JSON.stringify({
+            firstname: new_user.value.firstname,
+            lastname: new_user.value.lastname,
+            email: new_user.value.email,
+            password: new_user.value.password,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
         })
-        .then((json) => {
-          if (json.token) {
-            localStorage.setItem("token", json.token);
-            window.location.href = "/";
-          }
-        });
+          .then((response) => {
+            if (response.ok) {
+              let json = response.json();
+              return json;
+            } else {
+              error.value = "Failed to regsiter user.";
+            }
+          })
+          .then((json) => {
+            if (json.token) {
+              localStorage.setItem("token", json.token);
+              window.location.href = "/";
+            }
+          });
+      }
     };
 
     return { new_user, registerUser, error };

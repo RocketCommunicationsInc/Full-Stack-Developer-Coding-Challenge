@@ -40,6 +40,11 @@
                       </div>
                     </div>
                   </div>
+                  <p v-if="error">
+                    <strong class="text-danger">
+                      {{ error }}
+                    </strong>
+                  </p>
 
                   <rux-button
                     id="sign-in-btn"
@@ -60,13 +65,6 @@
       </div>
     </div>
   </section>
-  <div v-if="error">
-    <p>
-      <strong class="text-danger">
-        {{ error }}
-      </strong>
-    </p>
-  </div>
 </template>
 
 <script>
@@ -91,31 +89,37 @@ export default {
     });
 
     const validateUser = (e) => {
-      fetch("http://localhost:8000/users/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: user.value.email,
-          password: user.value.password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            let json = response.json();
-            return json;
-          } else {
-            error.value = "Invalid username or password.";
-          }
+      if (user.value.email == "" || user.value.password == "") {
+        error.value = "Enter email and password."   
+        return error
+      } 
+      else {
+        fetch("http://localhost:8000/users/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: user.value.email,
+            password: user.value.password,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
         })
-        .then((json) => {
-          if (json.token) {
-            localStorage.setItem("token", json.token);
-            window.location.href = "/";
-          }
-        });
-    };
+          .then((response) => {
+            if (response.ok) {
+              let json = response.json();
+              return json;
+            } else {
+              error.value = "Invalid username or password.";
+            }
+          })
+          .then((json) => {
+            if (json.token) {
+              localStorage.setItem("token", json.token);
+              window.location.href = "/";
+            }
+          })
+      }
+    }
 
     return { user, validateUser, error };
   },
