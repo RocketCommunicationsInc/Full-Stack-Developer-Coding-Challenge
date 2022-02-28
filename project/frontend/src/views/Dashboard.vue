@@ -4,7 +4,7 @@
         <h3>Alerts</h3>
         <AlertsView></AlertsView>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
         <h3>Contacts</h3>
         <ContactsView></ContactsView>
     </div>

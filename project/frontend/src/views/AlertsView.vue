@@ -1,14 +1,16 @@
 <template>
     <table class="table table-striped">
         <colgroup>
-            <col span="1" style="width: 65%;">
-            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 55%;">
+            <col span="1" style="width: 20%;">
             <col span="1" style="width: 25%;">
         </colgroup>
         <thead class="thead-dark">
             <tr>
                 <th>Message</th>
-                <th>Category</th>
+                <th @click="sortCategory">
+                    <span>Category <i class="fa-solid fa-sort"></i></span>
+                </th>
                 <th>Time</th>
             </tr>
         </thead>
@@ -40,8 +42,12 @@ export default {
     const formatAlertTime = (alert) => {
         return formatTimeString(alert.time)
     }
+    
+    const sortCategory = () =>{
+        alerts.value = alerts.value.sort()
+    }
 
-    return { alerts, error, formatAlertTime }
+    return { alerts, error, formatAlertTime, sortCategory }
   }
 }
 </script>

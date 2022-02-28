@@ -19,7 +19,9 @@
         </colgroup>
         <thead class="thead-dark">
             <tr>
-                <th>Name</th>
+                <th @click="sortName">
+                    <span>Name <i class="fa-solid fa-sort"></i></span>
+                </th>
                 <th>Status</th>
                 <th>AOC-EOC</th>
             </tr>
@@ -63,7 +65,11 @@ export default {
         return startTime + " - " + endTime
     }
     
-    return { contacts, contactsError, stateError, formatContactStartEndTimestamps, states}
+    const sortName = () => {
+
+    }
+    
+    return { contacts, contactsError, stateError, formatContactStartEndTimestamps, states, sortName}
   },
 }
 </script>
