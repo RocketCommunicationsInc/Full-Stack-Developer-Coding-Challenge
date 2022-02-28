@@ -78,7 +78,7 @@ import { RuxInput } from '@astrouxds/astro-web-components/dist/components/rux-in
 export default {
     name: "LoginView",
     setup() {
-        const { error, register} = userRegister()
+        const error = ref(null)
         const new_user = ref({
             firstname: '',
             lastname: '',
@@ -113,19 +113,6 @@ export default {
                     }
                 })
 
-        }
-        
-        const old_registerUser = (e) => {
-            let result = register(new_user.value.firstname, 
-                    new_user.value.lastname,
-                    new_user.value.email,
-                    new_user.value.password)
-            
-            if(!error){
-                localStorage.setItem('token', result.token)
-                
-                window.location.href = '/'
-            }
         }
         
         return { new_user, registerUser, error }
