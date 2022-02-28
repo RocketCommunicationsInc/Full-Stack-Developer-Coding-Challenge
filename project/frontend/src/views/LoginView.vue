@@ -94,7 +94,7 @@ export default {
         return error
       } 
       else {
-        fetch("http://nickloy-fullstack-challenge.herokuapp.com/api/users/login", {
+        fetch("https://nickloy-fullstack-challenge.herokuapp.com/api/users/login", {
           method: "POST",
           body: JSON.stringify({
             email: user.value.email,

@@ -7,7 +7,7 @@ const getContactStates = () => {
 
   const loadStates = async () => {
     try {
-      let data = await fetch('http://nickloy-fullstack-challenge.herokuapp.com/api/contacts/states/count')
+      let data = await fetch('https://nickloy-fullstack-challenge.herokuapp.com/api/contacts/states/count')
       if(!data.ok) {
         throw Error('no available data')
       }
