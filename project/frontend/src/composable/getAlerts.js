@@ -7,7 +7,7 @@ const getAlerts = () => {
 
   const load = async () => {
     try {
-      let data = await fetch('http://localhost:8887/alerts')
+      let data = await fetch('http://nickloy-fullstack-challenge.herokuapp.com/api/alerts')
       if(!data.ok) {
         throw Error('no available data')
       }
