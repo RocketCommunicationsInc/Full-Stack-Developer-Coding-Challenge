@@ -23,7 +23,7 @@
         <rux-table-body v-for="contact in contacts" :key="contact.id">
             <rux-table-row>
                 <rux-table-cell>{{ contact.name }}</rux-table-cell>
-                <rux-table-cell>{{ contact.status.display}}</rux-table-cell>
+                <rux-table-cell>{{ contact.status.display}} (Step: {{contact.step.display }})</rux-table-cell>
                 <rux-table-cell>{{ formatContactStartEndTimestamps(contact) }}</rux-table-cell>
             </rux-table-row>
         </rux-table-body>
