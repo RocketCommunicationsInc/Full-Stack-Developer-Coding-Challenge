@@ -117,8 +117,6 @@
       </strong>
     </p>
   </div>
-
-  <form id="new_user_form" @submit.prevent="registerUser"></form>
 </template>
 
 <script>

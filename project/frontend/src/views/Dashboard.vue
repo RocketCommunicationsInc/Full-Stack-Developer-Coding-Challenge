@@ -20,11 +20,7 @@ export default {
     components: {
         AlertsView,
         ContactsView
-    },
-    setup(){
-        
     }
-
 }
 </script>
 

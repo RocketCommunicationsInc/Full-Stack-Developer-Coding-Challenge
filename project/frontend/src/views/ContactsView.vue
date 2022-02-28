@@ -74,9 +74,7 @@ export default {
       else{
         sort_direction = true
         contacts.value.sort((t1,t2) => t1.name < t2.name ? -1 : 1);
-
       }
-
     }
     
     return { contacts, contactsError, stateError, formatContactStartEndTimestamps, states, sortName}
