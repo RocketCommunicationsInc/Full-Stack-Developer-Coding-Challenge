@@ -11,7 +11,7 @@
 </div> <!-- end row div -->
 <div class="row">
   <div class="col-md-12">
-    <table class="table table-striped">
+    <table class="table text-white">
         <colgroup>
             <col span="1" style="width: 15%;">
             <col span="1" style="width: 50%;">

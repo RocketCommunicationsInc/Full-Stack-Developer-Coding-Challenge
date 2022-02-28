@@ -1,34 +1,33 @@
 <template>
-    <table class="table table-striped">
-        <colgroup>
-            <col span="1" style="width: 55%;">
-            <col span="1" style="width: 20%;">
-            <col span="1" style="width: 25%;">
-        </colgroup>
-        <thead class="thead-dark">
-            <tr>
-                <th>Message</th>
-                <th @click="sortCategory">
-                    <span>Category <i class="fa-solid fa-sort"></i></span>
-                </th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody v-for="alert in alerts" :key="alert.id">
-            <tr>
-                <td>{{alert.message}}</td>
-                <td>{{alert.category.display}}</td>
-                <td class="text-right">{{ formatAlertTime(alert) }}</td>
-            </tr>
-
-        </tbody>
-    </table>
     <div v-if="error">{{ error }}</div>
+    <rux-table>
+        <rux-table-header>
+            <rux-table-header-row>
+                <rux-table-header-cell>Message</rux-table-header-cell>
+                <rux-table-header-cell>Category</rux-table-header-cell>
+                <rux-table-header-cell>Time</rux-table-header-cell>
+                </rux-table-header-row>
+        </rux-table-header>
+        <rux-table-body v-for="alert in alerts" :key="alert.id">
+            <rux-table-row>
+                <rux-table-cell>{{ alert.message }}</rux-table-cell>
+                <rux-table-cell>{{ alert.category.display}}</rux-table-cell>
+                <rux-table-cell>{{ formatAlertTime(alert) }}</rux-table-cell>
+            </rux-table-row>
+        </rux-table-body>
+    </rux-table>
 </template>
 
 <script>
 import getAlerts from "../composable/getAlerts.js"
 import formatTimeString from "../composable/timeUtils.js"
+import RuxTable from '@astrouxds/astro-web-components/dist/components/rux-table'
+import RuxTableHeader from '@astrouxds/astro-web-components/dist/components/rux-table-header'
+import RuxTableHeaderRow from '@astrouxds/astro-web-components/dist/components/rux-table-header-row'
+import RuxTableHeaderCell from '@astrouxds/astro-web-components/dist/components/rux-table-header-cell'
+import RuxTableBody from '@astrouxds/astro-web-components/dist/components/rux-table-body'
+import RuxTableRow from '@astrouxds/astro-web-components/dist/components/rux-table-row'
+import RuxTableCell from '@astrouxds/astro-web-components/dist/components/rux-table-cell'
 
 export default {
   name: 'AlertsView',

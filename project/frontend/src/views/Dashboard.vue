@@ -1,6 +1,6 @@
 <template>
 <div class="row justify-content-center">
-    <div class="col-md-4 text-white">
+    <div class="col-md-4">
         <h3>Alerts</h3>
         <AlertsView></AlertsView>
     </div>
