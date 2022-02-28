@@ -147,7 +147,7 @@ export default {
         return new_user
       }
       else {
-        fetch("http://localhost:8887/users/register", {
+        fetch("https://localhost:8887/users/register", {
           method: "POST",
           body: JSON.stringify({
             firstname: new_user.value.firstname,

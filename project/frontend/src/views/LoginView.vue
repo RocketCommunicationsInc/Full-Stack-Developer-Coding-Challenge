@@ -94,7 +94,7 @@ export default {
         return error
       } 
       else {
-        fetch("http://localhost:8887/users/login", {
+        fetch("https://localhost:8887/users/login", {
           method: "POST",
           body: JSON.stringify({
             email: user.value.email,
