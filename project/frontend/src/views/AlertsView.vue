@@ -4,7 +4,7 @@
         <rux-table-header>
             <rux-table-header-row>
                 <rux-table-header-cell>Message</rux-table-header-cell>
-                <rux-table-header-cell>Category</rux-table-header-cell>
+                <rux-table-header-cell @click="sortCategory">Category <i class="fas fa-sort"></i></rux-table-header-cell>
                 <rux-table-header-cell>Time</rux-table-header-cell>
                 </rux-table-header-row>
         </rux-table-header>
@@ -34,6 +34,7 @@ export default {
   components: {
   },
   setup() {
+    let sort_direction = true
     const { alerts, error, load } = getAlerts()
     
     load()
@@ -43,7 +44,14 @@ export default {
     }
     
     const sortCategory = () =>{
-        alerts.value = alerts.value.sort()
+        if (sort_direction){
+            alerts.value.sort((t1,t2) => t1.category.id < t2.category.id ? -1 : 1);
+            sort_direction = false
+        }
+        else{
+            alerts.value.sort((t1,t2) => t1.category.id > t2.category.id ? -1 : 1);
+            sort_direction = true
+        }
     }
 
     return { alerts, error, formatAlertTime, sortCategory }

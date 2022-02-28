@@ -15,7 +15,7 @@
     <rux-table>
       <rux-table-header>
         <rux-table-header-row>
-          <rux-table-header-cell>Name</rux-table-header-cell>
+          <rux-table-header-cell @click="sortName">Name <i class="fas fa-sort"></i></rux-table-header-cell>
           <rux-table-header-cell>Status</rux-table-header-cell>
           <rux-table-header-cell>AOC-EOC</rux-table-header-cell>
         </rux-table-header-row>
@@ -52,6 +52,7 @@ export default {
   },
   setup() {
     // Init objects.
+    let sort_direction = true
     const { contacts, contactsError, load} = getContacts()
     const { states, stateError, loadStates} = getContactStates()
     
@@ -66,6 +67,15 @@ export default {
     }
     
     const sortName = () => {
+      if(sort_direction){
+        sort_direction = false
+        contacts.value.sort((t1,t2) => t1.name > t2.name ? -1 : 1);
+      }
+      else{
+        sort_direction = true
+        contacts.value.sort((t1,t2) => t1.name < t2.name ? -1 : 1);
+
+      }
 
     }
     
