@@ -120,8 +120,6 @@ with open(alert_json_filename, 'rb') as file:
         row = Alert()
         row.message = alert['errorMessage']
         row.long_message = alert['longMessage']
-        # row.time = pd.to_datetime(alert['errorTime'], unit='s')
-        # row.time = datetime.datetime.fromtimestamp(int(alert['errorTime']))
         row.time = convert_epoch(alert['errorTime'])
         row.selected = alert['selected']
         row.new = alert['new']
@@ -153,9 +151,7 @@ with open(contacts_json_filename, 'rb') as file:
         temp.satellite = contact['contactSatellite']
         temp.equipment = contact['contactEquipment']
         temp.detail = contact['contactDetail']
-        # temp.begin_timestamp = pd.to_datetime(contact['contactBeginTimestamp'], unit='s')
         temp.begin_timestamp = convert_epoch(contact['contactBeginTimestamp'])
-        # temp.end_timestamp = pd.to_datetime(contact['contactEndTimestamp'], unit='s')
         temp.end_timestamp = convert_epoch(contact['contactEndTimestamp'])
         temp.latitude = contact['contactLatitude']
         temp.longitude = contact['contactLongitude']
